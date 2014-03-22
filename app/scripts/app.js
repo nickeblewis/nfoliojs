@@ -4,7 +4,9 @@ angular.module('farnboroughyoApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ngRoute'
+  'ngRoute',
+  'firebase',
+  'iso.directives'
 ])
   .config(function ($routeProvider) {
     $routeProvider

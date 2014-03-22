@@ -8,7 +8,6 @@
 </div>
 
 <div jumbotron jt-heading="Welcome to FG" jt-intro="Always a pleasure helping you discover whats new in town" jt-button="Splendid!"></div>
-<jumbotron jt-heading="A second" jt-intro="Not much more" jt-button="Lets go!"></jumbotron>
 
 
 <div class="row marketing">
@@ -71,7 +70,7 @@
             <h2><a data-ng-href="#/show/{{place.$id}}">{{place.name}}</a></h2>
           </div>
           <div class="item_description">
-            <img src="http://placehold.it/450x250" ng-if="place.pic != null" />
+            <!-- <img src="http://placehold.it/450x250" ng-if="place.pic != null" /> -->
             <p class="content" ng-show="isAuthorised" editable-textarea="place.description" e-cols="17" e-rows="6" e-style="width: 100%; font-size: 14px;" onaftersave="save()">
               {{place.description || "empty"}}         
             </p>

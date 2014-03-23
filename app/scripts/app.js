@@ -5,6 +5,7 @@ angular.module('farnboroughyoApp', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
+  'ngAnimate',
   'firebase',
   'iso.directives'
 ])

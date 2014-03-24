@@ -11,7 +11,7 @@ angular.module('farnboroughyoApp')
     };
  
     $scope.save = function() {
-      $scope.place.updated = (new Date).getTime();
+      $scope.place.updated = (new Date()).getTime();
       $scope.place.$save();
       $location.path('/');
     };

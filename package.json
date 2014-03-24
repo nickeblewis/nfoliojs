@@ -35,6 +35,7 @@
     "karma": "^0.12.1",
     "karma-jasmine": "latest",
     "karma-phantomjs-launcher": "latest",
+    "jsdom": "*",
     "grunt-karma": "^0.8.2"
   },
   "engines": {

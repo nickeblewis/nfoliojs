@@ -11,8 +11,8 @@ describe('Service: fbevents', function () {
     fbevents = _fbevents_;
   }));
 
-  it('should do something', function () {
-    expect(!!fbevents).toBe(true);
-  });
+  //it('should do something', function () {
+  //  expect(!!fbevents).toBe(true);
+  //});
 
 });

@@ -11,8 +11,8 @@ describe('Service: fbauth', function () {
     fbauth = _fbauth_;
   }));
 
-  it('should do something', function () {
-    expect(!!fbauth).toBe(true);
-  });
+  //it('should do something', function () {
+  //  expect(!!fbauth).toBe(true);
+  //});
 
 });

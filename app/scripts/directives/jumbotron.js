@@ -10,6 +10,6 @@ angular.module('farnboroughyoApp')
 				jtHeading: '@',
 				jtIntro: '@',
 				jtButton: '@'
-			}			     
+			}
     };
   });

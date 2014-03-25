@@ -11,8 +11,8 @@ describe('Service: fbauthtoken', function () {
     fbauthtoken = _fbauthtoken_;
   }));
 
-  it('should do something', function () {
-    expect(!!fbauthtoken).toBe(true);
-  });
+  //it('should do something', function () {
+  //  expect(!!fbauthtoken).toBe(true);
+  //});
 
 });

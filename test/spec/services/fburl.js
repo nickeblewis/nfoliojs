@@ -11,8 +11,8 @@ describe('Service: fburl', function () {
     fburl = _fburl_;
   }));
 
-  it('should do something', function () {
-    expect(!!fburl).toBe(true);
-  });
+  //it('should do something', function () {
+  //  expect(!!fburl).toBe(true);
+  //});
 
 });

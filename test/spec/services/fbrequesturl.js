@@ -11,8 +11,8 @@ describe('Service: fbrequesturl', function () {
     fbrequesturl = _fbrequesturl_;
   }));
 
-  it('should do something', function () {
-    expect(!!fbrequesturl).toBe(true);
-  });
+  //it('should do something', function () {
+  //  expect(!!fbrequesturl).toBe(true);
+  //});
 
 });

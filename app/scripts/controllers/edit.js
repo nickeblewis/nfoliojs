@@ -1,5 +1,6 @@
 'use strict';
 
+/*global Firebase*/
 angular.module('farnboroughyoApp')
   .controller('EditCtrl', function ($scope, $location, $routeParams, $firebase, fbURL) {
     var placeUrl = fbURL + $routeParams.placeId;

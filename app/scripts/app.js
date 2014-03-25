@@ -6,8 +6,7 @@ angular.module('farnboroughyoApp', [
   'ngSanitize',
   'ngRoute',
   'ngAnimate',
-  'firebase',
-  'iso.directives'
+  'firebase'
 ])
   .config(function ($routeProvider) {
     $routeProvider

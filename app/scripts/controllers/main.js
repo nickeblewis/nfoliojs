@@ -7,7 +7,7 @@ angular.module('farnboroughyoApp')
     var isAuthorised = false;
 
     var ref = new Firebase(fbAUTH);
-    new FirebaseSimpleLogin(ref, function(error, user) {
+    var auth = new FirebaseSimpleLogin(ref, function(error, user) {
       if (error) {
         // an error ocurred during login
         console.log(error);
@@ -20,7 +20,7 @@ angular.module('farnboroughyoApp')
         console.log('User has logged out');
       }
     });
-    $scope = true;
+    $scope.test = true;
     $scope.isAuthorised = false;
     $scope.authmessage = '';
     $scope.status = 'Loading...';

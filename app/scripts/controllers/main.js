@@ -20,7 +20,6 @@ angular.module('farnboroughyoApp')
         console.log('User has logged out');
       }
     });
-    $scope.test = true;
     $scope.isAuthorised = false;
     $scope.authmessage = '';
     $scope.status = 'Loading...';

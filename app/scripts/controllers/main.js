@@ -7,7 +7,7 @@ angular.module('farnboroughyoApp')
     var isAuthorised = false;
 
     var ref = new Firebase(fbAUTH);
-    var auth = new FirebaseSimpleLogin(ref, function(error, user) {
+    new FirebaseSimpleLogin(ref, function(error, user) {
       if (error) {
         // an error ocurred during login
         console.log(error);

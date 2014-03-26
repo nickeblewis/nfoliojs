@@ -2,9 +2,9 @@
 /*global Firebase*/
 /*global FirebaseSimpleLogin*/
 angular.module('farnboroughyoApp')
-  .factory('fbRequestUrl', function ($firebase, fbURL, fbAuthToken) {
+  .factory('fbRequestUrl', function ($firebase, fbURL) {
     var ref = new Firebase(fbURL);
-    var auth = new FirebaseSimpleLogin(ref, function(error, user) {
+    new FirebaseSimpleLogin(ref, function(error, user) {
       if (error) {
         // an error ocurred during login
         console.log(error);

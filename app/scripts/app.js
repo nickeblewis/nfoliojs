@@ -24,6 +24,10 @@ angular.module('farnboroughyoApp', [
         // templateUrl: 'views/edit.html',
         controller: 'EditCtrl'
       })
+      .when('/test', {
+        templateUrl: 'views/test.html',
+        controller: 'TestCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

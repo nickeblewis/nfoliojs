@@ -1,6 +1,8 @@
 $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 
 $grey: #dfdfdf;
+$dark-grey: #777;
+$lightish-grey: #aaa;
 
 @import 'sass-bootstrap/lib/bootstrap';
 
@@ -153,6 +155,20 @@ body {
     padding-bottom: 20px;
     margin-bottom: 35px;
     @include border-radius(5px);
+  
+    .feed-list {
+      list-style-type: none;
+      @include border-radius(5px);
+      padding: 8px;
+      background-color: $dark-grey;
+    
+      .item {
+        background-color: $lightish-grey;
+        @include border-radius(5px);
+        padding: 8px;
+        margin: 2px;
+    }
+  }
 }
 
 /* Animation stuff!! */

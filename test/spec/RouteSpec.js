@@ -81,6 +81,8 @@ describe('Routes test', function() {
             expect(route.current.controller).toBe('TestCtrl')
         });
     });
+    
+    // add a create route, though that may be shared using EditCtrl?????
 
     
 });

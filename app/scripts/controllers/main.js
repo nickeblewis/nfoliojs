@@ -5,7 +5,7 @@
 angular.module('farnboroughyoApp')
   .controller('MainCtrl', function ($scope, $timeout, fbRequestUrl, fbEvents, fbAUTH) {
     var isAuthorised = false;
-	$scope.canbetested = true;
+    $scope.canbetested = true;
     var ref = new Firebase(fbAUTH);
     new FirebaseSimpleLogin(ref, function(error, user) {
       if (error) {

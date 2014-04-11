@@ -10,7 +10,7 @@ angular.module('farnboroughyoApp')
       $scope.place.$remove();
       $location.path('/');
     };
- 
+
     $scope.save = function() {
       $scope.place.updated = (new Date()).getTime();
       $scope.place.$save();

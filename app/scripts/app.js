@@ -28,6 +28,10 @@ angular.module('farnboroughyoApp', [
         templateUrl: 'views/test.html',
         controller: 'TestCtrl'
       })
+      .when('/create', {
+        templateUrl: 'views/create.html',
+        controller: 'CreateCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

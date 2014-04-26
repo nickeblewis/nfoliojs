@@ -7,7 +7,7 @@ angular.module('farnboroughyoApp')
     fbRequestUrl.$add($scope.place, function() {
       $timeout(function() { $location.path('/'); });
     });
-    
+    $location.path('/');
   };
 });
 

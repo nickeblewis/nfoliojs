@@ -31,6 +31,7 @@
     "karma-ng-html2js-preprocessor": "^0.1.0",
     "karma-ng-scenario": "^0.1.0",
     "karma": "^0.12.1",
+	  "karma-coverage": "latest",
     "karma-jasmine": "latest",
     "karma-phantomjs-launcher": "latest",
     "jsdom": "*",

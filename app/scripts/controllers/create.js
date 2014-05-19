@@ -2,8 +2,17 @@
 
 angular.module('farnboroughyoApp')
 	.controller('CreateCtrl', function ($scope, $location, $timeout, fbRequestUrl, fbURL, $anchorScroll) {
-        
+     navigator.geolocation.getCurrentPosition(
+        function(position) {
+          $scope.place.lat = position.coords.latitude;
+          $scope.place.lng = position.coords.longitude;
+        });
+    
+    
   		$scope.save = function() {
+        
+        
+        
         if ($scope.myForm.$valid) {
           var messageListRef = new Firebase(fbURL);
           var newMessageRef = messageListRef.push();          
@@ -14,6 +23,8 @@ angular.module('farnboroughyoApp')
           
           newMessageRef.set({'name': $scope.place.name, 
                              'description': $scope.place.description, 
+                             'lat': $scope.lat,
+                             'lng': $scope.lng,
                              'updated': $scope.place.updated});
           
           if($scope.files) {
@@ -32,7 +43,6 @@ angular.module('farnboroughyoApp')
           }
           $location.path('/');
         } else {
-          alert("Form invalid");
           $location.hash('name');
           $anchorScroll();
         }

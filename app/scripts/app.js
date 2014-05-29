@@ -16,11 +16,11 @@ angular.module('farnboroughyoApp', [
       })
       .when('/show/:placeId', {
         templateUrl: 'views/show.html',
-        controller: 'EditCtrl'
+        controller: 'ShowCtrl'
         // controller: 'ShowCtrl'
       })
       .when('/edit/:placeId', {
-        templateUrl: 'views/show.html',
+        templateUrl: 'views/edit.html',
         // templateUrl: 'views/edit.html',
         controller: 'EditCtrl'
       })

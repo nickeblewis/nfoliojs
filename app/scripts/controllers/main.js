@@ -41,7 +41,7 @@ angular.module('farnboroughyoApp')
     fbEvents.on('child_changed', function(snapshot) {
       var placeName = snapshot.val().name;
       $scope.status = placeName + ' has been updated';
-      console.log('FB has updated ');
+      //console.log('FB has updated ');
     });
 
     fbEvents.on('child_added', function(snapshot) {

@@ -5,7 +5,7 @@
     <li><a ng-href="#/login" ng-show="!signedIn()">Login</a></li>
     <li><a ng-click="logOut()" ng-show="signedIn()">Logout</a></li>
   </ul>
-  <h3 class="text-muted">FG</h3>
+  <h3 class="text-muted"><a ng-href="/">FG</a></h3>
 </div>
 <!-- <jumbotron jt-heading="1 - Welcome" jt-intro="Always a pleasure helping you discover whats new in town" jt-button="Explore!" /> -->
 <!-- <jumbotron jt-heading="2 - Register" jt-intro="Follow your favourite things around the town for more useful information and train this site to help you better" jt-button="Register!" /> -->
@@ -14,9 +14,10 @@
   <!-- TODO: Login/logout/register -->
   <!-- TODO: Remove the modal dialog, not needed at all -->  
   <searchbar />
-  <!-- <statusbar />     -->
+  <statusbar />
 </div>
 <div class="row main">
+<!-- 	<div ng-show="!loaded" class="well well-lg"><p class="bg-primary">Loading you feed... please wait a moment...</p></div> -->
   <div ng-show="loaded" class="animate-repeat col-md-12 card" ng-repeat="place in places | orderByPriority | filter:search | orderBy:'updated':reverse=true">
     <strong><a data-ng-href="#/show/{{place.$id}}">{{place.name}}</a></strong> <i>Updated {{timeAgo(place.updated)}}</i>
       <p class="card-content" ng-show="isAuthorised" editable-textarea="place.description" e-cols="17" e-rows="6" e-style="width: 100%; font-size: 14px;" onaftersave="save()">
@@ -25,8 +26,8 @@
       <p class="card-content" ng-show="!isAuthorised">
         {{place.description || "empty"}}         
       </p>
-      <ul class="feed-list" ng-show="place.feed.length > 0">
-        <li class="item" ng-repeat="item in place.feed" ng-if="item != null"><i class="glyphicon glyphicon-user"></i> {{item}}</li>
+      <ul class="feed-list" ng-show="place.feed">
+        <li class="item" ng-repeat="item in place.feed | orderByPriority | orderBy:'updated':reverse=true""><i class="glyphicon glyphicon-user"></i> {{item.message}}</li>
       </ul>      
   </div>
 </div>

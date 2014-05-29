@@ -95,6 +95,7 @@ module.exports = function (grunt) {
     jshint: {
       options: {
         jshintrc: '.jshintrc',
+				newcap: false,
         reporter: require('jshint-stylish')
       },
       all: [

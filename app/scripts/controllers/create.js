@@ -2,7 +2,10 @@
 /*global Firebase*/
 /*global Auth*/
 angular.module('farnboroughyoApp')
-  .controller('CreateCtrl', function ($scope, $location, $timeout, fbRequestUrl, fbURL, $anchorScroll) {
+  .controller('CreateCtrl', function ($scope, $location, $timeout, fbRequestUrl, fbURL, $anchorScroll, Auth) {
+		
+		$scope.place = {};
+		
     navigator.geolocation.getCurrentPosition(
       function(position) {
         $scope.place.lat = position.coords.latitude;
@@ -17,8 +20,8 @@ angular.module('farnboroughyoApp')
           //$scope.place.imageData = 0;          
           newMessageRef.set({'name': $scope.place.name,
                              'description': $scope.place.description,
-                             'lat': $scope.lat,
-                             'lng': $scope.lng,
+                             'lat': $scope.place.lat,
+                             'lng': $scope.place.lng,
                              'updated': $scope.place.updated,
                              'userid': Auth.signedInAs().id
                             });

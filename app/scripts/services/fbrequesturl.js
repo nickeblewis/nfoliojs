@@ -23,7 +23,7 @@ angular.module('farnboroughyoApp')
 
   .factory('Auth', function ($firebase, $rootScope, fbAUTH) {
     var ref = new Firebase(fbAUTH);
-    var auth = new FirebaseSimpleLogin(ref, function(error, user) {
+    var auth = FirebaseSimpleLogin(ref, function(error, user) {
       if (error) {
         // an error ocurred during login
         console.log(error);

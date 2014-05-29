@@ -3,7 +3,9 @@
 /*global FirebaseSimpleLogin*/
 /*global moment*/
 angular.module('farnboroughyoApp')
-  .controller('MainCtrl', function ($scope, $timeout, fbRequestUrl, fbEvents, fbAUTH) {
+  .controller('MainCtrl', function ($scope, $timeout, fbRequestUrl, fbEvents, fbAUTH, Auth) {
+    
+    // TODO: a lot of the code below is now crap because I have added a service
     var isAuthorised = false;
     $scope.canbetested = true;
     var ref = new Firebase(fbAUTH);
@@ -75,5 +77,13 @@ angular.module('farnboroughyoApp')
 
     $scope.timeAgo = function(ms) {
       return moment(ms).fromNow();
+    };
+    
+    $scope.signedIn = function() {
+      return Auth.signedIn();
+    };
+    
+    $scope.logOut = function() {
+      return Auth.logout();
     };
   });

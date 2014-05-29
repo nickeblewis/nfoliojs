@@ -1,4 +1,4 @@
-//'use strict';
+'use strict';
 /*global Firebase*/
 /*global FirebaseSimpleLogin*/
 angular.module('farnboroughyoApp')
@@ -23,14 +23,14 @@ angular.module('farnboroughyoApp')
 
   .factory('Auth', function ($firebase, $rootScope, fbAUTH) {
     var ref = new Firebase(fbAUTH);
-    var auth = FirebaseSimpleLogin(ref, function(error, user) {
+    var auth = new FirebaseSimpleLogin(ref, function(error, user) {
       if (error) {
         // an error ocurred during login
         console.log(error);
       } else if (user) {
         // You are logged in
-        console.log('factory User ID: ' + user.id + ', Provider: ' + user.provider);        
-        $rootScope.signedIn = true;
+        console.log('factory User ID: ' + user.id + ', Provider: ' + user.provider);
+				$rootScope.signedIn = true;
         $rootScope.signedInAs = user;
       } else {
         // User has logged out
@@ -38,8 +38,8 @@ angular.module('farnboroughyoApp')
         $rootScope.signedIn = false;
       }
     });
-     var Auth = {
-    register: function (user) {
+		var Auth = {
+			register: function (user) {
         auth.createUser(user.email, user.password, function(error,user) {
           console.log('New user ' + user.id + ' was created');
         });
@@ -57,8 +57,8 @@ angular.module('farnboroughyoApp')
         auth.logout();
         $rootScope.signedIn = false;
       }
-  };
+		};
     
-  return Auth;
+		return Auth;
     //return $firebase(ref);
   });

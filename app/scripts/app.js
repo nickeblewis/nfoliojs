@@ -32,6 +32,10 @@ angular.module('farnboroughyoApp', [
         templateUrl: 'views/create.html',
         controller: 'CreateCtrl'
       })
+      .when('/login', {
+        templateUrl: 'views/login.html',
+        controller: 'LoginCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

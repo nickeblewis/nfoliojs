@@ -40,7 +40,9 @@ angular.module('farnboroughyoApp')
     });
      var Auth = {
     register: function (user) {
-        return auth.createUser(user.email, user.password);
+        return auth.createUser(user.email, user.password, function(error,user) {
+          console.log('New user ' + user.id + ' was created');
+        });
       },
       signedIn: function () {
         return $rootScope.signedIn;

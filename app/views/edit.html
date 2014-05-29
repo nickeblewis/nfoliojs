@@ -1,14 +1,17 @@
-<div class="col-md-12 element place-card general">
-  <div class="hover_img">
-    <h2>Create/Edit</h2>
-    {{place.userid}}
-  </div>
-  <div class="item_description_large">
-    <div id="spin"></div>  
-    <input class="hidden" type="file" accept="image/*" capture="camera" id="file-upload">
-    <br/>
-    <img class="pano" id="pano" />
-    <!-- <img src="http://placehold.it/150x150" ng-if="place.pic != null" />           -->
+<!-- New -->
+<div class="header">
+  <ul class="nav nav-pills pull-right"></ul>
+	<h3 class="text-muted"><a ng-href="/">FG</a></h3>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">Create/Edit</div>
+  <div class="panel-body">
+    <div class="item_description_large">
+    	<div id="spin"></div>  
+    	<input class="hidden" type="file" accept="image/*" capture="camera" id="file-upload">
+    	<br/>
+    	<img class="pano" id="pano" />
+    	<!-- <img src="http://placehold.it/150x150" ng-if="place.pic != null" />           -->
       <p>
         <form class="form-horizontal" role="form" name="myForm">
           <div class="form-group" ng-class="{error: myForm.name.$invalid && !myForm.name.$pristine}">

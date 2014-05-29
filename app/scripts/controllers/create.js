@@ -20,7 +20,7 @@ angular.module('farnboroughyoApp')
                              'lat': $scope.lat,
                              'lng': $scope.lng,
                              'updated': $scope.place.updated,
-                             'userid': Auth.signedInAs()
+                             'userid': Auth.signedInAs().id
                             });
           
           if($scope.files) {

@@ -35,7 +35,7 @@ angular.module('farnboroughyoApp')
 
     $scope.places.$on('loaded', function() {
       $scope.status = 'Watch this spot for live updates across the site!';
-      $scope.loaded = 1;
+      $scope.loaded = true;
     });
 
     fbEvents.on('child_changed', function(snapshot) {

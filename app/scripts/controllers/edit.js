@@ -5,7 +5,7 @@ angular.module('farnboroughyoApp')
   .controller('EditCtrl', function ($scope, $location, $routeParams, $firebase, fbURL, Auth) {
     var placeUrl = fbURL + $routeParams.placeId;
     $scope.place = $firebase(new Firebase(placeUrl));
-    $scope.place.userid = Auth.signedInAs();
+    $scope.place.userid = Auth.signedInAs().id;
  
     $scope.destroy = function() {
       $scope.place.$remove();

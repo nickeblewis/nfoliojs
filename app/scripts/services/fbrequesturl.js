@@ -21,8 +21,8 @@ angular.module('farnboroughyoApp')
     return $firebase(ref);
   })
 
-  .factory('Auth', function ($firebase, $rootScope, fbURL) {
-    var ref = new Firebase(fbURL);
+  .factory('Auth', function ($firebase, $rootScope, fbAUTH) {
+    var ref = new Firebase(fbAUTH);
     var auth = FirebaseSimpleLogin(ref, function(error, user) {
       if (error) {
         // an error ocurred during login
@@ -40,7 +40,7 @@ angular.module('farnboroughyoApp')
     });
      var Auth = {
     register: function (user) {
-        return auth.createUser(user.email, user.password, function(error,user) {
+        auth.createUser(user.email, user.password, function(error,user) {
           console.log('New user ' + user.id + ' was created');
         });
       },

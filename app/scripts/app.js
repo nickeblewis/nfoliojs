@@ -29,7 +29,7 @@ angular.module('farnboroughyoApp', [
         controller: 'TestCtrl'
       })
       .when('/create', {
-        templateUrl: 'views/create.html',
+        templateUrl: 'views/edit.html',
         controller: 'CreateCtrl'
       })
       .when('/login', {

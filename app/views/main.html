@@ -12,9 +12,9 @@
 
 </div>
 
-<card-feed>
-	<status-feed />
+<!-- <card-feed places="places">
 </card-feed>
+ -->
 
 <div class="row main">
 <!-- 	<div ng-show="!loaded" class="well well-lg"><p class="bg-primary">Loading you feed... please wait a moment...</p></div> -->
@@ -31,15 +31,7 @@
 				<li class="feed-item-post" ng-repeat="item in place.feed | orderByPriority | orderBy:'updated':reverse=true"><i class="glyphicon glyphicon-user"></i> {{item.message}}</li>
 <!-- 		<feedlist action="add" list="place.feed" /> -->
 				<li class="feed-item-add">
-<!-- 					<i class="glyphicon glyphicon-plus"></i> -->
-					<form class="form-inline" role="form" name="myForm"  ng-show="!postsuccess">
-    				<div class="form-group">
-							<input type="text" class="form-control" id="inputStatus" placeholder="add a status post" ng-model="status">
-						</div>
-    				<div class="form-group">
-							<button ng-click="postStatus()"class="btn btn-primary">Post</button>
-    				</div>
-					</form>
+					<statuspost place="place" />					
 				</li>
       </ul>
   </div>

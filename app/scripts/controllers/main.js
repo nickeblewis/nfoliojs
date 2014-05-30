@@ -3,11 +3,12 @@
 /*global FirebaseSimpleLogin*/
 /*global moment*/
 angular.module('farnboroughyoApp')
-  .controller('MainCtrl', function ($scope, $timeout, fbRequestUrl, fbEvents, fbAUTH, Auth) {
-    
+  .controller('MainCtrl', function ($scope, $timeout, fbRequestUrl, fbEvents, fbAUTH, fbURL, Auth) {
+//     $scope.postsuccess = false;
     // TODO: a lot of the code below is now crap because I have added a service
     var isAuthorised = false;
     $scope.canbetested = true;
+		//$scope.place.feed.post = '';
     var ref = new Firebase(fbAUTH);
     new FirebaseSimpleLogin(ref, function(error, user) {
       if (error) {
@@ -68,5 +69,15 @@ angular.module('farnboroughyoApp')
     $scope.timeAgo = function(ms) {
       return moment(ms).fromNow();
     };
+		
+		$scope.postStatus = function(placeId) {
+			var messageListRef = new Firebase(fbURL + placeId + '/feed');
+			var newMessageRef = messageListRef.push();          
+			newMessageRef.set({
+				'message': $scope.post,
+				'updated': (new Date()).getTime()
+			});			
+// 			$scope.postsuccess = true;
+		};
     
   });

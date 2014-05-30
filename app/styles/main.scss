@@ -186,7 +186,7 @@ body {
 /* Animation stuff!! */
 
  
-.animate-repeat.ng-move,
+/* .animate-repeat.ng-move,
 .animate-repeat.ng-enter,
 .animate-repeat.ng-leave {
   -webkit-transition:all linear 0.5s;
@@ -205,4 +205,31 @@ body {
 .animate-repeat.ng-enter.ng-enter-active {
   opacity:1;
   max-height:40px;
+} */
+
+/* Put your css in here */
+.ng-enter 
+{
+    -webkit-transition: 0.8s;
+    -moz-transition:0.8s;
+    -o-transition:0.8s;
+    transition: 0.8s;
+    opacity:0;
+}
+.ng-enter-active 
+{
+    opacity:1;
+}
+
+
+.ng-leave 
+{
+    -webkit-transition: 0.8s;
+    -moz-transition:0.8s;
+    -o-transition:0.8s;
+    transition: 0.8s;
+}
+.ng-leave-active 
+{
+    opacity:0;
 }

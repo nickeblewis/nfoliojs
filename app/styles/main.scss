@@ -3,6 +3,8 @@ $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 $grey: #dfdfdf;
 $dark-grey: #777;
 $lightish-grey: #aaa;
+$very-lightish-grey: #ccc;
+$very-very-lightish-grey: #eee;
 
 @import 'sass-bootstrap/lib/bootstrap';
 
@@ -163,8 +165,14 @@ body {
       padding: 8px;
       background-color: $dark-grey;
     
-      .item {
-        background-color: $lightish-grey;
+      .feed-item-post {
+        background-color: $very-lightish-grey;
+        @include border-radius(5px);
+        padding: 8px;
+        margin: 2px;
+    }
+			.feed-item-add {
+        background-color: $very-very-lightish-grey;
         @include border-radius(5px);
         padding: 8px;
         margin: 2px;

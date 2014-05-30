@@ -51,11 +51,13 @@ angular.module('farnboroughyoApp')
         return $rootScope.signedInAs;
       },
       login: function (user) {
+				$rootScope.signedIn = true;
         return auth.login('password', user);
       },
       logout: function () {
         auth.logout();
         $rootScope.signedIn = false;
+				return $rootScope.signedIn;
       }
 		};
     

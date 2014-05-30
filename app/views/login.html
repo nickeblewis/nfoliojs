@@ -1,3 +1,4 @@
+<headernav />
 <div class="col-md-12 element place-card general">
   <h2>Login/Register</h2>
   <form class="form-horizontal" role="form" name="myForm">
@@ -28,9 +29,9 @@
       <div class="col-sm-offset-2 col-sm-10">            
         <a href="#/" class="btn">Cancel</a>
         <!-- <button ng-click="save()" ng-disabled="myForm.$invalid" class="btn btn-primary" class="btn btn-default">Save</button> -->
-        <button ng-click="login()" class="btn btn-primary" class="btn btn-default">Login</button>
-        <button ng-click="logout()" class="btn btn-danger">Logout</button>
-        <button ng-click="register()" class="btn btn-danger">Register</button>
+        <button ng-click="login()" ng-show="!signedIn()" class="btn btn-primary" class="btn btn-default">Login</button>
+        <button ng-click="logout()" ng-show="signedIn()" class="btn btn-danger">Logout</button>
+        <button ng-click="register()" ng-show="!signedIn()" class="btn btn-danger">Register</button>
       </div>
     </div>
       

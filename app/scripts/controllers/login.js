@@ -5,12 +5,12 @@ angular.module('farnboroughyoApp')
     
 		$scope.login = function() {
 			Auth.login($scope.user);
-			$location.path('/');
+// 			$location.path('/');
 		};
   
 		$scope.logout = function() {
 			Auth.logout();
-			$location.path('/');
+// 			$location.path('/');
 		};
   
 		$scope.signedIn = function() {
@@ -23,6 +23,6 @@ angular.module('farnboroughyoApp')
   
 		$scope.register = function() {
 			Auth.register($scope.user);
-			$location.path('/');
+// 			$location.path('/');
 		};
 	});

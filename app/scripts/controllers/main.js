@@ -60,16 +60,6 @@ angular.module('farnboroughyoApp')
       $scope.modalShown = !$scope.modalShown;
     };
   
-    $scope.logOut = function() {
-      $scope.isAuthorised = false;
-      $scope.authmessage = 'You have successfully logged out';
-      //auth.logout();
-    };
-
-    $scope.logIn = function() {
-      $scope.isAuthorised = true;
-      $scope.authmessage = 'You have successfully logged in';
-    };
 
     $scope.save = function() {
       $scope.places.$save();
@@ -79,11 +69,4 @@ angular.module('farnboroughyoApp')
       return moment(ms).fromNow();
     };
     
-    $scope.signedIn = function() {
-      return Auth.signedIn();
-    };
-    
-    $scope.logOut = function() {
-      return Auth.logout();
-    };
   });

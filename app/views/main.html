@@ -1,35 +1,13 @@
-
-
+<headernav />
 <!-- <jumbotron jt-heading="1 - Welcome" jt-intro="Always a pleasure helping you discover whats new in town" jt-button="Explore!" /> -->
 <!-- <jumbotron jt-heading="2 - Register" jt-intro="Follow your favourite things around the town for more useful information and train this site to help you better" jt-button="Register!" /> -->
 <div class="row toolbars">
-<headernav />
-	<!-- TODO: New Card -->	  
   <searchbar />
-	
-	<!-- TODO: items changed don't show but it does work for other events -->
   <statusbar />
-
 </div>
-
-<!-- <card-feed places="places">
-</card-feed>
- -->
-
-<div class="row main">
-<!-- 	<div ng-show="!loaded" class="well well-lg"><p class="bg-primary">Loading you feed... please wait a moment...</p></div> -->
-  <div ng-show="loaded" class="animate-repeat col-md-12 card" ng-repeat="place in places | orderByPriority | filter:search | orderBy:'updated':reverse=true">
-    <strong><a data-ng-href="#/show/{{place.$id}}">{{place.name}}</a></strong> <i>Updated {{timeAgo(place.updated)}}</i>
-      <p class="card-content" ng-show="isAuthorised" editable-textarea="place.description" e-cols="17" e-rows="6" e-style="width: 100%; font-size: 14px;" onaftersave="save()">
-        {{place.description || "empty"}}
-      </p>
-      <p class="card-content" ng-show="!isAuthorised">
-        {{place.description || "empty"}}
-      </p>
-			<feedlist>
-				<statuspost place="place" />					
-			</feedlist>
-  </div>
-</div>
-
+<placelist>
+	<feedlist>
+		<statuspost place="place" />
+	</feedlist>
+</placelist>
 <footernav />

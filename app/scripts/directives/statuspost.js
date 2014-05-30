@@ -6,6 +6,7 @@ angular.module('farnboroughyoApp')
 		function ($templateCache) {
 			$templateCache.put(
 				'statuspost.html',
+				'<li class="feed-item-add">' +
 				'<form class="form-inline" role="form" name="myForm">' +
     				'<div class="form-group">' +
 							'<input type="text" class="form-control" id="inputStatus" placeholder="add a status post" ng-model="post">' +
@@ -13,7 +14,8 @@ angular.module('farnboroughyoApp')
     				'<div class="form-group">' +
 							'<button ng-click="postStatus(place.$id)"class="btn btn-primary">Post</button>' +
     				'</div>' +
-					'</form>'
+					'</form>' +
+				'</li>'
 			);
 		}
 	])
@@ -36,7 +38,7 @@ angular.module('farnboroughyoApp')
       restrict: 'EA',
 			replace: true,
 			scope: {
-      place: '='
+      	place: '='
      },
 			controller: 'StatuspostCtrl'
     };

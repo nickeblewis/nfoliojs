@@ -1,9 +1,9 @@
-<headernav />
+
 
 <!-- <jumbotron jt-heading="1 - Welcome" jt-intro="Always a pleasure helping you discover whats new in town" jt-button="Explore!" /> -->
 <!-- <jumbotron jt-heading="2 - Register" jt-intro="Follow your favourite things around the town for more useful information and train this site to help you better" jt-button="Register!" /> -->
 <div class="row toolbars">
-
+<headernav />
 	<!-- TODO: New Card -->	  
   <searchbar />
 	
@@ -26,14 +26,9 @@
       <p class="card-content" ng-show="!isAuthorised">
         {{place.description || "empty"}}
       </p>
-      <ul class="feed-list" ng-show="place.feed">
-<!--    <feedlist action="show" list="place.feed" /> -->
-				<li class="feed-item-post" ng-repeat="item in place.feed | orderByPriority | orderBy:'updated':reverse=true"><i class="glyphicon glyphicon-user"></i> {{item.message}}</li>
-<!-- 		<feedlist action="add" list="place.feed" /> -->
-				<li class="feed-item-add">
-					<statuspost place="place" />					
-				</li>
-      </ul>
+			<feedlist>
+				<statuspost place="place" />					
+			</feedlist>
   </div>
 </div>
 

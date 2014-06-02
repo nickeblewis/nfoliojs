@@ -22,7 +22,10 @@
               <textarea class="form-control" rows="5" name="description" ng-model="place.description"></textarea>
             </div>
 <!--             <img width="100" height="100" ng-src="{{place.file}}" ng-show="{{place.file}}"> -->
-          </div>          
+          </div>  
+					<div class="form-group">
+						<input type="file" ng-model="place.files">
+					</div>
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">            
               <a href="#/" class="btn">Cancel</a>

@@ -6,6 +6,7 @@ angular.module('farnboroughyoApp')
 		
 		$scope.place = {};
 		
+		
     navigator.geolocation.getCurrentPosition(
       function(position) {
         $scope.place.lat = position.coords.latitude;
@@ -33,7 +34,29 @@ angular.module('farnboroughyoApp')
             reader.onload = (function() {
               return function(e) {
                 var filePayload = e.target.result;
-                newMessageRef.update({'file': filePayload});
+								
+								// start - Upload using S3 here
+// 								var appId = '686219584770096';
+//         				var roleArn = 'arn:aws:iam::931603287051:role/farnborough';
+//         				var bucketName = 'farnborough';
+//         				var fbUserId;
+								
+// 						
+							AWS.config.update({accessKeyId: 'AKIAIUAB3DKYZOD3S7VQ', secretAccessKey: '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'});
+								AWS.config.region = 'eu-west-1';
+								
+        				var bucket = new AWS.S3({params: {Bucket: 'farnborough'}});
+								var params = {Key: f.name,ContentType: f.type, Body: f};
+                bucket.putObject(params, function (err, data) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log(data);
+                    }
+                });
+								// end - Upload using S3 here
+								
+                newMessageRef.update({'file': f.name});
               };
             })(f);
             reader.readAsDataURL(f);

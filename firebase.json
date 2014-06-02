@@ -1,4 +1,4 @@
 {
   "firebase": "farnborough",
-  "public": "dist"
+  "public": "app"
 }

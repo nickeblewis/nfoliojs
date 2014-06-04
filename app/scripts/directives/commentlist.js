@@ -5,7 +5,7 @@ angular.module('nfolio')
 	.run(['$templateCache',
 		function ($templateCache) {
 			$templateCache.put(
-				'feedlist.html',
+				'commentlist.html',
 				'<ul class="feed-list list-group" ng-show="place.feed">' +
 // 				'	<li class="feed-item-post list-group-item" class="animate" ng-repeat="item in place.feed | orderByPriority | orderBy:\'updated\':reverse=true | limitTo: {{limit}}">' +
         '	<li class="feed-item-post list-group-item" class="animate" ng-repeat="item in place.feed | orderByPriority | orderBy:\'updated\':reverse=true | limitTo:5">' +
@@ -18,9 +18,9 @@ angular.module('nfolio')
 		}
 	])
 
-  .directive('feedlist', function () {
+  .directive('commentlist', function () {
     return {
-      templateUrl: 'feedlist.html',
+      templateUrl: 'commentlist.html',
       restrict: 'EA',
 			replace: true,
 			transclude: true

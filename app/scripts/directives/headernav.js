@@ -18,7 +18,7 @@ angular.module('nfolio')
 		}
 	])
 
-	.controller('HeaderNavCtrl', function ($scope, $timeout, fbRequestUrl, fbEvents, fbAUTH, Auth) {
+	.controller('HeaderNavCtrl', ['$scope', '$timeout', 'fbRequestUrl', 'fbEvents', 'fbAUTH', 'Auth', function ($scope, $timeout, fbRequestUrl, fbEvents, fbAUTH, Auth) {
     $scope.logIn = function() {
       $scope.isAuthorised = true;
       $scope.authmessage = 'You have successfully logged in';
@@ -31,7 +31,7 @@ angular.module('nfolio')
     $scope.logOut = function() {
       return Auth.logout();
     };
-  })
+  }])
 
   .directive('headernav', function () {
     return {

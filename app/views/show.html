@@ -4,8 +4,10 @@
 <div class="panel panel-default">
   <div class="panel-heading">{{place.name}}</div>
   <div class="panel-body">
+    
+		<img ng-show="place.fileThumb != undefined" ng-src="https://s3-eu-west-1.amazonaws.com/nfolio/{{place.fileMedium}}">  
+    <img ng-show="place.fileThumb == undefined" src="http://placehold.it/700&text=Image Uploading">  
     <p>{{place.description}}</p>
-		<img ng-show="place.fileThumb" ng-src="https://s3-eu-west-1.amazonaws.com/nfolio/{{place.fileThumb}}">    
   </div>
 </div>
 <div class="panel panel-default">
@@ -18,9 +20,9 @@
 <div class="panel panel-default">
 	<div class="panel-heading">Comments</div>      
   <div class="panel-body">
-    <feedlist>
-<!-- 		<statuspost place="place" /> -->
-	</feedlist>
+    <commentlist>
+      <!-- 		<statuspost place="place" /> -->
+	  </commentlist>
 		<form class="form-inline" role="form" name="myForm"  ng-show="!postsuccess">    
     	<div class="form-group">              
 				<input type="text" class="form-control" id="inputStatus" placeholder="write a status post" ng-model="status">

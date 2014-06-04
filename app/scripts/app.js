@@ -6,6 +6,7 @@ angular.module('nfolio', [
   'ngSanitize',
   'ngRoute',
 //   'ngAnimate',
+//   'iso.directives',
   'firebase'
 ])
   .config(function ($routeProvider) {

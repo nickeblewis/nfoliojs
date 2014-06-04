@@ -3,7 +3,7 @@
 /*global FirebaseSimpleLogin*/
 /*global moment*/
 angular.module('nfolio')
-  .controller('MainCtrl', function ($scope, $timeout, fbRequestUrl, fbEvents, fbAUTH, fbURL, Auth) {
+  .controller('MainCtrl', ['$scope', '$timeout', 'fbRequestUrl', 'fbEvents', 'fbAUTH', 'fbURL',function ($scope, $timeout, fbRequestUrl, fbEvents, fbAUTH, fbURL, Auth) {
 //     $scope.postsuccess = false;
     // TODO: a lot of the code below is now crap because I have added a service
     var isAuthorised = false;
@@ -81,4 +81,4 @@ angular.module('nfolio')
 // 			$scope.postsuccess = true;
 		};
     
-  });
+  }]);

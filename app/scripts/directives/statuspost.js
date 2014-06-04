@@ -20,7 +20,7 @@ angular.module('nfolio')
 		}
 	])
 
-	.controller('StatuspostCtrl', function ($scope, $timeout, fbRequestUrl, fbEvents, fbAUTH, fbURL, Auth) {
+	.controller('StatuspostCtrl', ['$scope', '$timeout', 'fbRequestUrl', 'fbEvents', 'fbAUTH', 'fbURL', 'Auth', function ($scope, $timeout, fbRequestUrl, fbEvents, fbAUTH, fbURL, Auth) {
 		$scope.postStatus = function(placeId) {
 			var messageListRef = new Firebase(fbURL + placeId + '/feed');
 			var newMessageRef = messageListRef.push();          
@@ -30,7 +30,7 @@ angular.module('nfolio')
 			});			
 // 			$scope.postsuccess = true;
 		};
-  })
+  }])
 
   .directive('statuspost', function () {
     return {

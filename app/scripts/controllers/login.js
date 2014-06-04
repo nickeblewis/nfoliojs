@@ -1,6 +1,6 @@
 'use strict';
 angular.module('nfolio')
-	.controller('LoginCtrl', function ($scope, $firebase, Auth, $location) {
+	.controller('LoginCtrl', ['$scope', '$firebase', 'Auth', '$location', function ($scope, $firebase, Auth, $location) {
 		$scope.user = {};
     
 		$scope.login = function() {
@@ -25,4 +25,4 @@ angular.module('nfolio')
 			Auth.register($scope.user);
 // 			$location.path('/');
 		};
-	});
+	}]);

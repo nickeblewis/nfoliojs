@@ -44,7 +44,7 @@ angular.module('nfolio')
 		}
 	])
 
-	.controller('CreatePlaceCtrl', function ($scope, $location, $timeout, fbRequestUrl, fbURL, $anchorScroll, Auth) {
+	.controller('CreatePlaceCtrl', ['$scope', '$location', '$timeout', 'fbRequestUrl', 'fbURL', '$anchorScroll', 'Auth' ,function ($scope, $location, $timeout, fbRequestUrl, fbURL, $anchorScroll, Auth) {
 		
 		$scope.place = {};
 		
@@ -86,7 +86,7 @@ angular.module('nfolio')
           $anchorScroll();
         }
       };
-	})
+	}])
 
 
   .directive('createplace', function () {

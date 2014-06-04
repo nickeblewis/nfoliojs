@@ -1,7 +1,7 @@
 'use strict';
 /*global Firebase*/
 angular.module('nfolio')
-  .controller('ShowCtrl', function ($scope, $location, $routeParams, $firebase, fbURL, Auth) {
+  .controller('ShowCtrl', ['$scope', '$location', '$routeParams', '$firebase', 'fbURL', 'Auth', function ($scope, $location, $routeParams, $firebase, fbURL, Auth) {
     
 		var placeUrl = fbURL + $routeParams.placeId;
     
@@ -23,4 +23,4 @@ angular.module('nfolio')
 			$scope.postsuccess = true;
 		};
 		
-  });
+  }]);

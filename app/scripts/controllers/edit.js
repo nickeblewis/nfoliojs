@@ -2,12 +2,34 @@
 
 /*global Firebase*/
 angular.module('nfolio')
-  .controller('EditCtrl', function ($scope, $location, $routeParams, $firebase, fbURL, Auth) {
+  .controller('EditCtrl', ['$scope', '$location', '$routeParams', '$firebase', 'fbURL', 'Auth', function ($scope, $location, $routeParams, $firebase, fbURL, Auth) {
     var placeUrl = fbURL + $routeParams.placeId;
     $scope.place = $firebase(new Firebase(placeUrl));
     $scope.place.userid = Auth.signedInAs().id;
  
     $scope.destroy = function() {
+      var s3 = new AWS.S3();
+      AWS.config.update({accessKeyId: 'AKIAIUAB3DKYZOD3S7VQ', secretAccessKey: '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'});
+      AWS.config.region = 'eu-west-1';
+      var params = {
+        Bucket: 'nfolio', // required
+        Delete: {
+          Objects: [
+            {
+              Key: $scope.place.fileThumb
+            },
+            {
+              Key: $scope.place.fileMedium
+            }
+          ],
+          
+        }
+      };
+      
+      s3.deleteObjects(params, function(err, data) {
+        if (err) console.log(err, err.stack); // an error occurred
+        else     console.log('DONE' + data);           // successful response
+      });
       $scope.place.$remove();
       $location.path('/');
     };
@@ -17,4 +39,4 @@ angular.module('nfolio')
       $scope.place.$save();
       $location.path('/');
     };
-  });
+  }]);

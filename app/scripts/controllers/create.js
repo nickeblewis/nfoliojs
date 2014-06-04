@@ -2,7 +2,7 @@
 /*global Firebase*/
 /*global Auth*/
 angular.module('nfolio')
-  .controller('CreateCtrl', function ($scope, $location, $timeout, fbRequestUrl, fbURL, $anchorScroll, Auth) {
+  .controller('CreateCtrl', ['$scope', '$location', '$timeout', 'fbRequestUrl', 'fbURL', '$anchorScroll', 'Auth', function ($scope, $location, $timeout, fbRequestUrl, fbURL, $anchorScroll, Auth) {
     $scope.place = {};
 
     navigator.geolocation.getCurrentPosition(function(position) {
@@ -63,13 +63,17 @@ angular.module('nfolio')
                 fileType: 'image/jpeg'
               }
               console.log('calling s3send for medimages...');
-              sendS3(mediumImage);  
+              var message = {
+                'fileMedium': userFolder + '/' + imageFolder + '/medium/' + f.name
+              };  
+              
+              sendS3(mediumImage, message,newMessageRef);
               
            }
             
                         var img2 = new Image();
             img2.onload=function(){
-              var MAXWidthHeight = 200;
+              var MAXWidthHeight = 167;
               var r=MAXWidthHeight/Math.max(this.width,this.height),
                   w=Math.round(this.width*r),
                   h=Math.round(this.height*r),
@@ -93,7 +97,10 @@ angular.module('nfolio')
                 fileType: 'image/jpeg'
               }
               console.log('calling s3send for thumbimages...');
-              sendS3(thumbImage);  
+              var message = {
+                'fileThumb': userFolder + '/' + imageFolder + '/thumb/' + f.name
+              };  
+              sendS3(thumbImage, message,newMessageRef);  
               
            }
 
@@ -121,38 +128,38 @@ angular.module('nfolio')
              img.src=e.target.result;
              img2.src=e.target.result;
                 
-            var filePayload = e.target.result;
+            //var filePayload = e.target.result;
             //img.src = e.target.result;
 
-            var fullsizeImage = {
-              fileName: userFolder + '/' + imageFolder + '/original/' + f.name,
-              bucket: 'nfolio',
-              dataURL: filePayload,
-              fileType: 'image/jpeg'
-            }
+//             var fullsizeImage = {
+//               fileName: userFolder + '/' + imageFolder + '/original/' + f.name,
+//               bucket: 'nfolio',
+//               dataURL: filePayload,
+//               fileType: 'image/jpeg'
+//             }
             
-            sendS3(fullsizeImage);
+//             sendS3(fullsizeImage);
 
-                
-            newMessageRef.update({
-              'fileOriginal': userFolder + '/' + imageFolder + '/original/' + f.name,
-              'fileThumb': userFolder + '/' + imageFolder + '/thumb/' + f.name,
-              'fileMedium': userFolder + '/' + imageFolder + '/medium/' + f.name
-            });
+                            
+//             newMessageRef.update({
+// //               'fileOriginal': userFolder + '/' + imageFolder + '/original/' + f.name,
+//               'fileThumb': userFolder + '/' + imageFolder + '/thumb/' + f.name,
+//               'fileMedium': userFolder + '/' + imageFolder + '/medium/' + f.name
+//             });
           }
 //         })(f);
         
         reader.readAsDataURL(f);
       }
-        //$location.path('/');
+        $location.path('/');
       } else {
         $location.hash('name');
         $anchorScroll();
       }
     };
-  });
+  }]);
 
-function sendS3(s3Pkg) {
+function sendS3(s3Pkg,message,ref) {
 //   var img = new Image();
 //   img.onload=function(){
 //     var MAXWidthHeight = 700;
@@ -181,6 +188,7 @@ function sendS3(s3Pkg) {
     } else {
       console.log(s3Pkg.fileName);
       console.log(data);
+      ref.update(message);
     }
   });  
 }

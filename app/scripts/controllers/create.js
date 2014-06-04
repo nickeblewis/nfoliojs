@@ -34,8 +34,8 @@ angular.module('nfolio')
         
         var f = $scope.files[0];
         var reader = new FileReader();
-        reader.onload = (function() {
-          return function(e) {
+        reader.onload = function(e) {
+//           return function(e) {
             
             var img = new Image();
             img.onload=function(){
@@ -53,7 +53,37 @@ angular.module('nfolio')
 //               c.getContext("2d").drawImage(this,0,0,w,100,0,0,w,h);
 //               c.getContext("2d").drawImage(img,90,130,50,60,10,10,50,60);
               
-              this.src=c.toDataURL();
+              //this.src=c.toDataURL();
+              //cument.body.appendChild(this);
+                  
+              var mediumImage = {
+                fileName: userFolder + '/' + imageFolder + '/medium/' + f.name,
+                bucket: 'nfolio',
+                dataURL: c.toDataURL(),
+                fileType: 'image/jpeg'
+              }
+              console.log('calling s3send for medimages...');
+              sendS3(mediumImage);  
+              
+           }
+            
+                        var img2 = new Image();
+            img2.onload=function(){
+              var MAXWidthHeight = 200;
+              var r=MAXWidthHeight/Math.max(this.width,this.height),
+                  w=Math.round(this.width*r),
+                  h=Math.round(this.height*r),
+                  c=document.createElement("canvas");
+                  
+              c.width=w;c.height=h;
+              
+              // context.drawImage(img,x,y,width,height);
+              // context.drawImage(img,sx,sy,swidth,sheight,x,y,width,height);
+              c.getContext("2d").drawImage(this,0,0,w,h);
+//               c.getContext("2d").drawImage(this,0,0,w,100,0,0,w,h);
+//               c.getContext("2d").drawImage(img,90,130,50,60,10,10,50,60);
+              
+              //this.src=c.toDataURL();
               //cument.body.appendChild(this);
                   
               var thumbImage = {
@@ -62,7 +92,7 @@ angular.module('nfolio')
                 dataURL: c.toDataURL(),
                 fileType: 'image/jpeg'
               }
-              
+              console.log('calling s3send for thumbimages...');
               sendS3(thumbImage);  
               
            }
@@ -88,28 +118,29 @@ angular.module('nfolio')
 //             sendS3(mediumImage);              
 //            }
             
-//             img.src=e.target.result;
+             img.src=e.target.result;
+             img2.src=e.target.result;
                 
-//             var filePayload = e.target.result;
-//             img.src = e.target.result;
+            var filePayload = e.target.result;
+            //img.src = e.target.result;
 
-//             var fullsizeImage = {
-//               fileName: userFolder + '/' + imageFolder + '/original/' + f.name,
-//               bucket: 'nfolio',
-//               dataURL: filePayload,
-//               fileType: 'image/jpeg'
-//             }
+            var fullsizeImage = {
+              fileName: userFolder + '/' + imageFolder + '/original/' + f.name,
+              bucket: 'nfolio',
+              dataURL: filePayload,
+              fileType: 'image/jpeg'
+            }
             
-//             sendS3(fullsizeImage);
+            sendS3(fullsizeImage);
 
                 
             newMessageRef.update({
-//               'fileOriginal': userFolder + '/' + imageFolder + '/original/' + f.name,
+              'fileOriginal': userFolder + '/' + imageFolder + '/original/' + f.name,
               'fileThumb': userFolder + '/' + imageFolder + '/thumb/' + f.name,
               'fileMedium': userFolder + '/' + imageFolder + '/medium/' + f.name
             });
-          };
-        })(f);
+          }
+//         })(f);
         
         reader.readAsDataURL(f);
       }
@@ -122,13 +153,22 @@ angular.module('nfolio')
   });
 
 function sendS3(s3Pkg) {
+//   var img = new Image();
+//   img.onload=function(){
+//     var MAXWidthHeight = 700;
+//     var r=MAXWidthHeight/Math.max(this.width,this.height),
+//     w=Math.round(this.width*r),
+//     h=Math.round(this.height*r),
+//     c=document.createElement("canvas");                  
+//     c.width=w;c.height=h;
+//     c.getContext("2d").drawImage(this,0,0,w,h);
+//     this.src=c.toDataURL();
+//   }
+  
   var blobData = dataURLtoBlob(s3Pkg.dataURL);
-
   AWS.config.update({accessKeyId: 'AKIAIUAB3DKYZOD3S7VQ', secretAccessKey: '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'});
   AWS.config.region = 'eu-west-1';
-
   var bucket = new AWS.S3({params: {Bucket: s3Pkg.bucket}});
-  
   var params = {
     Key: s3Pkg.fileName,
     ContentType: s3Pkg.fileType, 
@@ -139,7 +179,7 @@ function sendS3(s3Pkg) {
     if (err) {
       console.log(err);
     } else {
-      console.log("Successful upload to S3");
+      console.log(s3Pkg.fileName);
       console.log(data);
     }
   });  

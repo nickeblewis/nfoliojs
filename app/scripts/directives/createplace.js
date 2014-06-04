@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('farnboroughyoApp')
+angular.module('nfolio')
 
 	.run(['$templateCache',
 		function ($templateCache) {

@@ -1,4 +1,5 @@
 'use strict';
 
-angular.module('farnboroughyoApp')
-  .value('fbURL', 'https://farnborough.firebaseio.com/places/');
+// Two collections photos and photostest
+angular.module('nfolio')
+  .value('fbURL', 'https://nfolio.firebaseio.com/photostest/');

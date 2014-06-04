@@ -1,11 +1,11 @@
 'use strict';
 
-angular.module('farnboroughyoApp', [
+angular.module('nfolio', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
   'ngRoute',
-  'ngAnimate',
+//   'ngAnimate',
   'firebase'
 ])
   .config(function ($routeProvider) {

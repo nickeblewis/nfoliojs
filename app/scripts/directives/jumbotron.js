@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('farnboroughyoApp')
+angular.module('nfolio')
   .directive('jumbotron', function () {
     return {
 			template: '<div class="jumbotron"><h1>{{jtHeading}}</h1><p class="lead">{{jtIntro}}</p><p><a class="btn btn-lg btn-success" ng-href="#">{{jtButton}}</a></p></div>',

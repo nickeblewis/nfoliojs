@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('farnboroughyoApp')
+angular.module('nfolio')
 	// Cached templates for directives
 	.run(['$templateCache',
 		function ($templateCache) {
@@ -12,7 +12,7 @@ angular.module('farnboroughyoApp')
     				'<li><a ng-href="#/login" ng-show="!signedIn()">Login</a></li>' +
 						'<li><a ng-click="logOut()" ng-show="signedIn()">Logout</a></li>' +
   				'</ul>' +
-  				'<h3 class="text-muted"><a ng-href="/">FG</a></h3>' +
+  				'<h3 class="text-muted"><a ng-href="/">Nfolio</a></h3>' +
 				'</div>'
 			);
 		}

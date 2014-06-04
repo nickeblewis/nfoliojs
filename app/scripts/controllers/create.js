@@ -1,83 +1,170 @@
 'use strict';
 /*global Firebase*/
 /*global Auth*/
-angular.module('farnboroughyoApp')
+angular.module('nfolio')
   .controller('CreateCtrl', function ($scope, $location, $timeout, fbRequestUrl, fbURL, $anchorScroll, Auth) {
-		
-		$scope.place = {};
-		
-		// Grab the current GPS location - not too sure how FG will use this at the moment but lets just take it anyway
-    navigator.geolocation.getCurrentPosition(
-      function(position) {
-        $scope.place.lat = position.coords.latitude;
-        $scope.place.lng = position.coords.longitude;
-      });
+    $scope.place = {};
+
+    navigator.geolocation.getCurrentPosition(function(position) {
+      $scope.place.lat = position.coords.latitude;
+      $scope.place.lng = position.coords.longitude;
+    });
     
-		// User has clicked save on the form
-		$scope.save = function() {
-			
-			// Proceed only if the form has passed validation
-			if ($scope.myForm.$valid) {
-				
-					// Create a reference to Firebase - this should be moved to data services ideally as implementation should not be a concern of the controller
-          var messageListRef = new Firebase(fbURL);
-          var newMessageRef = messageListRef.push();
-				
-					// Record the current timestamp as this is used to give users an indication of the age of this item
-          $scope.place.updated = (new Date()).getTime();
+    $scope.save = function() {
+
+    if ($scope.myForm.$valid) {
+      var messageListRef = new Firebase(fbURL);
+      var newMessageRef = messageListRef.push();
+
+      $scope.place.updated = (new Date()).getTime();
    
-					// Item is added to firebase without image at this point (if there was one of course)
-          newMessageRef.set({'name': $scope.place.name,
-                             'description': $scope.place.description,
-                             'lat': $scope.place.lat,
-                             'lng': $scope.place.lng,
-                             'updated': $scope.place.updated,
-                             'userid': Auth.signedInAs().id
-                            });
+      newMessageRef.set({
+        'name': $scope.place.name,
+        'description': $scope.place.description,
+        'lat': $scope.place.lat,
+        'lng': $scope.place.lng,
+        'updated': $scope.place.updated,
+        'userid': Auth.signedInAs().id
+      });
           
-					// Now for the image processing part.... if there are images to process otherwise it doesn't worry about it
-          if($scope.files) {
-						// Currently onle single files are supported
-						// TODO: Implement a drag-and-drop to upload multiple files (maybe)
-            var f = $scope.files[0];
-            var reader = new FileReader();
+      if($scope.files) {
+        
+        var userFolder = 'user' + Auth.signedInAs().id,
+            imageFolder = 'image' + (new Date()).getTime();;
+        
+        var f = $scope.files[0];
+        var reader = new FileReader();
+        reader.onload = (function() {
+          return function(e) {
+            
+            var img = new Image();
+            img.onload=function(){
+              var MAXWidthHeight = 700;
+              var r=MAXWidthHeight/Math.max(this.width,this.height),
+                  w=Math.round(this.width*r),
+                  h=Math.round(this.height*r),
+                  c=document.createElement("canvas");
+                  
+              c.width=w;c.height=h;
+              
+              // context.drawImage(img,x,y,width,height);
+              // context.drawImage(img,sx,sy,swidth,sheight,x,y,width,height);
+              c.getContext("2d").drawImage(this,0,0,w,h);
+//               c.getContext("2d").drawImage(this,0,0,w,100,0,0,w,h);
+//               c.getContext("2d").drawImage(img,90,130,50,60,10,10,50,60);
+              
+              this.src=c.toDataURL();
+              //cument.body.appendChild(this);
+                  
+              var thumbImage = {
+                fileName: userFolder + '/' + imageFolder + '/thumb/' + f.name,
+                bucket: 'nfolio',
+                dataURL: c.toDataURL(),
+                fileType: 'image/jpeg'
+              }
+              
+              sendS3(thumbImage);  
+              
+           }
 
-						// TODO: Using the canvas object resize the image in various ways 
-						// http://hacks.mozilla.org/2011/01/how-to-develop-a-html5-image-uploader/
-            reader.onload = (function() {
-              return function(e) {
+//             var imgMedium = new Image();
+//             imgMedium.onload=function(){
+//               var MAXWidthHeight = 700;
+//               var r=MAXWidthHeight/Math.max(this.width,this.height),
+//               w=Math.round(this.width*r),
+//               h=Math.round(this.height*r),
+//               c=document.createElement("canvas");
+//               c.width=w;c.height=h;
+//               c.getContext("2d").drawImage(this,0,0,w,h);
+//               this.src=c.toDataURL();
+//               //cument.body.appendChild(this);
+                  
+//               var mediumImage = {
+//                 fileName: userFolder + '/' + imageFolder + '/medium/' + f.name,
+//                 bucket: 'nfolio',
+//                 dataURL: c.toDataURL(),
+//                 fileType: 'image/jpeg'
+//               }
+//             sendS3(mediumImage);              
+//            }
+            
+//             img.src=e.target.result;
+                
+//             var filePayload = e.target.result;
+//             img.src = e.target.result;
 
-								// Read in the file data object
-                var filePayload = e.target.result;
+//             var fullsizeImage = {
+//               fileName: userFolder + '/' + imageFolder + '/original/' + f.name,
+//               bucket: 'nfolio',
+//               dataURL: filePayload,
+//               fileType: 'image/jpeg'
+//             }
+            
+//             sendS3(fullsizeImage);
 
-								// Hard coded authentication 
-								// TODO: Make this more secure after reading up on this more
-								AWS.config.update({accessKeyId: 'AKIAIUAB3DKYZOD3S7VQ', secretAccessKey: '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'});
-								AWS.config.region = 'eu-west-1';
-								
-								// Reference the S3 bucket object
-        				var bucket = new AWS.S3({params: {Bucket: 'farnborough'}});
-								var params = {Key: f.name,ContentType: f.type, Body: f};
-                bucket.putObject(params, function (err, data) {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        console.log(data);
-                    }
-                });
+                
+            newMessageRef.update({
+//               'fileOriginal': userFolder + '/' + imageFolder + '/original/' + f.name,
+              'fileThumb': userFolder + '/' + imageFolder + '/thumb/' + f.name,
+              'fileMedium': userFolder + '/' + imageFolder + '/medium/' + f.name
+            });
+          };
+        })(f);
+        
+        reader.readAsDataURL(f);
+      }
+        //$location.path('/');
+      } else {
+        $location.hash('name');
+        $anchorScroll();
+      }
+    };
+  });
 
-								// Write the filename to Firebase
-								// TODO: This would be better being a complete S3 reference and even better if the filename was randomised to avoid duplication of names
-                newMessageRef.update({'file': f.name});
-              };
-            })(f);
-            reader.readAsDataURL(f);
-          }
-          $location.path('/');
-        } else {
-          $location.hash('name');
-          $anchorScroll();
-        }
-      };
-	});
+function sendS3(s3Pkg) {
+  var blobData = dataURLtoBlob(s3Pkg.dataURL);
 
+  AWS.config.update({accessKeyId: 'AKIAIUAB3DKYZOD3S7VQ', secretAccessKey: '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'});
+  AWS.config.region = 'eu-west-1';
+
+  var bucket = new AWS.S3({params: {Bucket: s3Pkg.bucket}});
+  
+  var params = {
+    Key: s3Pkg.fileName,
+    ContentType: s3Pkg.fileType, 
+    Body: blobData
+  };
+  
+  bucket.putObject(params, function (err, data) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Successful upload to S3");
+      console.log(data);
+    }
+  });  
+}
+
+function dataURLtoBlob(dataURL) {
+  var BASE64_MARKER = ';base64,';
+    if (dataURL.indexOf(BASE64_MARKER) == -1) {
+      var parts = dataURL.split(',');
+      var contentType = parts[0].split(':')[1];
+      var raw = parts[1];
+
+      return new Blob([raw], {type: contentType});
+    }
+
+    var parts = dataURL.split(BASE64_MARKER);
+    var contentType = parts[0].split(':')[1];
+    var raw = window.atob(parts[1]);
+    var rawLength = raw.length;
+
+    var uInt8Array = new Uint8Array(rawLength);
+
+    for (var i = 0; i < rawLength; ++i) {
+      uInt8Array[i] = raw.charCodeAt(i);
+    }
+
+    return new Blob([uInt8Array], {type: contentType});
+}

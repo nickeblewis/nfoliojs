@@ -1,6 +1,6 @@
 'use strict';
 /*global Firebase*/
-angular.module('farnboroughyoApp')
+angular.module('nfolio')
   .factory('fbEvents', function ($firebase, fbURL, fbAuthToken) {
     var firebase = new Firebase(fbURL);
     firebase.auth(fbAuthToken);

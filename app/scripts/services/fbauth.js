@@ -1,4 +1,4 @@
 'use strict';
 
-angular.module('farnboroughyoApp')
-  .value('fbAUTH', 'https://farnborough.firebaseio.com');
+angular.module('nfolio')
+  .value('fbAUTH', 'https://nfolio.firebaseio.com');

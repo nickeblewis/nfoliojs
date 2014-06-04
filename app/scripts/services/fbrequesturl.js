@@ -1,7 +1,7 @@
 'use strict';
 /*global Firebase*/
 /*global FirebaseSimpleLogin*/
-angular.module('farnboroughyoApp')
+angular.module('nfolio')
   .factory('fbRequestUrl', function ($firebase, fbURL) {
     var ref = new Firebase(fbURL);
     new FirebaseSimpleLogin(ref, function(error, user) {

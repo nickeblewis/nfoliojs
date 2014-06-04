@@ -1,6 +1,6 @@
 'use strict';
 /*global Firebase*/
-angular.module('farnboroughyoApp')
+angular.module('nfolio')
   .controller('ShowCtrl', function ($scope, $location, $routeParams, $firebase, fbURL, Auth) {
     
 		var placeUrl = fbURL + $routeParams.placeId;

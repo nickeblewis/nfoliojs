@@ -1,7 +1,7 @@
 'use strict';
 // Taken from http://stackoverflow.com/questions/16579427/html5-file-upload-with-angularjs
 // Take a look at the Plunkr for more in-depth look at extracting images, creating thumbs etc
-angular.module('farnboroughyoApp')
+angular.module('nfolio')
 	.directive('filelistBind', function() {
 	  return function( scope, elm, attrs ) {
 			elm.bind('change', function( evt ) {

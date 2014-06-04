@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('farnboroughyoApp')
+angular.module('nfolio')
   .controller('TestCtrl', function ($scope) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',

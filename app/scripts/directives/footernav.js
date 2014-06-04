@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('farnboroughyoApp')
+angular.module('nfolio')
 	// Cached templates for directives
 	.run(['$templateCache',
 		function ($templateCache) {

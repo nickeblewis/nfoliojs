@@ -2,12 +2,13 @@
 /*global Firebase*/
 /*global FirebaseSimpleLogin*/
 /*global moment*/
-angular.module('farnboroughyoApp')
+angular.module('nfolio')
   .controller('MainCtrl', function ($scope, $timeout, fbRequestUrl, fbEvents, fbAUTH, fbURL, Auth) {
 //     $scope.postsuccess = false;
     // TODO: a lot of the code below is now crap because I have added a service
     var isAuthorised = false;
     $scope.canbetested = true;
+    
 		//$scope.place.feed.post = '';
     var ref = new Firebase(fbAUTH);
     new FirebaseSimpleLogin(ref, function(error, user) {

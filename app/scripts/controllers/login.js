@@ -1,5 +1,5 @@
 'use strict';
-angular.module('farnboroughyoApp')
+angular.module('nfolio')
 	.controller('LoginCtrl', function ($scope, $firebase, Auth, $location) {
 		$scope.user = {};
     

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('farnboroughyoApp')
+angular.module('nfolio')
   .directive('grid', function () {
     return {
       template: '<div class="col-md-12 place-card element general">' +

@@ -6,36 +6,36 @@ angular.module('nfolio')
   .controller('MainCtrl', ['$scope', '$timeout', 'fbRequestUrl', 'fbMessagesUrl','fbEvents', 'fbAUTH', 'fbURL',function ($scope, $timeout, fbRequestUrl, fbMessagesUrl, fbEvents, fbAUTH, fbURL, Auth) {
 //     $scope.postsuccess = false;
     // TODO: a lot of the code below is now crap because I have added a service
-    var isAuthorised = false;
-    $scope.canbetested = true;
+//     var isAuthorised = false;
+//     $scope.canbetested = true;
     
 		//$scope.place.feed.post = '';
-    var ref = new Firebase(fbAUTH);
-    new FirebaseSimpleLogin(ref, function(error, user) {
-      if (error) {
-        // an error ocurred during login
-        console.log(error);
-      } else if (user) {
-        // You are logged in
-        console.log('User ID: ' + user.id + ', Provider: ' + user.provider);
-        isAuthorised = true;
-      } else {
-        // User has logged out
-        console.log('User has logged out');
-      }
-    });
-    $scope.isAuthorised = false;
-    $scope.authmessage = '';
+//     var ref = new Firebase(fbAUTH);
+//     new FirebaseSimpleLogin(ref, function(error, user) {
+//       if (error) {
+//         // an error ocurred during login
+//         console.log(error);
+//       } else if (user) {
+//         // You are logged in
+//         console.log('User ID: ' + user.id + ', Provider: ' + user.provider);
+//         isAuthorised = true;
+//       } else {
+//         // User has logged out
+//         console.log('User has logged out');
+//       }
+//     });
+//     $scope.isAuthorised = false;
+//     $scope.authmessage = '';
     $scope.status = 'Loading...';
     $scope.statusref = '';
     $scope.places = fbRequestUrl;
     $scope.messages = fbMessagesUrl;
 
-    $scope.$watch('places', function() {
-      console.log('Places has updated ');
-      // if($scope.loaded === 1)
-      //   $('.isotope').isotope();
-    });
+//     $scope.$watch('places', function() {
+//       console.log('Places has updated ');
+//       // if($scope.loaded === 1)
+//       //   $('.isotope').isotope();
+//     });
 
     $scope.places.$on('loaded', function() {
       $scope.status = 'Watch this spot for live updates across the site!';
@@ -50,8 +50,9 @@ angular.module('nfolio')
     });
 
     fbEvents.on('child_added', function(snapshot) {
-      var placeName = snapshot.val().name;
-      $scope.status = placeName + ' has been added';
+      //var placeName = snapshot.name();
+      $scope.status = snapshot.val().name + ' has been added';
+      $scope.statusref = snapshot.name();
     });
 
     fbEvents.on('child_removed', function(snapshot) {

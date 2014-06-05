@@ -35,7 +35,8 @@ angular.module('nfolio')
     };
 
     $scope.save = function() {
-      $scope.place.updated = (new Date()).getTime();
+      // NOTE: I felt that if people edit or post en-masse the homepage order would go crazy, so for now, commented this line out 
+      //$scope.place.updated = (new Date()).getTime();
       $scope.place.$save();
       $location.path('/');
     };

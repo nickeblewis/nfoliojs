@@ -15,15 +15,20 @@ angular.module('nfolio')
       return Auth.signedIn();
     };
     
-		$scope.postStatus = function() {
-			$scope.place.updated = (new Date()).getTime();
+    $scope.signedInAs = function() {
+			return Auth.signedInAs();
+		};
+    
+		$scope.postComment = function() {
+// 			$scope.place.updated = (new Date()).getTime();
       $scope.place.$save();
 			var messageListRef = new Firebase(fbURL + $scope.placeId + '/feed');
 			var newMessageRef = messageListRef.push();          
 			newMessageRef.set({
 				'message': $scope.status,
-				'updated': (new Date()).getTime()
-			});			
+				'updated': (new Date()).getTime(),
+        'userid': $scope.signedInAs().id
+			});
 			$scope.postsuccess = true;
 		};
 		

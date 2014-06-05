@@ -13,7 +13,7 @@ angular.module('nfolio')
         '<p ng-show="{{place.fileThumb == undefined}}"><img width="100%" src="https://s3-eu-west-1.amazonaws.com/nfolio/{{place.fileMedium}}" /></p>' +
 //         '<p><img ng-show="{{place.fileThumb != undefined}}" src="http://placehold.it/700x100&text=Image Uploading" /></p>' +
 //         '<p><img ng-show="{{place.fileThumb}}" ng-src="https://s3-eu-west-1.amazonaws.com/nfolio/{{place.fileThumb}}" /></p>' +
-        '<strong><a data-ng-href="#/show/{{place.$id}}">{{place.name}}</a></strong> <i>Updated {{timeAgo(place.updated)}}</i>' +
+        '<strong><span class="badge">{{place.userid}}</span> <a data-ng-href="#/show/{{place.$id}}">{{place.name}}</a></strong> <i>Updated {{timeAgo(place.updated)}}</i>' +
       '<p class="card-content">' +
         '{{place.description || "empty"}}' +
 				'<div ng-transclude></div>' +

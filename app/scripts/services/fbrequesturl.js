@@ -4,20 +4,25 @@
 angular.module('nfolio')
   .factory('fbRequestUrl', function ($firebase, fbURL) {
     var ref = new Firebase(fbURL);
-    new FirebaseSimpleLogin(ref, function(error, user) {
-      if (error) {
-        // an error ocurred during login
-        console.log(error);
-      } else if (user) {
-        // You are logged in
-        console.log('factory User ID: ' + user.id + ', Provider: ' + user.provider);
-        //isAuthorised = true;
-      } else {
-        // User has logged out
-        console.log('factory User has logged out');
-      }
-    });
+//     new FirebaseSimpleLogin(ref, function(error, user) {
+//       if (error) {
+//         // an error ocurred during login
+//         console.log(error);
+//       } else if (user) {
+//         // You are logged in
+//         console.log('factory User ID: ' + user.id + ', Provider: ' + user.provider);
+//         //isAuthorised = true;
+//       } else {
+//         // User has logged out
+//         console.log('factory User has logged out');
+//       }
+//     });
 
+    return $firebase(ref);
+  })
+
+  .factory('fbMessagesUrl', function ($firebase, fbMessagesURL) {
+    var ref = new Firebase(fbMessagesURL);
     return $firebase(ref);
   })
 

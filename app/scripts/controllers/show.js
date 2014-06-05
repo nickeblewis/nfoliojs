@@ -11,6 +11,10 @@ angular.module('nfolio')
 		
 		$scope.postsuccess = false;
 		
+    $scope.signedIn = function() {
+      return Auth.signedIn();
+    };
+    
 		$scope.postStatus = function() {
 			$scope.place.updated = (new Date()).getTime();
       $scope.place.$save();

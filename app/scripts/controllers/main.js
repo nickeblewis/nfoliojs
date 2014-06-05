@@ -3,7 +3,7 @@
 /*global FirebaseSimpleLogin*/
 /*global moment*/
 angular.module('nfolio')
-  .controller('MainCtrl', ['$scope', '$timeout', 'fbRequestUrl', 'fbEvents', 'fbAUTH', 'fbURL',function ($scope, $timeout, fbRequestUrl, fbEvents, fbAUTH, fbURL, Auth) {
+  .controller('MainCtrl', ['$scope', '$timeout', 'fbRequestUrl', 'fbMessagesUrl','fbEvents', 'fbAUTH', 'fbURL',function ($scope, $timeout, fbRequestUrl, fbMessagesUrl, fbEvents, fbAUTH, fbURL, Auth) {
 //     $scope.postsuccess = false;
     // TODO: a lot of the code below is now crap because I have added a service
     var isAuthorised = false;
@@ -27,7 +27,9 @@ angular.module('nfolio')
     $scope.isAuthorised = false;
     $scope.authmessage = '';
     $scope.status = 'Loading...';
+    $scope.statusref = '';
     $scope.places = fbRequestUrl;
+    $scope.messages = fbMessagesUrl;
 
     $scope.$watch('places', function() {
       console.log('Places has updated ');
@@ -41,8 +43,9 @@ angular.module('nfolio')
     });
 
     fbEvents.on('child_changed', function(snapshot) {
-      var placeName = snapshot.val().name;
-      $scope.status = placeName + ' has been updated';
+      //var placeName = snapshot.name();
+      $scope.status = snapshot.val().name + ' has been updated';
+      $scope.statusref = snapshot.name();
       console.log('child_changed');
     });
 

@@ -18,7 +18,7 @@ angular.module('nfolio')
 		};
   
 		$scope.signedInAs = function() {
-			return Auth.signedInAs().email;
+			return Auth.signedInAs();
 		};
   
 		$scope.register = function() {

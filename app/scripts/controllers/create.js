@@ -5,10 +5,10 @@ angular.module('nfolio')
   .controller('CreateCtrl', ['$scope', '$location', '$timeout', 'fbRequestUrl', 'fbURL', '$anchorScroll', 'Auth', function ($scope, $location, $timeout, fbRequestUrl, fbURL, $anchorScroll, Auth) {
     $scope.place = {};
 
-    navigator.geolocation.getCurrentPosition(function(position) {
-      $scope.place.lat = position.coords.latitude;
-      $scope.place.lng = position.coords.longitude;
-    });
+//     navigator.geolocation.getCurrentPosition(function(position) {
+//       $scope.place.lat = position.coords.latitude;
+//       $scope.place.lng = position.coords.longitude;
+//     });
     
     $scope.save = function() {
 
@@ -21,8 +21,8 @@ angular.module('nfolio')
       newMessageRef.set({
         'name': $scope.place.name,
         'description': $scope.place.description,
-        'lat': $scope.place.lat,
-        'lng': $scope.place.lng,
+//         'lat': $scope.place.lat,
+//         'lng': $scope.place.lng,
         'updated': $scope.place.updated,
         'userid': Auth.signedInAs().id
       });
@@ -73,7 +73,7 @@ angular.module('nfolio')
             
                         var img2 = new Image();
             img2.onload=function(){
-              var MAXWidthHeight = 167;
+              var MAXWidthHeight = 332;
               var r=MAXWidthHeight/Math.max(this.width,this.height),
                   w=Math.round(this.width*r),
                   h=Math.round(this.height*r),

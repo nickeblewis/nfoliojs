@@ -2,4 +2,4 @@
 
 // Two collections photos and photostest
 angular.module('nfolio')
-  .value('fbURL', 'https://nfolio.firebaseio.com/photostest/');
+  .value('fbURL', 'https://nfolio.firebaseio.com/photos/');

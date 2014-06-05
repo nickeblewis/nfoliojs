@@ -7,7 +7,7 @@ angular.module('nfolio')
 			$templateCache.put(
 				'footernav.html',
 				'<div class="footer">' +
-  				'<p>♥ from the FG team</p>' +
+  				'<p>♥ from the Nfolio team</p>' +
 				'</div>'
 			);
 		}

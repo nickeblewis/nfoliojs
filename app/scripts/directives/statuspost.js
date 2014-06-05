@@ -9,7 +9,7 @@ angular.module('nfolio')
 				'<li class="feed-item-add">' +
 				'<form class="form-inline" role="form" name="myForm">' +
     				'<div class="form-group">' +
-							'<input type="text" class="form-control" id="inputStatus" placeholder="add a status post" ng-model="post">' +
+							'<input type="text" class="form-control" id="inputStatus" placeholder="add a comment or critique" ng-model="post">' +
 						'</div>' +
     				'<div class="form-group">' +
 							'<button ng-click="postStatus(place.$id)"class="btn btn-primary">Post</button>' +

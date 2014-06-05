@@ -5,9 +5,8 @@
   <searchbar />
   <statusbar />
 </div>
-<!-- <createplace /> -->
 <photolist>
-	<commentlist>
+	<commentlist ng-show="signedIn()">
 		<statuspost place="place" />
 	</commentlist>
 </photolist>

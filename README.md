@@ -6,6 +6,7 @@
 - Can I push this into a private repo?
 - SASS best way of breaking this down??
 - created main copy that includes the commented out toolbars and other things I will need to bring back in
+- Reinstate the header directive, see if it were the missing DI declaration that was left out of the other file??
 
 ## Profile Page
 
@@ -19,6 +20,9 @@
 
 - How about the possibilty of uploading a set of images per entry?
 
-## 
+## Square cropping
+
+- Wipe S3 files and data - try uploading a whole bunch of Malta photos and see how their crops look.
+  - May need to make some big tweaks to the algorithm for this?
 
 

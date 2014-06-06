@@ -4,20 +4,16 @@
 angular.module('nfolio')
   .controller('CreateCtrl', ['$scope', '$location', '$timeout', 'fbRequestUrl', 'fbURL', '$anchorScroll', 'Auth', '$upload', function ($scope, $location, $timeout, fbRequestUrl, fbURL, $anchorScroll, Auth, $upload) {
     $scope.place = {};
-    $scope.logIn = function() {
-          $scope.isAuthorised = true;
-          $scope.authmessage = 'You have successfully logged in';
-        };
     
-        $scope.signedIn = function() {
-          return Auth.signedIn();
-        };
+    $scope.signedIn = function() {
+      return Auth.signedIn();
+    };
 
-        $scope.logOut = function() {
-          return Auth.logout();
-        };
+    $scope.logOut = function() {
+      return Auth.logout();
+    };
+    
     $scope.save = function() {
-
       if ($scope.myForm.$valid) {
         var messageListRef = new Firebase(fbURL);
         var newMessageRef = messageListRef.push();
@@ -31,8 +27,7 @@ angular.module('nfolio')
           'userid': Auth.signedInAs().id
         });
           
-        if($scope.files) {
-        
+        if($scope.files) {        
           var userFolder = 'user' + Auth.signedInAs().id,
               imageFolder = 'image' + (new Date()).getTime();;
         
@@ -40,7 +35,6 @@ angular.module('nfolio')
           var reader = new FileReader();
           reader.onload = function(e) {
             // return function(e) {
-
             var img = new Image();
               img.onload=function(){
                 var MAXWidthHeight = 700;
@@ -75,14 +69,26 @@ angular.module('nfolio')
                   h=Math.round(this.height*r),
                   c=document.createElement("canvas");
                   
+              var sx = 0,
+                   sy = 0,
+                   sw = 332,
+                   sh = 332,
+                   dx = 0,
+                   dy = 0,
+                   dw = 332,
+                   dh = 332,
+                   cc = document.createElement("canvas");
+                                          
               c.width=w;c.height=h;
+              cc.width=dw;cc.height=dh;
               
               c.getContext("2d").drawImage(this,0,0,w,h);
+              cc.getContext("2d").drawImage(this, sx, sy, sw, sh, dx, dy, dw, dh);
                   
               var thumbImage = {
                 fileName: userFolder + '/' + imageFolder + '/thumb/' + f.name,
                 bucket: 'nfolio',
-                dataURL: c.toDataURL(),
+                dataURL: cc.toDataURL(),
                 fileType: 'image/jpeg'
               }
               
@@ -96,7 +102,6 @@ angular.module('nfolio')
             img.src=e.target.result;
             img2.src=e.target.result;                
           }
-
         
           reader.readAsDataURL(f);
         }

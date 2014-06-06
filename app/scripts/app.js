@@ -7,7 +7,8 @@ angular.module('nfolio', [
   'ngRoute',
 //   'ngAnimate',
 //   'iso.directives',
-  'firebase'
+  'firebase',
+  'angularFileUpload'
 ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -31,7 +32,10 @@ angular.module('nfolio', [
       })
       .when('/create', {
         templateUrl: 'views/edit.html',
-        controller: 'CreateCtrl'
+        controller: 'CreateCtrl',
+        resolve: {
+          factory: checkSignedIn
+        }
       })
       .when('/login', {
         templateUrl: 'views/login.html',
@@ -41,3 +45,21 @@ angular.module('nfolio', [
         redirectTo: '/'
       });
   });
+
+var checkSignedIn = function ($q, $rootScope, $location, Auth, $http) {
+    if (Auth.signedIn()) {
+        return true;
+    } else {
+        var deferred = $q.defer();
+        $http.post("/login")
+            .success(function (response) {
+                //$rootScope.userProfile = response.userProfile;
+                deferred.resolve(true);
+            })
+            .error(function () {
+                deferred.reject();
+                $location.path("/");
+             });
+        return deferred.promise;
+    }
+};

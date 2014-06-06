@@ -1,11 +1,9 @@
 ## Todos
 
 - Should translate these into TDD unit tests
-- Create button which fires up the launch page
+  - Eurgggh I have done no tests at all 
 - Write directives for common pieces of HTML that are gradually coming together
-- Can I push this into a private repo?
-- SASS best way of breaking this down??
-- created main copy that includes the commented out toolbars and other things I will need to bring back in
+  - Coming along well, though some bits have strayed from this path a bit
 - Reinstate the header directive, see if it were the missing DI declaration that was left out of the other file??
 
 ## Profile Page
@@ -18,11 +16,18 @@
 
 ## Image upload
 
-- How about the possibilty of uploading a set of images per entry?
+- How about the possibilty of uploading a set of images per entry? The idea behind this is that a title, a description (background story) may complement a set of photos better
 
 ## Square cropping
 
 - Wipe S3 files and data - try uploading a whole bunch of Malta photos and see how their crops look.
   - May need to make some big tweaks to the algorithm for this?
+  
+## Launching the site with a photowalk
+
+- Host a Farnborough photo walk that will be promoted through Nfolio
+- Attendees can register with the site to join the walk
+- Post their photos their later
+- We can discuss their photos in real time at the end of the day
 
 

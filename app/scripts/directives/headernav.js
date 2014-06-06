@@ -1,7 +1,6 @@
 'use strict';
 
 angular.module('nfolio')
-	// Cached templates for directives
 	.run(['$templateCache',
 		function ($templateCache) {
 			$templateCache.put(
@@ -18,26 +17,24 @@ angular.module('nfolio')
 		}
 	])
 
-	.controller('HeaderNavCtrl', ['$scope', '$timeout', 'fbRequestUrl', 'fbEvents', 'fbAUTH', 'Auth', function ($scope, $timeout, fbRequestUrl, fbEvents, fbAUTH, Auth) {
-    $scope.logIn = function() {
-      $scope.isAuthorised = true;
-      $scope.authmessage = 'You have successfully logged in';
-    };
-    
-    $scope.signedIn = function() {
-      return Auth.signedIn();
-    };
-    
-    $scope.logOut = function() {
-      return Auth.logout();
-    };
-  }])
-
-  .directive('headernav', function () {
+  .directive('headernav', [function () {
     return {
       templateUrl: 'headernav.html',
       restrict: 'EA',
 			replace: true,
-			controller: 'HeaderNavCtrl'
-    };
-  });
+			controller: ['$scope', 'Auth', function ($scope, Auth) {
+        $scope.logIn = function() {
+          $scope.isAuthorised = true;
+          $scope.authmessage = 'You have successfully logged in';
+        };
+    
+        $scope.signedIn = function() {
+          return Auth.signedIn();
+        };
+
+        $scope.logOut = function() {
+          return Auth.logout();
+        };
+      }]
+    }
+  }]);

@@ -3,7 +3,7 @@
 /*global FirebaseSimpleLogin*/
 /*global moment*/
 angular.module('nfolio')
-  .controller('MainCtrl', ['$scope', '$timeout', 'fbRequestUrl', 'fbMessagesUrl','fbEvents', 'fbAUTH', 'fbURL',function ($scope, $timeout, fbRequestUrl, fbMessagesUrl, fbEvents, fbAUTH, fbURL, Auth) {
+  .controller('MainCtrl', ['$scope', '$timeout', 'fbRequestUrl', 'fbMessagesUrl','fbEvents', 'fbAUTH', 'fbURL', 'Auth', function ($scope, $timeout, fbRequestUrl, fbMessagesUrl, fbEvents, fbAUTH, fbURL, Auth) {
 //     $scope.postsuccess = false;
     // TODO: a lot of the code below is now crap because I have added a service
 //     var isAuthorised = false;
@@ -36,7 +36,18 @@ angular.module('nfolio')
 //       // if($scope.loaded === 1)
 //       //   $('.isotope').isotope();
 //     });
+    $scope.logIn = function() {
+          $scope.isAuthorised = true;
+          $scope.authmessage = 'You have successfully logged in';
+        };
+    
+        $scope.signedIn = function() {
+          return Auth.signedIn();
+        };
 
+        $scope.logOut = function() {
+          return Auth.logout();
+        };
     $scope.places.$on('loaded', function() {
       $scope.status = 'Watch this spot for live updates across the site!';
       $scope.loaded = true;

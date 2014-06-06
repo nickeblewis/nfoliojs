@@ -17,6 +17,10 @@ angular.module('nfolio')
     return {
       templateUrl: 'footernav.html',
       restrict: 'EA',
-			replace: true
+			replace: true,
+      controller: ['$scope', function ($scope)
+      {                   
+        $scope.test = 3;                   
+      }]
     };
   });

@@ -1,12 +1,27 @@
 'use strict';
 
 angular.module('nfolio')
-  .directive('statusbar', function () {
+  .run(['$templateCache',
+  function ($templateCache) {
+      $templateCache.put(
+        'statusbar.html',
+        '<div class="col-md-12 card">' +
+          '<div class="status-bar"><strong><a href="#/show/{{statusref}}">{{status}}</a></strong></div>' +
+        '</div>'
+);
+}
+])
+      
+  .directive('statusbar', [function () {
     return {
-      template: '<div class="col-md-12 card"><div class="status-bar"><strong><a href="#/show/{{statusref}}">{{status}}</a></strong></div></div>',
+      templateUrl: 'statusbar.html',
       restrict: 'EA',
-      replace: true
-    };
-  });
+      replace: false,
+      controller: ['$scope', function ($scope)
+      {                   
+        $scope.test = 3;
+      }]
+    }
+  }]);
 
 

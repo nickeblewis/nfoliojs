@@ -323,4 +323,16 @@ body {
 /*   border: 1px solid #000; */
 }
 
+.sample{
+    width:332px;
+    height:332px;
+    overflow:hidden;
+    position: relative;
+/*     border: 1px solid black; */
+}
 
+.sample img {
+    position: absolute;
+    top: -332px;
+    left: 0px;
+}

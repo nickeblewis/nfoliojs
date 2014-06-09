@@ -7,8 +7,8 @@ angular.module('nfolio', [
   'ngRoute',
 //   'ngAnimate',
 //   'iso.directives',
-  'firebase',
-  'angularFileUpload'
+  'firebase'
+//   'angularFileUpload'
 ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -32,10 +32,10 @@ angular.module('nfolio', [
       })
       .when('/create', {
         templateUrl: 'views/edit.html',
-        controller: 'CreateCtrl',
-        resolve: {
-          factory: checkSignedIn
-        }
+        controller: 'CreateCtrl'
+//         resolve: {
+//           factory: checkSignedIn
+//         }
       })
       .when('/login', {
         templateUrl: 'views/login.html',

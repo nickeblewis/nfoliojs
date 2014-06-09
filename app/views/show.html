@@ -11,8 +11,7 @@
     <div class="panel-heading">{{place.name}}</div>
     <div class="panel-body">
 
-      <img ng-show="place.fileThumb != undefined" ng-src="https://s3-eu-west-1.amazonaws.com/nfolio/{{place.fileMedium}}" width="100%">  
-      <!--     <img ng-show="place.fileThumb == undefined" src="http://placehold.it/700&text=Uploading...">   -->
+      <img ng-show="place.fileMedium != undefined" ng-src="https://s3-eu-west-1.amazonaws.com/nfolio/{{place.fileMedium}}" width="100%">  
       <p>{{place.description}}</p>
     </div>
   </div>

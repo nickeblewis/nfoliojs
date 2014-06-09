@@ -2,19 +2,25 @@
 /*global Firebase*/
 /*global Auth*/
 angular.module('nfolio')
-  .controller('CreateCtrl', ['$scope', '$location', '$timeout', 'fbRequestUrl', 'fbURL', '$anchorScroll', 'Auth', '$upload', function ($scope, $location, $timeout, fbRequestUrl, fbURL, $anchorScroll, Auth, $upload) {
+  .controller('CreateCtrl', ['$rootScope', '$scope', '$location', '$timeout', 'fbRequestUrl', 'fbURL', '$anchorScroll', 'Auth', function ($rootScope, $scope, $location, $timeout, fbRequestUrl, fbURL, $anchorScroll, Auth) {
     $scope.place = {};
     
+    // TODO: signedIn, signedInAs and logOut - Not DRY, every controller has these, not sure that is good???
     $scope.signedIn = function() {
       return Auth.signedIn();
     };
 
+    $scope.signedInAs = function() {
+      return $rootScope.signedInAs;
+    };
+    
     $scope.logOut = function() {
       return Auth.logout();
     };
     
     $scope.save = function() {
       if ($scope.myForm.$valid) {
+    
         var messageListRef = new Firebase(fbURL);
         var newMessageRef = messageListRef.push();
 
@@ -24,83 +30,32 @@ angular.module('nfolio')
           'name': $scope.place.name,
           'description': $scope.place.description,
           'updated': $scope.place.updated,
-          'userid': Auth.signedInAs().id
+          'userid': $scope.signedInAs()
         });
           
         if($scope.files) {        
-          var userFolder = 'user' + Auth.signedInAs().id,
+          var userFolder = 'user' + Auth.signedInAs(),
               imageFolder = 'image' + (new Date()).getTime();;
         
           var f = $scope.files[0];
+        
           var reader = new FileReader();
+          
           reader.onload = function(e) {
             // return function(e) {
+          
             var img = new Image();
-              img.onload=function(){
-                var MAXWidthHeight = 700;
-                var r=MAXWidthHeight/Math.max(this.width,this.height),
-                    w=Math.round(this.width*r),
-                    h=Math.round(this.height*r),
-                    c=document.createElement("canvas");
-
-              c.width=w;c.height=h;
-              c.getContext("2d").drawImage(this,0,0,w,h);
-                  
-              var mediumImage = {
-                fileName: userFolder + '/' + imageFolder + '/medium/' + f.name,
-                bucket: 'nfolio',
-                dataURL: c.toDataURL(),
-                fileType: 'image/jpeg'
-              }
-
-              var message = {
-                'fileMedium': userFolder + '/' + imageFolder + '/medium/' + f.name
-              };  
-              
-              sendS3(mediumImage, message,newMessageRef);              
-           }
+            img.onload=function(){            
+              resizeUpload(this,700, 'medium', userFolder + '/' + imageFolder + '/medium/' + f.name, newMessageRef)                                            
+             }
             
-            var img2 = new Image();
-            
-            img2.onload=function(){
-              var MAXWidthHeight = 332;
-              var r=MAXWidthHeight/Math.max(this.width,this.height),
-                  w=Math.round(this.width*r),
-                  h=Math.round(this.height*r),
-                  c=document.createElement("canvas");
-                  
-              var sx = 0,
-                   sy = 0,
-                   sw = 332,
-                   sh = 332,
-                   dx = 0,
-                   dy = 0,
-                   dw = 332,
-                   dh = 332,
-                   cc = document.createElement("canvas");
-                                          
-              c.width=w;c.height=h;
-              cc.width=dw;cc.height=dh;
-              
-              c.getContext("2d").drawImage(this,0,0,w,h);
-              cc.getContext("2d").drawImage(this, sx, sy, sw, sh, dx, dy, dw, dh);
-                  
-              var thumbImage = {
-                fileName: userFolder + '/' + imageFolder + '/thumb/' + f.name,
-                bucket: 'nfolio',
-                dataURL: cc.toDataURL(),
-                fileType: 'image/jpeg'
-              }
-              
-              var message = {
-                'fileThumb': userFolder + '/' + imageFolder + '/thumb/' + f.name
-              };  
-              
-              sendS3(thumbImage, message,newMessageRef);                
-            }
+//             var img2 = new Image();            
+//             img2.onload=function(){              
+//               resizeUpload(this,332, 'thumb', userFolder + '/' + imageFolder + '/thumb/' + f.name, newMessageRef);                                          
+//             }
             
             img.src=e.target.result;
-            img2.src=e.target.result;                
+//             img2.src=e.target.result;                
           }
         
           reader.readAsDataURL(f);
@@ -143,6 +98,32 @@ angular.module('nfolio')
     // $scope.upload = $upload.http({...})  see 88#issuecomment-31366487 for sample code.
   };
   }]);
+
+function resizeUpload(image,maxwidthheight,type,filename,newMessageRef) {
+  var r=maxwidthheight/Math.max(image.width,image.height),
+      w=Math.round(image.width*r),
+      h=Math.round(image.height*r),
+      c=document.createElement("canvas");
+      c.width=w;c.height=h;
+      c.getContext("2d").drawImage(image,0,0,w,h);
+  
+  var thumbImage = {
+                fileName: filename,
+                bucket: 'nfolio',
+                dataURL: c.toDataURL(),
+                fileType: 'image/jpeg'
+              }
+              
+  var message = '';
+              if (type === 'thumb') {
+                message = {'fileThumb': filename};
+                
+              } else {
+                message = {'fileMedium': filename};
+              }
+              
+              sendS3(thumbImage, message,newMessageRef);  
+}
 
 function sendS3(s3Pkg,message,ref) {  
   var blobData = dataURLtoBlob(s3Pkg.dataURL);

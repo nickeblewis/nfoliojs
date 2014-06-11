@@ -19,10 +19,10 @@ angular.module('nfolio')
     }
   ])
 
-  .controller('CommentpostCtrl', ['$scope', '$timeout', 'fbRequestUrl', 'fbEvents', 'fbAUTH', 'fbURL', 'Auth', function ($scope, $timeout, fbRequestUrl, fbEvents, fbAUTH, fbURL, Auth) {
-    $scope.signedInAs = function() {
-      return Auth.signedInAs();
-    };
+  .controller('CommentpostCtrl', ['$rootScope','$scope', '$timeout', 'fbRequestUrl', 'fbEvents', 'fbAUTH', 'fbURL', 'Auth', function ($rootScope, $scope, $timeout, fbRequestUrl, fbEvents, fbAUTH, fbURL, Auth) {
+//     $scope.signedInAs = function() {
+//       return $rootScope.signedInAs;
+//     };
     
     $scope.postComment = function(photoId) {
       var messageListRef = new Firebase(fbURL + photoId + '/feed');
@@ -30,7 +30,7 @@ angular.module('nfolio')
       newMessageRef.set({
         'message': $scope.post,
         'updated': (new Date()).getTime(),
-        'userid': $scope.signedInAs().id
+        'userid': $scope.currentUser
       });
     };
   }])
@@ -40,9 +40,7 @@ angular.module('nfolio')
       templateUrl: 'commentpost.html',
       restrict: 'EA',
       replace: true,
-      scope: {
-        place: '='
-      },
+      scope: true,
       controller: 'CommentpostCtrl'
     };
   });

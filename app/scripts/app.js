@@ -5,61 +5,92 @@ angular.module('nfolio', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
-//   'ngAnimate',
-//   'iso.directives',
+//'ngAnimate',
+//'iso.directives',
   'firebase'
-//   'angularFileUpload'
+//'angularFileUpload'
 ])
-  .config(function ($routeProvider) {
+  .run(function ($rootScope, AUTH_EVENTS, Auth) {
+    $rootScope.$on('$routeChangeStart', function (event, next) {
+      if(next.data) {
+        var authorizedRoles = next.data.authorizedRoles;
+        if (!Auth.isAuthorized(authorizedRoles)) {
+          event.preventDefault();
+          if (Auth.isAuthenticated()) {
+            // user is not allowed
+            $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
+          } else {
+            // user is not logged in
+            $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
+          }
+        }
+      }
+    });
+  })
+  
+  .config(function ($routeProvider,USER_ROLES) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        controller: 'MainCtrl',
+        data: {
+          authorizedRoles: [USER_ROLES.all]
+        }
       })
       .when('/show/:placeId', {
         templateUrl: 'views/show.html',
-        controller: 'ShowCtrl'
-        // controller: 'ShowCtrl'
+        controller: 'ShowCtrl',
+        data: {
+          authorizedRoles: [USER_ROLES.all]
+        }
       })
       .when('/edit/:placeId', {
         templateUrl: 'views/edit.html',
         // templateUrl: 'views/edit.html',
-        controller: 'EditCtrl'
+        controller: 'EditCtrl',
+        data: {
+          authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
+        }
       })
       .when('/test', {
         templateUrl: 'views/test.html',
-        controller: 'TestCtrl'
+        controller: 'TestCtrl',
+        data: {
+          authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
+        }
       })
       .when('/create', {
         templateUrl: 'views/edit.html',
-        controller: 'CreateCtrl'
-//         resolve: {
-//           factory: checkSignedIn
-//         }
+        controller: 'CreateCtrl',
+        data: {
+          authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
+        }
       })
       .when('/login', {
         templateUrl: 'views/login.html',
-        controller: 'LoginCtrl'
+        controller: 'LoginCtrl',
+        data: {
+          authorizedRoles: [USER_ROLES.all]
+        }
+      })
+      .when('/folio', {
+        templateUrl: 'views/folio.html',
+        controller: 'FolioCtrl',
+        data: {
+          authorizedRoles: [USER_ROLES.all]
+        }
+      })
+      .when('/discussion', {
+        templateUrl: 'views/discussion.html',
+        controller: 'DiscussionCtrl',
+        data: {
+          authorizedRoles: [USER_ROLES.all]
+        }
       })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/',
+        data: {
+          authorizedRoles: [USER_ROLES.all]
+        }
       });
   });
-
-var checkSignedIn = function ($q, $rootScope, $location, Auth, $http) {
-    if (Auth.signedIn()) {
-        return true;
-    } else {
-        var deferred = $q.defer();
-        $http.post("/login")
-            .success(function (response) {
-                //$rootScope.userProfile = response.userProfile;
-                deferred.resolve(true);
-            })
-            .error(function () {
-                deferred.reject();
-                $location.path("/");
-             });
-        return deferred.promise;
-    }
-};

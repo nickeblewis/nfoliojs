@@ -3,7 +3,7 @@
 /*global FirebaseSimpleLogin*/
 /*global moment*/
 angular.module('nfolio')
-  .controller('MainCtrl', ['$scope', '$timeout', 'fbRequestUrl', 'fbMessagesUrl','fbEvents', 'fbAUTH', 'fbURL', 'Auth', function ($scope, $timeout, fbRequestUrl, fbMessagesUrl, fbEvents, fbAUTH, fbURL, Auth) {
+  .controller('MainCtrl', ['$scope', '$timeout', 'fbRequestUrl', 'fbMessagesUrl','fbEvents', 'fbAUTH', 'fbURL', 'Auth', 'Session', function ($scope, $timeout, fbRequestUrl, fbMessagesUrl, fbEvents, fbAUTH, fbURL, Auth, Session) {
 //     $scope.postsuccess = false;
     // TODO: a lot of the code below is now crap because I have added a service
 //     var isAuthorised = false;
@@ -26,6 +26,9 @@ angular.module('nfolio')
 //     });
 //     $scope.isAuthorised = false;
 //     $scope.authmessage = '';
+    
+    //$scope.currentUser = Session.userId;
+    
     $scope.status = 'Loading...';
     $scope.statusref = '';
     $scope.places = fbRequestUrl;
@@ -36,18 +39,18 @@ angular.module('nfolio')
 //       // if($scope.loaded === 1)
 //       //   $('.isotope').isotope();
 //     });
-    $scope.logIn = function() {
-          $scope.isAuthorised = true;
-          $scope.authmessage = 'You have successfully logged in';
-        };
+//     $scope.logIn = function() {
+//           $scope.isAuthorised = true;
+//           $scope.authmessage = 'You have successfully logged in';
+//         };
     
-        $scope.signedIn = function() {
-          return Auth.signedIn();
-        };
+//         $scope.signedIn = function() {
+//           return Auth.signedIn();
+//         };
 
-        $scope.logOut = function() {
-          return Auth.logout();
-        };
+//         $scope.logOut = function() {
+//           return Auth.logout();
+//         };
     $scope.places.$on('loaded', function() {
       $scope.status = 'Watch this spot for live updates across the site!';
       $scope.loaded = true;
@@ -71,29 +74,29 @@ angular.module('nfolio')
       $scope.status = placeName + ' has been removed';
     });
 
-    $scope.modalShown = false;
+//     $scope.modalShown = false;
  
-    $scope.toggleModal = function() {
-      $scope.modalShown = !$scope.modalShown;
-    };
+//     $scope.toggleModal = function() {
+//       $scope.modalShown = !$scope.modalShown;
+//     };
   
 
-    $scope.save = function() {
-      $scope.places.$save();
-    };
+//     $scope.save = function() {
+//       $scope.places.$save();
+//     };
 
     $scope.timeAgo = function(ms) {
       return moment(ms).fromNow();
     };
 		
-		$scope.postStatus = function(placeId) {
-			var messageListRef = new Firebase(fbURL + placeId + '/feed');
-			var newMessageRef = messageListRef.push();          
-			newMessageRef.set({
-				'message': $scope.post,
-				'updated': (new Date()).getTime()
-			});			
-// 			$scope.postsuccess = true;
-		};
+// 		$scope.postStatus = function(placeId) {
+// 			var messageListRef = new Firebase(fbURL + placeId + '/feed');
+// 			var newMessageRef = messageListRef.push();          
+// 			newMessageRef.set({
+// 				'message': $scope.post,
+// 				'updated': (new Date()).getTime()
+// 			});			
+// // 			$scope.postsuccess = true;
+// 		};
     
   }]);

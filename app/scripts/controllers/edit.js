@@ -5,19 +5,19 @@ angular.module('nfolio')
   .controller('EditCtrl', ['$scope', '$location', '$routeParams', '$firebase', 'fbURL', 'Auth', function ($scope, $location, $routeParams, $firebase, fbURL, Auth) {
     var placeUrl = fbURL + $routeParams.placeId;
     $scope.place = $firebase(new Firebase(placeUrl));
-    $scope.place.userid = Auth.signedInAs().id;
- $scope.logIn = function() {
-          $scope.isAuthorised = true;
-          $scope.authmessage = 'You have successfully logged in';
-        };
+//     $scope.place.userid = Auth.signedInAs().id;
+//  $scope.logIn = function() {
+//           $scope.isAuthorised = true;
+//           $scope.authmessage = 'You have successfully logged in';
+//         };
     
-        $scope.signedIn = function() {
-          return Auth.signedIn();
-        };
+//         $scope.signedIn = function() {
+//           return Auth.signedIn();
+//         };
 
-        $scope.logOut = function() {
-          return Auth.logout();
-        };
+//         $scope.logOut = function() {
+//           return Auth.logout();
+//         };
     $scope.destroy = function() {
       var s3 = new AWS.S3();
       AWS.config.update({accessKeyId: 'AKIAIUAB3DKYZOD3S7VQ', secretAccessKey: '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'});

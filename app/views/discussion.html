@@ -10,14 +10,14 @@
   </ul>
   <h3 class="text-muted"><a ng-href="/">Nfolio</a></h3>
 </div> 
-<div class="row toolbars">
-<!--   <searchbar /> -->
-  <statusbar />
+<div class="row main">
+  <div class="panel panel-default" ng-show="!currentUser">
+    <div class="panel-heading">Discussion</div>
+    <div class="panel-body">
+      <p>
+        Feature coming soon - the ability for Nfolio lead developers and beta testers to discuss the site in a real time context
+      </p>
+    </div>
+  </div>  
 </div>
-<!-- <messagelist /> -->
-<photolist>
-	<commentlist ng-if="currentUser">
-		<commentpost place="place" />
-	</commentlist>
-</photolist>
-<footernav />
+<footernav>       

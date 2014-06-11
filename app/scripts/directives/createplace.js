@@ -65,7 +65,7 @@ angular.module('nfolio')
                              'lat': $scope.place.lat,
                              'lng': $scope.place.lng,
                              'updated': $scope.place.updated,
-                             'userid': Auth.signedInAs().id
+                             'userid': $scope.currentUser
                             });
           
           if($scope.files) {

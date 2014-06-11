@@ -2,6 +2,7 @@
 /*global Firebase*/
 /*global FirebaseSimpleLogin*/
 angular.module('nfolio')
+
   .factory('fbRequestUrl', function ($firebase, fbURL) {
     var ref = new Firebase(fbURL);
     return $firebase(ref);
@@ -16,30 +17,48 @@ angular.module('nfolio')
     var ref = new Firebase(fbProfilesURL);
     return $firebase(ref);
   })
+  
+  .service('Session', function () {
+    this.create = function (userId, userEmail, userRole) {
+      this.userId = userId;
+      this.userEmail = userEmail;
+      this.userRole = userRole;
+    };
+    this.destroy = function () {
+      this.userId = null;
+      this.userEmail = null;
+      this.userRole = null;
+    };
+    return this;
+  })
 
-  .factory('Auth', function ($firebase, $rootScope, fbAUTH, fbProfilesURL, $q) {
+  .factory('Auth', function ($firebase, $rootScope, fbAUTH, Session, fbProfilesURL, $q, AUTH_EVENTS, USER_ROLES) {
     var ref = new Firebase(fbAUTH);
     var auth = FirebaseSimpleLogin(ref, function(error, user) {
       if (error) {
         // an error ocurred during login
          console.log(error);
-        $rootScope.signedIn = false;
+//         $rootScope.signedIn = false;
+        
 //         $rootScope.signedInAs = null;
       } else if (user) {
         // You are logged in
 //         console.log('factory User ID: ' + user.id + ', Provider: ' + user.provider);
-        $rootScope.signedIn = true;
-        $rootScope.signedInAs = user.id;
+//         $rootScope.signedIn = true;
+//         $rootScope.signedInAs = user.id;
+        Session.create(user.id,user.email,USER_ROLES.guest);
       } else {
         // User has logged out
         
-        $rootScope.signedIn = false;
+//         $rootScope.signedIn = false;
 //         $rootScope.signedInAs = null;
+        Session.destroy();
         
-        console.log('factory User has logged out ');
+//         console.log('factory User has logged out ');
       }
     });
-		var Auth = {
+		
+    return {
 			register: function (newuser) {
         auth.createUser(newuser.remail, newuser.rpassword, function(error,user) {
 //           console.log('New user ' + user.id + ' was created');
@@ -55,19 +74,32 @@ angular.module('nfolio')
         });
       },
       
-      signedIn: function () {
-        return $rootScope.signedIn;
+//       signedIn: function () {
+//         return $rootScope.signedIn;
         
+//       },
+      
+//       signedInAs: function() {
+//         return $rootScope.signedInAs;
+//       },
+      
+      isAuthenticated: function () {
+        return !!Session.userId;  
       },
       
-      signedInAs: function() {
-        return $rootScope.signedInAs;
+      isAuthorized: function (authorizedRoles) {
+        if (!angular.isArray(authorizedRoles)) {
+          authorizedRoles = [authorizedRoles];
+        } 
+        return (this.isAuthenticated() &&
+          authorizedRoles.indexOf(Session.userRole) !== -1);
+        
       },
       
       login: function (user) {
 // 				$rootScope.signedIn = true;
         var deferred = $q.defer();
-        auth.login('password', {email: user.email, password: user.password}).then(function(user) {
+        auth.login('password', {email: user.email, password: user.password, rememberMe: true}).then(function(user) {
           console.log('Logged in');
           deferred.resolve(user);
         }, function(error) { 
@@ -89,5 +121,5 @@ angular.module('nfolio')
       }
 		};
     
-		return Auth;
+// 		return Auth;
   });

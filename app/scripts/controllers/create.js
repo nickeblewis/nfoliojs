@@ -6,17 +6,17 @@ angular.module('nfolio')
     $scope.place = {};
     
     // TODO: signedIn, signedInAs and logOut - Not DRY, every controller has these, not sure that is good???
-    $scope.signedIn = function() {
-      return Auth.signedIn();
-    };
+//     $scope.signedIn = function() {
+//       return Auth.signedIn();
+//     };
 
-    $scope.signedInAs = function() {
-      return $rootScope.signedInAs;
-    };
+//     $scope.signedInAs = function() {
+//       return $rootScope.signedInAs;
+//     };
     
-    $scope.logOut = function() {
-      return Auth.logout();
-    };
+//     $scope.logOut = function() {
+//       return Auth.logout();
+//     };
     
     $scope.save = function() {
       if ($scope.myForm.$valid) {
@@ -30,11 +30,11 @@ angular.module('nfolio')
           'name': $scope.place.name,
           'description': $scope.place.description,
           'updated': $scope.place.updated,
-          'userid': $scope.signedInAs()
+          'userid': $scope.currentUser
         });
           
         if($scope.files) {        
-          var userFolder = 'user' + Auth.signedInAs(),
+          var userFolder = 'user' + $scope.currentUser,
               imageFolder = 'image' + (new Date()).getTime();;
         
           var f = $scope.files[0];
@@ -46,18 +46,17 @@ angular.module('nfolio')
           
             var img = new Image();
             img.onload=function(){            
-              resizeUpload(this,700, 'medium', userFolder + '/' + imageFolder + '/medium/' + f.name, newMessageRef)                                            
+              resizeUpload(this,700, 'medium', userFolder + '/' + imageFolder + '/medium/' + f.name, newMessageRef);                                           
              }
             
-//             var img2 = new Image();            
-//             img2.onload=function(){              
-//               resizeUpload(this,332, 'thumb', userFolder + '/' + imageFolder + '/thumb/' + f.name, newMessageRef);                                          
-//             }
+            var img2 = new Image();            
+            img2.onload=function(){              
+               resizeUpload(this,332, 'thumb', userFolder + '/' + imageFolder + '/thumb/' + f.name, newMessageRef);                                          
+            }
             
             img.src=e.target.result;
-//             img2.src=e.target.result;                
-          }
-        
+            img2.src=e.target.result;                
+          };        
           reader.readAsDataURL(f);
         }
         $location.path('/');
@@ -67,6 +66,7 @@ angular.module('nfolio')
       }
     };
     
+    // NOTE: Not used at the moment but could be used as an alternative pattern to the above especially when DnD is introduced
     $scope.onFileSelect = function($files) {
     //$files: an array of files selected, each file has name, size, and type.
     for (var i = 0; i < $files.length; i++) {

@@ -19,7 +19,7 @@ angular.module('nfolio')
 
   .controller('CommentListCtrl', ['$scope', '$timeout', 'fbRequestUrl', 'fbEvents', 'fbAUTH', 'Auth', function ($scope, $timeout, fbRequestUrl, fbEvents, fbAUTH, Auth) {        
     $scope.signedIn = function() {
-      return Auth.signedIn();
+      return $scope.currentUser;
     };        
   }])
 

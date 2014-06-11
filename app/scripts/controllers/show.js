@@ -1,30 +1,33 @@
 'use strict';
 /*global Firebase*/
 angular.module('nfolio')
-  .controller('ShowCtrl', ['$scope', '$location', '$routeParams', '$firebase', 'fbURL', 'Auth', function ($scope, $location, $routeParams, $firebase, fbURL, Auth) {
+  .controller('ShowCtrl', ['$rootScope','$scope', '$location', '$routeParams', '$firebase', 'fbURL', 'Auth', function ($rootScope, $scope, $location, $routeParams, $firebase, fbURL, Auth) {
     var placeUrl = fbURL + $routeParams.placeId;
     
     $scope.place = $firebase(new Firebase(placeUrl));
     $scope.placeId = $routeParams.placeId;
     $scope.postsuccess = false;
-    $scope.signedIn = function() {
-      return Auth.signedIn();
-    };
+    $scope.status = '';
     
-    $scope.signedInAs = function() {
-      return Auth.signedInAs();
-    };
+//     $scope.signedIn = function() {
+//       return Auth.signedIn();
+//     };
     
-    $scope.postComment = function() {
+//     $scope.signedInAs = function() {
+//       return $rootScope.signedInAs;
+//     };
+    
+    $scope.postComment = function(comment) {
       $scope.place.updated = (new Date()).getTime();
       $scope.place.$save();
       var messageListRef = new Firebase(fbURL + $scope.placeId + '/feed');
       var newMessageRef = messageListRef.push();          
       newMessageRef.set({
-        'message': $scope.status,
+        'message': comment,
         'updated': (new Date()).getTime(),
-        'userid': $scope.signedInAs().id
+        'userid': $scope.currentUser
       });
-      $scope.postsuccess = true;
+//       $scope.postsuccess = true;
+      $scope.status = '';
     };
   }]);

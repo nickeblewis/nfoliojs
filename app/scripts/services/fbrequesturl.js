@@ -64,11 +64,11 @@ angular.module('nfolio')
 //           console.log('New user ' + user.id + ' was created');
           var messageListRef = new Firebase(fbProfilesURL);
           var newMessageRef = messageListRef.push();
-          newMessageRef.set({
+          newMessageRef.setWithPriority({
             'email': newuser.remail,
             'name': newuser.rname,
             'userid': user.id
-          });
+          }, user.id);
 //           $rootScope.signedIn = true;
 //         return auth.login('password', newuser);
         });

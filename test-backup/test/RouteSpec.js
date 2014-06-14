@@ -44,14 +44,14 @@ describe('Routes test', function() {
 		it('should load the show page on successful load of /show/1', function() {
 				location.path('/show/1');
 				rootScope.$digest();
-				expect(route.current.controller).toBe('ShowCtrl');
+				expect(route.current.controller).toBe('EditCtrl');
 			});
 	});
-  
+
 	describe('edit place via id route', function() {
 		beforeEach(inject(
 			function($httpBackend) {
-				$httpBackend.expectGET('views/edit.html')
+				$httpBackend.expectGET('views/show.html')
 				.respond(200);
 			}));
 
@@ -65,7 +65,7 @@ describe('Routes test', function() {
 	describe('Create route', function() {
 		beforeEach(inject(
 			function($httpBackend) {
-				$httpBackend.expectGET('views/edit.html')
+				$httpBackend.expectGET('views/create.html')
 				.respond(200);
 			}));
 
@@ -75,31 +75,4 @@ describe('Routes test', function() {
 				expect(route.current.controller).toBe('CreateCtrl');
 			});
 	});
-  
-  describe('Login route', function() {
-    beforeEach(inject(
-			function($httpBackend) {
-				$httpBackend.expectGET('views/login.html')
-				.respond(200);
-			}));
-    it('allows the user to login', function(){
-      location.path('/login');
-      rootScope.$digest();
-      expect(route.current.controller).toBe('LoginCtrl');
-    });
-  });
-  
-  // nfolio.com/nicklewis, nfolio.com/studio1st etc etc
-  describe('Specific user folio route', function() {
-    beforeEach(inject(
-			function($httpBackend) {
-				$httpBackend.expectGET('views/main.html')
-				.respond(200);
-			}));
-    it('allows the visitor to view the Nick Lewis folio', function(){
-      location.path('/nicklewis');
-      rootScope.$digest();
-      expect(route.current.controller).toBe('MainCtrl');
-    });
-  });
 });

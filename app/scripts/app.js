@@ -28,8 +28,18 @@ angular.module('nfolio', [
     });
   })
   
-  .config(function ($routeProvider,USER_ROLES) {
+  .config(function ($routeProvider, $locationProvider, USER_ROLES) {
+    $locationProvider
+      .html5Mode(true);
+    
     $routeProvider
+    .when('/:id', {
+        templateUrl: 'views/main.html',
+        controller: 'MainCtrl',
+        data: {
+          authorizedRoles: [USER_ROLES.all]
+        }
+      })
       .when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
@@ -46,7 +56,6 @@ angular.module('nfolio', [
       })
       .when('/edit/:placeId', {
         templateUrl: 'views/edit.html',
-        // templateUrl: 'views/edit.html',
         controller: 'EditCtrl',
         data: {
           authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
@@ -87,6 +96,8 @@ angular.module('nfolio', [
           authorizedRoles: [USER_ROLES.all]
         }
       })
+      
+   
       .otherwise({
         redirectTo: '/',
         data: {

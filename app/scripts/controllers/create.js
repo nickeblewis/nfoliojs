@@ -33,6 +33,7 @@ angular.module('nfolio')
           'userid': $scope.currentUser
         });
           
+        
         if($scope.files) {        
           var userFolder = 'user' + $scope.currentUser,
               imageFolder = 'image' + (new Date()).getTime();;

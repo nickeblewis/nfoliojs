@@ -8,26 +8,31 @@ angular.module('nfolio')
     $scope.placeId = $routeParams.placeId;
     $scope.postsuccess = false;
     $scope.status = '';
-    
-//     $scope.signedIn = function() {
-//       return Auth.signedIn();
-//     };
-    
-//     $scope.signedInAs = function() {
-//       return $rootScope.signedInAs;
-//     };
-    
+        
     $scope.postComment = function(comment) {
+      var count = 0;
       $scope.place.updated = (new Date()).getTime();
+      
+      // Move this to a function getCount(ref) and put in come
+      var table = new Firebase(fbURL + $scope.placeId + '/feed');
+      table.on('value', function(snapshot) {
+   
+        snapshot.forEach(function() {
+          count++;
+        });
+      });
+        
+      $scope.place.commentcount = parseInt(count) + 1;
       $scope.place.$save();
+      
       var messageListRef = new Firebase(fbURL + $scope.placeId + '/feed');
       var newMessageRef = messageListRef.push();          
+      
       newMessageRef.set({
         'message': comment,
         'updated': (new Date()).getTime(),
         'userid': $scope.currentUser
       });
-//       $scope.postsuccess = true;
       $scope.status = '';
     };
   }]);

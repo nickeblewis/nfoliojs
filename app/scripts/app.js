@@ -26,26 +26,29 @@ angular.module('nfolio', [
         }
       }
     });
+//     $rootScope.$on('$locationChangeStart', function (event, next) {
+//       if (!Auth.isAuthenticated()) {
+//         event.preventDefault();
+//         return;
+//       }
+//     });
   })
   
-  .config(function ($routeProvider, $locationProvider, USER_ROLES) {
-    $locationProvider
-      .html5Mode(true);
+  .config(function ($routeProvider, USER_ROLES) {
+
     
     $routeProvider
-    .when('/:id', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        data: {
-          authorizedRoles: [USER_ROLES.all]
-        }
-      })
+// NOTE: This totally broke the routing and had me puzzled for 3 days!!!
+//     .when('/:id', {
+//         templateUrl: 'views/main.html',
+//         controller: 'MainCtrl',
+//         data: {
+//           authorizedRoles: [USER_ROLES.all]
+//         }
+//       })
       .when('/', {
         templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        data: {
-          authorizedRoles: [USER_ROLES.all]
-        }
+        controller: 'MainCtrl'
       })
       .when('/show/:placeId', {
         templateUrl: 'views/show.html',
@@ -77,10 +80,7 @@ angular.module('nfolio', [
       })
       .when('/login', {
         templateUrl: 'views/login.html',
-        controller: 'LoginCtrl',
-        data: {
-          authorizedRoles: [USER_ROLES.all]
-        }
+        controller: 'LoginCtrl'
       })
       .when('/folio', {
         templateUrl: 'views/folio.html',
@@ -99,9 +99,6 @@ angular.module('nfolio', [
       
    
       .otherwise({
-        redirectTo: '/',
-        data: {
-          authorizedRoles: [USER_ROLES.all]
-        }
+        redirectTo: '/'
       });
   });

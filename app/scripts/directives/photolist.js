@@ -7,10 +7,10 @@ angular.module('nfolio')
         'photolist.html',
         '<div class="row main">' +
           '<div ng-show="loaded" class="col-md-12 card" ng-repeat="place in places | orderByPriority | orderBy:\'updated\':reverse=true">' +
-            '<p ng-show="{{place.fileMedium != undefined}}">' + 
-              '<img width="100%" src="https://s3-eu-west-1.amazonaws.com/nfolio/{{place.fileMediumZZ}}" />' +
+            '<p ng-show="{{place.fileMedium != undefined}}">' +
+//               '<img width="100%" src="https://s3-eu-west-1.amazonaws.com/nfolio/{{place.fileMedium}}" />' +
             '</p>' +
-            '<p ng-show="{{place.fileMedium == undefined}}" class="alert alert-info">' + 
+            '<p ng-show="{{place.fileMedium == undefined}}" class="alert alert-info">' +
               'Your image files are currently being generated, they will appear here shortly...' +
             '</p>' +
             '<strong><span class="badge">{{place.userid}}</span> <a data-ng-href="#/show/{{place.$id}}">{{place.name}}</a></strong> <i>Updated {{timeAgo(place.updated)}}</i>' +
@@ -18,7 +18,8 @@ angular.module('nfolio')
                 '{{place.description || "empty"}}' +
                 '<div ng-transclude></div>' +
               '</p>' +
-            '</div>' 
+              '<p><span class="badge">{{place.commentcount}} comments</span></p>' +
+            '</div>'
 //         '<div class="row main">' +
 //           '<div ng-show="loaded" class="col-md-12 card" ng-repeat="place in places | orderByPriority | orderBy:\'updated\':reverse=true" ng-if="$first">' +
 //             '<p ng-show="{{place.fileMedium != undefined}}">' + 
@@ -48,8 +49,8 @@ angular.module('nfolio')
 			replace: true,
 			transclude: true,
       controller: ['$scope', function ($scope)
-      {                   
-        $scope.test = 3;                   
+      {
+        $scope.test = 3;  
       }]
     };
   });

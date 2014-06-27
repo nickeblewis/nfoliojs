@@ -37,11 +37,12 @@
     </div>
   </div>
   
-  <div class="panel panel-default" ng-show="currentUser">
+  <div class="panel panel-default">
     <div class="panel-heading">Comments</div>      
     <div class="panel-body">
-      <commentlist />
-      <form class="form-inline" role="form" name="myForm"  ng-show="!postsuccess" ng-submit="postComment(status)">    
+      
+      <div  ng-show="currentUser">
+      <form class="form" role="form" name="myForm"  ng-show="!postsuccess" ng-submit="postComment(status)">    
         <div class="form-group">              
           <input type="text" class="form-control" id="inputStatus" placeholder="add a comment" ng-model="status">
         </div>                
@@ -49,6 +50,8 @@
           <button type="submit" class="btn btn-primary">Post</button>
         </div>
       </form>  
+      </div>
+      <commentlist />
       <div class="alert alert-success" ng-show="postsuccess"><strong>submitted</strong> {{status}} <a ng-href="/" class="alert-link">back to feed</a></div>
     </div>
   </div>

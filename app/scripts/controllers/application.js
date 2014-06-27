@@ -8,13 +8,13 @@ angular.module('nfolio')
 
   $rootScope.$on(AUTH_EVENTS.loginSuccess, function () {
     $scope.currentUser = Session.userId;
-  })
+  });
 
   $rootScope.$on(AUTH_EVENTS.logoutSuccess, function () {
     $scope.currentUser = null;
-  })
+  });
 
   $rootScope.$on(AUTH_EVENTS.loginFailed, function () {
     $scope.currentUser = null;
-  })
+  });
 }]);

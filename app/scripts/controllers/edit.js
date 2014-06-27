@@ -38,8 +38,11 @@ angular.module('nfolio')
       };
       
       s3.deleteObjects(params, function(err, data) {
-        if (err) console.log(err, err.stack); // an error occurred
-        else     console.log('DONE' + data);           // successful response
+        if (err) {
+          console.log(err, err.stack); 
+        } else {     
+          console.log('DONE' + data);     
+        }
       });
       $scope.place.$remove();
       $location.path('/');

@@ -25,6 +25,8 @@ angular.module('nfolio')
 //     };
     
     $scope.postComment = function(photoId) {
+      $scope.place.updated = (new Date()).getTime();
+      $scope.place.$save();
       var messageListRef = new Firebase(fbURL + photoId + '/feed');
       var newMessageRef = messageListRef.push();          
       newMessageRef.set({

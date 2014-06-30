@@ -19,15 +19,17 @@ angular.module('nfolio')
   })
   
   .service('Session', function () {
-    this.create = function (userId, userEmail, userRole) {
+    this.create = function (userId, userEmail, userRole, userName) {
       this.userId = userId;
       this.userEmail = userEmail;
       this.userRole = userRole;
+      this.userName = userName;
     };
     this.destroy = function () {
       this.userId = null;
       this.userEmail = null;
       this.userRole = null;
+      this.userName = null;
     };
     return this;
   })

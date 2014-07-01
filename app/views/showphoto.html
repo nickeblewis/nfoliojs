@@ -1,0 +1,46 @@
+<div class="container photos-page">
+
+  <div class="photo row">
+    <!-- <div class="col-xs-1">
+      <div class="vote up"><span ng-hide="downVoted()" ng-click="upVotephoto(upVoted())">&#x25B2;</span></div>
+
+      <div class="vote down"><span ng-hide="upVoted()" ng-click="downVotephoto(downVoted())">&#x25BC;</span></div>
+    </div> -->
+    <div class="col-md-9 col-xs-11">
+
+      <div class="info">
+        <a href="{{ photo.url }}">
+          {{ photo.title }}
+          <span class="url">({{ photo.url | hostnameFromUrl }})</span>
+        </a>
+      </div>
+      <div>
+        <span>submitted by <a href="#/users/{{ photo.owner }}">{{ photo.owner }}</a></span>
+      </div>
+    </div>
+    <div class="col-md-2">
+      
+    </div>
+
+  </div>
+
+ <div ng-repeat="(commentId, comment) in photo.comments" class="row cmt">
+    <div class="col-md-12">
+      <p>{{ comment.text }}</p>
+      <p class="author">posted by <a href="#/users/{{ comment.username }}">{{ comment.username }}</a> <a ng-click="removeComment(comment, commentId)" ng-show="signedIn() && comment.username === currentUser.username">(delete)</a></p>
+    </div>
+  </div>
+
+
+  <div class="cmt-form">
+    <div ng-hide="signedIn()">
+      <p><a href="#/login">Sign in</a> to photo a comment</p>
+    </div>
+
+    <form ng-show="signedIn()">
+      <textarea ng-model="comment.text" placeholder="Photo a Comment" class="form-control"></textarea><br />
+      <input type="submit" ng-click="addComment()" value="Photo Comment" class="btn btn-primary" />
+    </form>
+  </div>
+
+</div>

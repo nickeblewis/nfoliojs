@@ -4,35 +4,28 @@
 angular.module('nfolio')
   .controller('CreateCtrl', ['$rootScope', '$scope', '$location', '$timeout', 'fbRequestUrl', 'fbURL', '$anchorScroll', 'Auth', function ($rootScope, $scope, $location, $timeout, fbRequestUrl, fbURL, $anchorScroll, Auth) {
     $scope.place = {};
-    
     // TODO: signedIn, signedInAs and logOut - Not DRY, every controller has these, not sure that is good???
 //     $scope.signedIn = function() {
 //       return Auth.signedIn();
 //     };
-
 //     $scope.signedInAs = function() {
 //       return $rootScope.signedInAs;
 //     };
-    
 //     $scope.logOut = function() {
 //       return Auth.logout();
 //     };
-    
-    $scope.save = function() {
+    $scope.save = function () {
       if ($scope.myForm.$valid) {
-    
         var messageListRef = new Firebase(fbURL);
         var newMessageRef = messageListRef.push();
 
         $scope.place.updated = (new Date()).getTime();
-   
         newMessageRef.set({
           'name': $scope.place.name,
           'description': $scope.place.description,
           'updated': $scope.place.updated,
           'userid': $scope.currentUser
         });
-          
         
         if($scope.files) {
           var userFolder = 'user' + $scope.currentUser,

@@ -9,9 +9,9 @@
     <div class="col-md-9 col-xs-11">
 
       <div class="info">
-        <a href="{{ photo.url }}">
+        <a ng-href="#/show/{{ photoId }}">
           {{ photo.title }}
-          <span class="url">({{ photo.url | hostnameFromUrl }})</span>
+          <!-- <span class="url">({{ photo.url | hostnameFromUrl }})</span> -->
         </a>
       </div>
       <div>

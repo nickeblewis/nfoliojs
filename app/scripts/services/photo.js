@@ -17,6 +17,33 @@ angular.module('nfolio')
           return photos.$add(photo).then(function (ref) {
             var photoId = ref.name();
 
+            if(photo.files) {
+              var userFolder = 'user' + user,
+                  imageFolder = 'image' + (new Date()).getTime();
+            
+              var f = $scope.files[0];
+            
+              var reader = new FileReader();
+              
+              reader.onload = function(e) {
+                // return function(e) {
+              
+                var img = new Image();
+                img.onload=function() {
+                  resizeUpload(this,700, 'medium', userFolder + '/' + imageFolder + '/medium/' + f.name, newMessageRef);
+                };
+                
+                var img2 = new Image();
+                img2.onload=function(){
+                  resizeUpload(this,332, 'thumb', userFolder + '/' + imageFolder + '/thumb/' + f.name, newMessageRef);
+                };
+                
+                img.src=e.target.result;
+                img2.src=e.target.result;
+              };
+              reader.readAsDataURL(f);
+            }
+
             user.$child('photos').$child(photoId).$set(photoId);
 
             return photoId;

@@ -91,3 +91,75 @@ angular.module('nfolio')
 
     return Photo;
   });
+
+function resizeUpload(image,maxwidthheight,type,filename,newMessageRef) {
+  var r=maxwidthheight/Math.max(image.width,image.height),
+      w=Math.round(image.width*r),
+      h=Math.round(image.height*r),
+      c=document.createElement("canvas");
+      c.width=w;c.height=h;
+      c.getContext("2d").drawImage(image,0,0,w,h);
+  
+  var thumbImage = {
+                fileName: filename,
+                bucket: 'nfolio',
+                dataURL: c.toDataURL(),
+                fileType: 'image/jpeg'
+              }
+              
+  var message = '';
+              if (type === 'thumb') {
+                message = {'fileThumb': filename};
+                
+              } else {
+                message = {'fileMedium': filename};
+              }
+              
+              sendS3(thumbImage, message,newMessageRef);  
+}
+
+function sendS3(s3Pkg,message,ref) {  
+  var blobData = dataURLtoBlob(s3Pkg.dataURL);
+  AWS.config.update({accessKeyId: 'AKIAIUAB3DKYZOD3S7VQ', secretAccessKey: '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'});
+  AWS.config.region = 'eu-west-1';
+  var bucket = new AWS.S3({params: {Bucket: s3Pkg.bucket}});
+  var params = {
+    Key: s3Pkg.fileName,
+    ContentType: s3Pkg.fileType, 
+    Body: blobData
+  };
+  
+  bucket.putObject(params, function (err, data) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(s3Pkg.fileName);
+      console.log(data);
+      ref.update(message);
+    }
+  });  
+}
+
+function dataURLtoBlob(dataURL) {
+  var BASE64_MARKER = ';base64,';
+    if (dataURL.indexOf(BASE64_MARKER) == -1) {
+      var parts = dataURL.split(',');
+      var contentType = parts[0].split(':')[1];
+      var raw = parts[1];
+
+      return new Blob([raw], {type: contentType});
+    }
+
+    var parts = dataURL.split(BASE64_MARKER);
+    var contentType = parts[0].split(':')[1];
+    var raw = window.atob(parts[1]);
+    var rawLength = raw.length;
+
+    var uInt8Array = new Uint8Array(rawLength);
+
+    for (var i = 0; i < rawLength; ++i) {
+      uInt8Array[i] = raw.charCodeAt(i);
+    }
+
+    return new Blob([uInt8Array], {type: contentType});
+}

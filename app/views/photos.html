@@ -1,6 +1,6 @@
 <div class="container photos-page">
 
-  <div class="photo row" ng-repeat="(photoId, photo) in photos">
+  <div class="photo row card" ng-repeat="(photoId, photo) in photos">
 <!--     <div class="col-xs-1">
       <div class="vote up"><span ng-hide="downVoted(photo)" ng-click="upVotephoto(photoId, upVoted(photo))">&#x25B2;</span></div>
 
@@ -20,7 +20,7 @@
         <span>submitted by <a href="#/users/{{ photo.owner }}">{{ photo.owner }}</a></span>
         &mdash;
         <a href="#/photos/{{ photoId }}">comments</a>
-        <a ng-click="deletephoto(photoId)">delete</a>
+        <a ng-click="deletePhoto(photoId)">delete</a>
       </div>
     </div>
     <div class="col-md-2">

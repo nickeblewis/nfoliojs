@@ -1,7 +1,7 @@
 'use strict';
 angular.module('nfolio')
 .controller('ProfileCtrl',
-  function ($scope, $routeParams, Post, User) {
+  function ($scope, $routeParams, Photo, User) {
     $scope.user = User.findByUsername($routeParams.username);
 
     $scope.commentedPhotos = {};
@@ -15,7 +15,7 @@ angular.module('nfolio')
       $scope.photos = {};
 
       angular.forEach($scope.user.photos, function(photoId) {
-        $scope.photos[photoId] = Post.find(photoId);
+        $scope.photos[photoId] = Photo.find(photoId);
       });
     }
 
@@ -23,12 +23,12 @@ angular.module('nfolio')
       $scope.comments = {};
 
       angular.forEach($scope.user.comments, function(comment) {
-        var photo = Post.find(comment.photoId);
+        var photo = Photo.find(comment.photoId);
 
         photo.$on('loaded', function() {
           $scope.comments[comment.id] = photo.$child('comments').$child(comment.id);
 
-          $scope.commentedPosts[comment.photoId] = photo;
+          $scope.commentedPhotos[comment.photoId] = photo;
         });
       });
     }

@@ -1,0 +1,32 @@
+<div class="container photos-page">
+
+  <div class="photo row" ng-repeat="(photoId, photo) in photos">
+<!--     <div class="col-xs-1">
+      <div class="vote up"><span ng-hide="downVoted(photo)" ng-click="upVotephoto(photoId, upVoted(photo))">&#x25B2;</span></div>
+
+      <div class="vote down"><span ng-hide="upVoted(photo)" ng-click="downVotephoto(photoId, downVoted(photo))">&#x25BC;</span></div>
+    </div> -->
+    <div class="col-md-9 col-xs-11">
+
+      <div class="info">
+        <a href="{{ photo.url }}">
+          {{ photo.title }}
+          <span class="url">({{ photo.url | hostnameFromUrl }})</span>
+        </a>
+      </div>
+      <div>
+        <span>{{ photo.score || 0 }} votes</span>
+        &mdash;
+        <span>submitted by <a href="#/users/{{ photo.owner }}">{{ photo.owner }}</a></span>
+        &mdash;
+        <a href="#/photos/{{ photoId }}">comments</a>
+        <a ng-click="deletephoto(photoId)">delete</a>
+      </div>
+    </div>
+    <div class="col-md-2">
+      
+    </div>
+
+  </div>
+
+</div>

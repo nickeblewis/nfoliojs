@@ -1,19 +1,19 @@
 .controller('ProfileCtrl',
-  function ($scope, $routeParams, Post, User) {
+  function ($scope, $routeParams, Photo, User) {
     $scope.user = User.findByUsername($routeParams.username);
  
-    $scope.commentedPosts = {};
+    $scope.commentedPhotos = {};
  
     $scope.user.$on('loaded', function () {
-      populatePosts();
+      populatePhotos();
       populateComments();
     });
  
-    function populatePosts () {
-      $scope.posts = {};
+    function populatePhotos () {
+      $scope.photos = {};
  
-      angular.forEach($scope.user.posts, function(postId) {
-        $scope.posts[postId] = Post.find(postId);
+      angular.forEach($scope.user.photos, function(photoId) {
+        $scope.photos[photoId] = Photo.find(photoId);
       });
     }
  
@@ -21,12 +21,12 @@
       $scope.comments = {};
  
       angular.forEach($scope.user.comments, function(comment) {
-        var post = Post.find(comment.postId);
+        var photo = Photo.find(comment.photoId);
  
         post.$on('loaded', function() {
-          $scope.comments[comment.id] = post.$child('comments').$child(comment.id);
+          $scope.comments[comment.id] = photo.$child('comments').$child(comment.id);
  
-          $scope.commentedPosts[comment.postId] = post;
+          $scope.commentedPhotos[comment.photoId] = photo;
         });
       });
     }

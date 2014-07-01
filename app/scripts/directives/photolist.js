@@ -6,9 +6,9 @@ angular.module('nfolio')
       $templateCache.put(
         'photolist.html',
         '<div class="row main">' +
-          '<div ng-show="loaded" class="col-md-12 card" ng-repeat="place in places | orderByPriority | orderBy:\'updated\':reverse=true">' +
+          '<div ng-show="loaded" class="col-md-12 card" ng-repeat="place in places | orderByPriority | orderBy:\'updated\':reverse=true" | limitTo:5>' +
             '<p ng-show="{{place.fileMedium != undefined}}">' +
-              '<img width="100%" src="https://s3-eu-west-1.amazonaws.com/nfolio/{{place.fileMedium}}" />' +
+              '<img width="100%" src="https://s3-eu-west-1.amazonaws.com/nfolio/{{place.fileMediumZZ}}" />' +
             '</p>' +
             '<p ng-show="{{place.fileMedium == undefined}}" class="alert alert-info">' +
               'Your image files are currently being generated, they will appear here shortly...' +

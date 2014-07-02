@@ -26,20 +26,13 @@ angular.module('nfolio', [
         templateUrl: 'views/photos.html',
         controller: 'PhotoCtrl'
       })
-      .when('/show/:placeId', {
-        templateUrl: 'views/show.html',
-        controller: 'ShowCtrl',
-        data: {
-          authorizedRoles: [USER_ROLES.all]
-        }
-      })
-      .when('/edit/:placeId', {
-        templateUrl: 'views/edit.html',
-        controller: 'EditCtrl',
-        data: {
-          authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
-        }
-      })
+      // .when('/edit/:placeId', {
+      //   templateUrl: 'views/edit.html',
+      //   controller: 'EditCtrl',
+      //   data: {
+      //     authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
+      //   }
+      // })
       .when('/users/:username', {
         templateUrl: 'views/profile.html',
         controller: 'ProfileCtrl'
@@ -65,6 +58,13 @@ angular.module('nfolio', [
       .when('/login', {
         templateUrl: 'views/login.html',
         controller: 'AuthCtrl'
+      })
+      .when('/show/:photoId', {
+        templateUrl: 'views/showphoto.html',
+        controller: 'PhotoViewCtrl',
+        data: {
+          authorizedRoles: [USER_ROLES.all]
+        }
       })
       .when('/photos/:photoId', {
         templateUrl: 'views/showphoto.html',

@@ -1,6 +1,6 @@
 'use strict';
 angular.module('nfolio')
-  .controller('NavCtrl', function ($scope, $location, Post, Auth) {
+  .controller('NavCtrl', function ($scope, $location, Photo, Auth) {
     
 //     $scope.post = {url: 'http://', title: ''};
 

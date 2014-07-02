@@ -1,4 +1,5 @@
 'use strict';
+/*global Firebase*/
 angular.module('nfolio')
 .factory('Post',
   function ($firebase, User, FIREBASE_URL) {

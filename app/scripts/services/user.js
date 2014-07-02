@@ -1,4 +1,6 @@
 'use strict';
+/*global Firebase*/
+/*global Auth*/
 angular.module('nfolio')
 .factory('User', function ($firebase, $rootScope, FIREBASE_URL, Auth) {
   var ref = new Firebase(FIREBASE_URL + 'users');

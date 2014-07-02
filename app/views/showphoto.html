@@ -1,13 +1,18 @@
 <div class="container photos-page">
 
-  <div class="photo row">
+  <div class="photo row card">
     <!-- <div class="col-xs-1">
       <div class="vote up"><span ng-hide="downVoted()" ng-click="upVotephoto(upVoted())">&#x25B2;</span></div>
 
       <div class="vote down"><span ng-hide="upVoted()" ng-click="downVotephoto(downVoted())">&#x25BC;</span></div>
     </div> -->
     <div class="col-md-9 col-xs-11">
-
+        <p ng-show="{{photo.fileMedium != undefined}}">
+            <img src="https://s3-eu-west-1.amazonaws.com/nfolio/{{photo.fileMedium}}" />
+        </p>
+        <p ng-show="{{photo.fileMedium == undefined}}" class="alert alert-info">
+            Your image files are currently being generated, they will appear here shortly...
+        </p>
       <div class="info">
         <a href="{{ photo.url }}">
           {{ photo.title }}
@@ -24,7 +29,7 @@
 
   </div>
 
- <div ng-repeat="(commentId, comment) in photo.comments" class="row cmt">
+ <div ng-repeat="(commentId, comment) in photo.comments" class="row cmt card">
     <div class="col-md-12">
       <p>{{ comment.text }}</p>
       <p class="author">posted by <a href="#/users/{{ comment.username }}">{{ comment.username }}</a> <a ng-click="removeComment(comment, commentId)" ng-show="signedIn() && comment.username === currentUser.username">(delete)</a></p>
@@ -32,7 +37,7 @@
   </div>
 
 
-  <div class="cmt-form">
+  <div class="row cmt-form card">
     <div ng-hide="signedIn()">
       <p><a href="#/login">Sign in</a> to photo a comment</p>
     </div>

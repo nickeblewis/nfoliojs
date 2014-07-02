@@ -69,7 +69,6 @@ angular.module('nfolio')
           }
         }
       };
-
       return Photo;
     });
 
@@ -101,6 +100,7 @@ angular.module('nfolio')
 
   function sendS3(s3Pkg,message,ref) {  
     var blobData = dataURLtoBlob(s3Pkg.dataURL);
+    // TODO: Amazon emailed me about this security hole
     AWS.config.update({accessKeyId: 'AKIAIUAB3DKYZOD3S7VQ', secretAccessKey: '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'});
     AWS.config.region = 'eu-west-1';
     var bucket = new AWS.S3({params: {Bucket: s3Pkg.bucket}});
@@ -109,7 +109,6 @@ angular.module('nfolio')
       ContentType: s3Pkg.fileType, 
       Body: blobData
     };
-    
     bucket.putObject(params, function (err, data) {
       if (err) {
         console.log(err);
@@ -127,20 +126,15 @@ angular.module('nfolio')
         var parts = dataURL.split(',');
         var contentType = parts[0].split(':')[1];
         var raw = parts[1];
-
         return new Blob([raw], {type: contentType});
       }
-
       var parts = dataURL.split(BASE64_MARKER);
       var contentType = parts[0].split(':')[1];
       var raw = window.atob(parts[1]);
       var rawLength = raw.length;
-
       var uInt8Array = new Uint8Array(rawLength);
-
       for (var i = 0; i < rawLength; ++i) {
         uInt8Array[i] = raw.charCodeAt(i);
       }
-
       return new Blob([uInt8Array], {type: contentType});
   }

@@ -12,63 +12,32 @@ angular.module('nfolio', [
 ])
 
   .constant('FIREBASE_URL', 'https://nfolio.firebaseio.com/')
-  .config(function ($routeProvider, USER_ROLES) {
+  .config(function ($routeProvider) {
     $routeProvider
-      // .when('/', {
-      //   templateUrl: 'views/main.html',
-      //   controller: 'MainCtrl'
-      // })
-      // .when('/', {
-      // templateUrl: 'views/posts.html',
-      // controller: 'PostsCtrl'
-      // })
       .when('/', {
         templateUrl: 'views/photos.html',
         controller: 'PhotoCtrl'
       })
-      // .when('/edit/:placeId', {
-      //   templateUrl: 'views/edit.html',
-      //   controller: 'EditCtrl',
-      //   data: {
-      //     authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
-      //   }
-      // })
       .when('/users/:username', {
         templateUrl: 'views/profile.html',
         controller: 'ProfileCtrl'
       })
-      //   .when('/test', {
-      //     templateUrl: 'views/test.html',
-      //     controller: 'TestCtrl',
-      //     data: {
-      //       authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
-      //     }
-      //   })
       .when('/create', {
         templateUrl: 'views/edit.html',
-        controller: 'PhotoCtrl',
-        data: {
-          authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
-        }
+        controller: 'PhotoCtrl'
       })
-      //       .when('/login', {
-      //         templateUrl: 'views/login.html',
-      //         controller: 'LoginCtrl'
-      //       })
       .when('/login', {
         templateUrl: 'views/login.html',
         controller: 'AuthCtrl'
       })
-      .when('/show/:photoId', {
-        templateUrl: 'views/showphoto.html',
-        controller: 'PhotoViewCtrl',
-        data: {
-          authorizedRoles: [USER_ROLES.all]
-        }
-      })
       .when('/photos/:photoId', {
         templateUrl: 'views/showphoto.html',
         controller: 'PhotoViewCtrl'
+      })
+       // TODO: A later feature.... for example tags/madrid, tags/airshow
+      .when('/tags/:tagId', {
+        templateUrl: 'views/photos.html',
+        controller: 'PhotoCtrl'
       })
       .when('/register', {
         templateUrl: 'views/register.html',

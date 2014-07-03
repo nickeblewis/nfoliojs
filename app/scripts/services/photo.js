@@ -65,6 +65,7 @@ angular.module('nfolio')
                var user = User.getCurrent();
                comment.username = user.username;
                comment.photoId = photoId;
+                comment.updated = (new Date()).getTime();
                 // TODO: Change updated date against photo?
                photos.$child(photoId).$child('comments').$add(comment).then(function (ref) {
                  user.$child('comments').$child(ref.name()).$set({id: ref.name(), photoId: photoId});

@@ -6,8 +6,8 @@
     </div> -->
     <div class="col-md-9 col-xs-11">
       <p ng-show="{{ photo.fileMedium != undefined }}">
-        <!--<img crossorigin="anonymous" src="https://s3-eu-west-1.amazonaws.com/nfolio/{{photo.fileMedium}}" image-resize image-percent="75" />-->
-        <img src="http://placehold.it/700x100" />
+        <img crossorigin="anonymous" src="https://s3-eu-west-1.amazonaws.com/nfolio/{{photo.fileMedium}}" />
+        <!--<img src="http://placehold.it/700x100" />-->
       </p>
       <p ng-show="{{ photo.fileMedium == undefined }}" class="alert alert-info">
         Your image files are currently being generated, they will appear here shortly...

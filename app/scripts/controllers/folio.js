@@ -1,3 +1,4 @@
+// TODO: This can be scrapped
 'use strict';
 
 angular.module('nfolio')

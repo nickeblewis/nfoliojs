@@ -24,8 +24,8 @@
       </div>
       <div class="col-md-9 col-xs-11">
         <div class="info">
-          <a href="{{ commentedPosts[comment.postId].url }}">{{ commentedPosts[comment.postId].title }}</a>
-          <span class="url">({{ commentedPosts[comment.postId].url | hostnameFromUrl }})</span>
+          <a href="{{ commentedPosts[comment.photoId].url }}">{{ commentedPosts[comment.photoId].title }}</a>
+          <!--<span class="url">({{ commentedPosts[comment.postId].url | hostnameFromUrl }})</span>-->
         </div>
         <a href="#/photos/{{ comment.photoId }}">comments</a>
         <p>{{ comment.text }}</p>

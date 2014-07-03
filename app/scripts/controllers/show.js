@@ -1,3 +1,4 @@
+// TODO: Can be removed later
 'use strict';
 /*global Firebase*/
 angular.module('nfolio')

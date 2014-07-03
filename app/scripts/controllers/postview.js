@@ -1,3 +1,4 @@
+// TODO: Not being used but keeping for the moment as reference material
 'use strict';
 angular.module('nfolio')
 .controller('PostViewCtrl', function ($scope, $routeParams, Post) {

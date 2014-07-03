@@ -1,10 +1,12 @@
+// TODO: This code has been superceded by new code, so maybe this can be deleted???
 'use strict';
 /*global Firebase*/
 /*global Auth*/
+/*global AWS*/
+/*global require */
 angular.module('nfolio')
-  .controller('CreateCtrl', ['$rootScope', '$scope', '$location', '$timeout', 'fbRequestUrl', 'fbURL', '$anchorScroll', 'Auth', function ($rootScope, $scope, $location, $timeout, fbRequestUrl, fbURL, $anchorScroll, Auth) {
+  .controller('CreateCtrl', ['$rootScope', '$scope', '$location', '$timeout', 'fbRequestUrl', 'fbURL', '$anchorScroll', function ($rootScope, $scope, $location, $timeout, fbRequestUrl, fbURL, $anchorScroll) {
     $scope.place = {};
-    // TODO: signedIn, signedInAs and logOut - Not DRY, every controller has these, not sure that is good???
 //     $scope.signedIn = function() {
 //       return Auth.signedIn();
 //     };
@@ -60,30 +62,20 @@ angular.module('nfolio')
       }
     };
     
-    // NOTE: Not used at the moment but could be used as an alternative pattern to the above especially when DnD is introduced
-    $scope.onFileSelect = function($files) {
-    //$files: an array of files selected, each file has name, size, and type.
-      for (var i = 0; i < $files.length; i++) {
-        var file = $files[i];
-        $scope.upload = $upload.upload({
-          url: 'server/upload/url', //upload.php script, node.js route, or servlet url
-          // method: 'POST' or 'PUT',
-          // headers: {'header-key': 'header-value'},
-          // withCredentials: true,
-          data: {myObj: $scope.myModelObj},
-          file: file, // or list of files: $files for html5 only
-          /* set the file formData name ('Content-Desposition'). Default is 'file' */
-          //fileFormDataName: myFile, //or a list of names for multiple files (html5).
-          /* customize how data is added to formData. See #40#issuecomment-28612000 for sample code */
-          //formDataAppender: function(formData, key, val){}
-        }).progress(function(evt) {
-          console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
-        }).success(function(data, status, headers, config) {
-          // file is uploaded successfully
-          console.log(data);
-        });          
-      }    
-    };
+//    $scope.onFileSelect = function($files) {
+//      for (var i = 0; i < $files.length; i++) {
+//        var file = $files[i];
+//        $scope.upload = $upload.upload({
+//          url: 'server/upload/url', //upload.php script, node.js route, or servlet url
+//          data: {myObj: $scope.myModelObj},
+//          file: file // or list of files: $files for html5 only
+//        }).progress(function(evt) {
+//          console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+//        }).success(function(data, status, headers, config) {
+//          console.log(data);
+//        });
+//      }
+//    };
    }]);
 
 function resizeUpload(image,maxwidthheight,type,filename,newMessageRef) {
@@ -95,21 +87,22 @@ function resizeUpload(image,maxwidthheight,type,filename,newMessageRef) {
       c.getContext("2d").drawImage(image,0,0,w,h);
   
   var thumbImage = {
-                fileName: filename,
-                bucket: 'nfolio',
-                dataURL: c.toDataURL(),
-                fileType: 'image/jpeg'
-              }
+    fileName: filename,
+    bucket: 'nfolio',
+    dataURL: c.toDataURL(),
+    fileType: 'image/jpeg'
+  };
               
   var message = '';
-              if (type === 'thumb') {
-                message = {'fileThumb': filename};
-                
-              } else {
-                message = {'fileMedium': filename};
-              }
-              
-              sendS3(thumbImage, message,newMessageRef);  
+
+  if (type === 'thumb') {
+    message = {'fileThumb': filename};
+
+  } else {
+    message = {'fileMedium': filename};
+  }
+
+  sendS3(thumbImage, message,newMessageRef);
 }
 
 function sendS3(s3Pkg,message,ref) {  
@@ -135,25 +128,27 @@ function sendS3(s3Pkg,message,ref) {
 }
 
 function dataURLtoBlob(dataURL) {
-  var BASE64_MARKER = ';base64,';
-    if (dataURL.indexOf(BASE64_MARKER) == -1) {
-      var parts = dataURL.split(',');
-      var contentType = parts[0].split(':')[1];
-      var raw = parts[1];
+   var BASE64_MARKER = ';base64,';
+   var parts, contentType, raw, rawLength, uInt8Array;
+
+   if (dataURL.indexOf(BASE64_MARKER) == -1) {
+      parts = dataURL.split(',');
+      contentType = parts[0].split(':')[1];
+      raw = parts[1];
 
       return new Blob([raw], {type: contentType});
-    }
+   }
 
-    var parts = dataURL.split(BASE64_MARKER);
-    var contentType = parts[0].split(':')[1];
-    var raw = window.atob(parts[1]);
-    var rawLength = raw.length;
+   parts = dataURL.split(BASE64_MARKER);
+   contentType = parts[0].split(':')[1];
+   raw = window.atob(parts[1]);
+    rawLength = raw.length;
 
-    var uInt8Array = new Uint8Array(rawLength);
+    uInt8Array = new Uint8Array(rawLength);
 
-    for (var i = 0; i < rawLength; ++i) {
+   for (var i = 0; i < rawLength; ++i) {
       uInt8Array[i] = raw.charCodeAt(i);
-    }
+   }
 
-    return new Blob([uInt8Array], {type: contentType});
+   return new Blob([uInt8Array], {type: contentType});
 }

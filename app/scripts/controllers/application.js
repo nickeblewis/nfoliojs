@@ -1,5 +1,5 @@
 'use strict';
-
+// TODO: This is redundant code, remove it later once project is more stable
 angular.module('nfolio')
   .controller('ApplicationCtrl', ['$rootScope', '$scope', 'USER_ROLES', 'AUTH_EVENTS', 'Auth', 'Session', function ($rootScope, $scope, USER_ROLES, AUTH_EVENTS, Auth, Session) {
     $scope.currentUser = null;

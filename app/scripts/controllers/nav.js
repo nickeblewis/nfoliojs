@@ -1,17 +1,7 @@
 'use strict';
 angular.module('nfolio')
-  .controller('NavCtrl', function ($scope, $location, Photo, Auth) {
-    
-//     $scope.post = {url: 'http://', title: ''};
-
-//     $scope.submitPost = function () {
-//       Post.create($scope.post).then(function (postId) {
-//         $location.path('/posts/' + postId);
-//         $scope.post = {url: 'http://', title: ''};
-//       });
-//     };
-
-    $scope.logout = function () {
-      Auth.logout();
-    };
-  });
+   .controller('NavCtrl', function ($scope, $location, Photo, Auth) {
+      $scope.logout = function () {
+         Auth.logout();
+      };
+   });

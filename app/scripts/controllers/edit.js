@@ -1,3 +1,4 @@
+// TODO: I think this module is now no longer needed since code has been restructured?
 'use strict';
 
 /*global Firebase*/
@@ -36,7 +37,8 @@ angular.module('nfolio')
           
         }
       };
-      
+
+       // TODO: Oh crikey! This needs to be moved into the new photo delete code, otherwise we'll end up with dead-wood files all over S3!!!
       s3.deleteObjects(params, function(err, data) {
         if (err) {
           console.log(err, err.stack); 

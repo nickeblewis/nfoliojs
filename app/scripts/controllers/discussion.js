@@ -1,3 +1,4 @@
+// TODO: Not used, can go?
 'use strict';
 
 angular.module('nfolio')

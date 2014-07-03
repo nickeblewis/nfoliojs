@@ -1,3 +1,4 @@
+// TODO: Superceded by auth.js, so can probably go??
 'use strict';
 angular.module('nfolio')
 	.controller('LoginCtrl', ['$rootScope','$scope', '$firebase', 'Auth', 'fbProfilesURL', '$location', '$q', 'AUTH_EVENTS', function ($rootScope, $scope, $firebase, Auth, fbProfilesURL, $location, $q, AUTH_EVENTS) {

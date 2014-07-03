@@ -1,3 +1,4 @@
+// TODO: Can be removed as it has been superceded?
 'use strict';
 /*global Firebase*/
 /*global FirebaseSimpleLogin*/

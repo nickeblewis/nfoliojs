@@ -11,6 +11,9 @@ angular.module('nfolio')
     image: '',
     updated: (new Date()).getTime()
   };
+      $scope.timeAgo = function(ms) {
+         return moment(ms).fromNow();
+      };
 
   $scope.submitPhoto = function () {
     Photo.create($scope.photo, $scope.files).then(function () {

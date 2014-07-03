@@ -31,4 +31,8 @@ angular.module('nfolio')
             });
          });
       }
+
+      $scope.timeAgo = function(time) {
+         return moment(ms).fromNow();
+      };
    });

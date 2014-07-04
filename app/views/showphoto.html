@@ -29,7 +29,14 @@
     </div>
 
   </div>
-
+    <!--<div class="row cmt card">-->
+        <!--<ul class="feed-list list-group">-->
+            <!--<li class="feed-item-post list-group-item" class="animate" ng-repeat="(commentId, comment) in photo.comments">-->
+                <!--<span class="badge">{{comment.username}}</span><span class="badge">{{timeAgo(comment.updated)}}</span>-->
+                <!--<i class="glyphicon glyphicon-user"></i> {{comment.text}}-->
+            <!--</li>-->
+        <!--</ul>-->
+    <!--</div>-->
  <div ng-repeat="(commentId, comment) in photo.comments" class="row cmt card">
     <div class="col-md-12">
       <p>{{ comment.text }}</p>

@@ -35,6 +35,7 @@ angular.module('nfolio')
                    reader.readAsDataURL(f);
                  }
                  user.$child('photos').$child(photoId).$set(photoId);
+
                  return photoId;
                });
              }

@@ -6,7 +6,7 @@ angular.module('nfolio', [
   'ngSanitize',
   'ngRoute',
 //'ngAnimate',
-//'iso.directives',
+'iso.directives',
   'firebase'
 //'angularFileUpload'
 ])

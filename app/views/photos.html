@@ -1,9 +1,41 @@
 <div class="container photos-page">
-  <div class="row" isotope-container="isotope-container">
-    <div isotope-item="isotope-item" class="col-md-3 col-xs-6 photo card no-transition" ng-repeat="photo in photos | orderByPriority | orderBy:'updated':reverse=true">
+    <!-- ISOTOPECONTAINER -->
+
+    <!--<div class="row">-->
+        <!--<ul id="isotopeContainer" isotope-container ng-cloak class="ng-cloak">-->
+            <!--<li ng-repeat="photo in photos | orderByPriority | orderBy:'updated':reverse=true" isotope-item>-->
+                <!--<p ng-show="{{ photo.fileMedium != undefined }}">-->
+                    <!--<img src="https://s3-eu-west-1.amazonaws.com/nfolio/{{photo.fileThumb}}" />-->
+                    <!--&lt;!&ndash;<img src="http://placehold.it/70x70" />&ndash;&gt;-->
+                <!--</p>-->
+                <!--<p ng-show="{{ photo.fileMedium == undefined }}" class="alert alert-info">-->
+                    <!--Your image files are currently being generated, they will appear here shortly...-->
+                <!--</p>-->
+                <!--<div class="info">-->
+                    <!--<a ng-href="#/photos/{{ photo.$id }}">-->
+                        <!--{{ photo.title }}-->
+                    <!--</a>-->
+                <!--</div>-->
+                <!--<div class="info">-->
+                    <!--{{ photo.description }}...-->
+                <!--</div>-->
+                <!--<div>-->
+                    <!--<span>submitted by <a href="#/users/{{ photo.owner }}">{{ photo.owner }}</a> {{ timeAgo(photo.updated) }}</span>-->
+                    <!--&mdash;-->
+                    <!--<a href="#/photos/{{ photo.$id }}">{{ photo.commentcount }} comments</a>-->
+                    <!--<a ng-show="signedIn() && photo.owner === user.username" ng-click="deletePhoto(photoId)">delete</a> | <a ng-show="signedIn() && photo.owner === user.username" ng-click="editPhoto(editId)">delete</a>-->
+                <!--</div>-->
+            <!--</li>-->
+
+
+    <!--</div>-->
+
+  <div class="row">
+      <div isotope-container>
+    <div isotope-item class="col-md-6 col-xs-12 photo card no-transition" ng-repeat="photo in photos | orderByPriority | orderBy:'updated':reverse=true">
       <p ng-show="{{ photo.fileMedium != undefined }}">
-        <!--<img src="https://s3-eu-west-1.amazonaws.com/nfolio/{{photo.fileThumb}}" />-->
-        <img src="http://placehold.it/70x70" />
+        <img width="100%" src="https://s3-eu-west-1.amazonaws.com/nfolio/{{photo.fileMedium}}" />
+        <!--<img src="http://placehold.it/70x70" />-->
       </p>
       <p ng-show="{{ photo.fileMedium == undefined }}" class="alert alert-info">
         Your image files are currently being generated, they will appear here shortly...
@@ -25,5 +57,6 @@
     </div>
     <!--<div class="col-md-2">-->
     <!--</div>-->
+      </div>
   </div>
 </div>

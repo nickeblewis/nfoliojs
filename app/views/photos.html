@@ -2,7 +2,7 @@
   <div class="row" isotope-container="isotope-container">
     <div isotope-item="isotope-item" class="col-md-3 col-xs-6 photo card no-transition" ng-repeat="photo in photos | orderByPriority | orderBy:'updated':reverse=true">
       <p ng-show="{{ photo.fileMedium != undefined }}">
-        <!--<img src="https://s3-eu-west-1.amazonaws.com/nfolio/{{photo.fileMedium}}" />-->
+        <!--<img src="https://s3-eu-west-1.amazonaws.com/nfolio/{{photo.fileThumb}}" />-->
         <img src="http://placehold.it/70x70" />
       </p>
       <p ng-show="{{ photo.fileMedium == undefined }}" class="alert alert-info">

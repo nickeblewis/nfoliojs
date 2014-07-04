@@ -27,7 +27,7 @@ angular.module('nfolio')
                      };
                      var img2 = new Image();
                      img2.onload=function(){
-                       resizeUpload(this,332, 'thumb', userFolder + '/' + imageFolder + '/thumb/' + f.name, ref);
+                       resizeUpload(this,350, 'thumb', userFolder + '/' + imageFolder + '/thumb/' + f.name, ref);
                      };
                      img.src=e.target.result;
                      img2.src=e.target.result;
@@ -63,7 +63,7 @@ angular.module('nfolio')
                   var photo = Photo.find(photoId);
                   photo.$on('loaded', function () {
 //                     var user = User.findByUsername(photo.owner);
-//                     photos.$set(photoId);
+                     photos.$update(photo);
                   });
                }
             },
@@ -80,9 +80,11 @@ angular.module('nfolio')
                });
              }
             },
-            editComment: function(photo, photoId) {
-               // TODO: User should be able to edit their comments
-            },
+
+// TODO: User should be able to edit their comments
+//            editComment: function(photo, photoId) {
+//
+//            },
 
             deleteComment: function (photo, comment, commentId) {
              if (User.signedIn()) {

@@ -13,11 +13,14 @@
           {{ photo.title }}
         </a>
       </div>
+        <div class="info">
+            {{ photo.description }}...
+        </div>
       <div>
-        <span>submitted by <a href="#/users/{{ photo.owner }}">{{ photo.owner }}</a> {{timeAgo(photo.updated)}}</span>
+        <span>submitted by <a href="#/users/{{ photo.owner }}">{{ photo.owner }}</a> {{ timeAgo(photo.updated) }}</span>
         &mdash;
-        <a href="#/photos/{{ photo.$id }}">{{photo.commentcount}} comments</a>
-        <a ng-show="signedIn() && photo.owner === user.username" ng-click="deletePhoto(photoId)">delete</a>
+        <a href="#/photos/{{ photo.$id }}">{{ photo.commentcount }} comments</a>
+        <a ng-show="signedIn() && photo.owner === user.username" ng-click="deletePhoto(photoId)">delete</a> | <a ng-show="signedIn() && photo.owner === user.username" ng-click="editPhoto(editId)">delete</a>
       </div>
     </div>
     <!--<div class="col-md-2">-->

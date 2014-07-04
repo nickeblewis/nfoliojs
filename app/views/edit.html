@@ -11,7 +11,7 @@
   <h3 class="text-muted"><a ng-href="/">Nfolio</a></h3>
 </div>  -->
 
-<form class="horizontal-form" role="search" ng-submit="submitPhoto()" ng-show="signedIn()">
+<form class="horizontal-form" role="search" ng-submit="editPhoto()" ng-show="signedIn()">
   <div class="form-group">
     <input type="text" class="form-control" placeholder="Title of the photo" ng-model="photo.title">
   </div>
@@ -20,7 +20,7 @@
     <textarea class="form-control" rows="5" placeholder="Description of the photo" ng-model="photo.description"></textarea>
   </div>
   <div class="form-group">
-    <input type="file" filelist-bind accept="image/*" class="form-control" id="files" placeholder="Image" name="files" ng-model="photo.image" multiple>
+    <!--<input type="file" filelist-bind accept="image/*" class="form-control" id="files" placeholder="Image" name="files" ng-model="photo.image" multiple>-->
     <button type="submit" class="btn btn-default">Submit</button>
   </div>
   <input type="hidden" ng-model="photo.updated">

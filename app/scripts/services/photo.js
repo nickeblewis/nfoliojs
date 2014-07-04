@@ -59,13 +59,13 @@ angular.module('nfolio')
 
             edit: function(photo, photoId) {
                // TODO: commented this out, it is buggerry pooped
-//               if (User.signedIn()) {
-//                  var photo = Photo.find(photoId);
-//                  photo.$on('loaded', function () {
+               if (User.signedIn()) {
+                  var photo = Photo.find(photoId);
+                  photo.$on('loaded', function () {
 //                     var user = User.findByUsername(photo.owner);
 //                     photos.$set(photoId);
-//                  });
-//               }
+                  });
+               }
             },
 
             addComment: function (photoId, comment) {

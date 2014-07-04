@@ -1,15 +1,10 @@
 <div class="container photos-page">
 
   <div class="photo row card">
-    <!-- <div class="col-xs-1">
-      <div class="vote up"><span ng-hide="downVoted()" ng-click="upVotephoto(upVoted())">&#x25B2;</span></div>
-
-      <div class="vote down"><span ng-hide="upVoted()" ng-click="downVotephoto(downVoted())">&#x25BC;</span></div>
-    </div> -->
     <div class="col-md-9 col-xs-11">
         <p ng-show="{{photo.fileMedium != undefined}}">
-            <img src="https://s3-eu-west-1.amazonaws.com/nfolio/{{photo.fileMedium}}" />
-            <!--<img src="http://placehold.it/700x100" />-->
+            <!--<img src="https://s3-eu-west-1.amazonaws.com/nfolio/{{photo.fileMedium}}" />-->
+            <img src="http://placehold.it/700x100" />
         </p>
         <p ng-show="{{photo.fileMedium == undefined}}" class="alert alert-info">
             Your image files are currently being generated, they will appear here shortly...

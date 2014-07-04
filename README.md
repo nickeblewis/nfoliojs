@@ -17,6 +17,7 @@
 ## Image upload
 
 - How about the possibilty of uploading a set of images per entry? The idea behind this is that a title, a description (background story) may complement a set of photos better
+- In the meanjs project I got a drag and drop working, so port this across.
 
 ## Square cropping
 
@@ -29,5 +30,9 @@
 - Attendees can register with the site to join the walk
 - Post their photos their later
 - We can discuss their photos in real time at the end of the day
+
+## Things
+
+- The edit route isn't fully set up yet which I have been trying to get to work today. In fact it destroyed a whole node. So will need to wipe the data back to square one again!
 
 

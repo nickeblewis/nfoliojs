@@ -58,7 +58,14 @@ angular.module('nfolio')
             },
 
             edit: function(photo, photoId) {
-              // TODO: Users can darn well edit their photos you know
+               // TODO: commented this out, it is buggerry pooped
+//               if (User.signedIn()) {
+//                  var photo = Photo.find(photoId);
+//                  photo.$on('loaded', function () {
+//                     var user = User.findByUsername(photo.owner);
+//                     photos.$set(photoId);
+//                  });
+//               }
             },
 
             addComment: function (photoId, comment) {

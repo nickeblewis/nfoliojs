@@ -102,19 +102,31 @@ angular.module('nfolio')
   function resizeUpload(image,maxwidthheight,type,filename,newMessageRef) {
     var r,w,h,c,c,c;
 
-     r=maxwidthheight/Math.max(image.width,image.height);
-     w=Math.round(image.width*r);
-     h=Math.round(image.height*r);
-     c=document.createElement("canvas");
-     c.width=w;c.height=h;
+
 
      if (type === 'thumb') {
-        w = maxwidthheight;
-        h = maxwidthheight;
-        c.width=w;c.height=h;
+         c=document.createElement("canvas");
+         var sourceX = 300;
+         var sourceY = 0;
+         var sourceWidth = 300;
+         var sourceHeight = 300;
+         var destWidth = sourceWidth;
+         var destHeight = sourceHeight;
+         var destX = c.width / 2 - destWidth / 2;
+         var destY = c.height / 2 - destHeight / 2;
+
+         c.getContext("2d").drawImage(image, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight);
+     } else {
+         r=maxwidthheight/Math.max(image.width,image.height);
+         w=Math.round(image.width*r);
+         h=Math.round(image.height*r);
+         c=document.createElement("canvas");
+         c.width=w;c.height=h;
+
+         c.getContext("2d").drawImage(image,0,0,w,h);
      }
 
-     c.getContext("2d").drawImage(image,0,0,w,h);
+
 
     var thumbImage = {
       fileName: filename,

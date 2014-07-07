@@ -27,7 +27,7 @@ angular.module('nfolio')
                      };
                      var img2 = new Image();
                      img2.onload=function(){
-                       resizeUpload(this,350, 'thumb', userFolder + '/' + imageFolder + '/thumb/' + f.name, ref);
+                       resizeUpload(this,300, 'thumb', userFolder + '/' + imageFolder + '/thumb/' + f.name, ref);
                      };
                      img.src=e.target.result;
                      img2.src=e.target.result;
@@ -100,13 +100,22 @@ angular.module('nfolio')
    });
 
   function resizeUpload(image,maxwidthheight,type,filename,newMessageRef) {
-    var r=maxwidthheight/Math.max(image.width,image.height),
-        w=Math.round(image.width*r),
-        h=Math.round(image.height*r),
-        c=document.createElement("canvas");
+    var r,w,h,c,c,c;
+
+     r=maxwidthheight/Math.max(image.width,image.height);
+     w=Math.round(image.width*r);
+     h=Math.round(image.height*r);
+     c=document.createElement("canvas");
+     c.width=w;c.height=h;
+
+     if (type === 'thumb') {
+        w = maxwidthheight;
+        h = maxwidthheight;
         c.width=w;c.height=h;
-        c.getContext("2d").drawImage(image,0,0,w,h);
-    
+     }
+
+     c.getContext("2d").drawImage(image,0,0,w,h);
+
     var thumbImage = {
       fileName: filename,
       bucket: 'nfolio',

@@ -81,10 +81,10 @@ angular.module('nfolio')
              }
             },
 
-// TODO: User should be able to edit their comments
-//            editComment: function(photo, photoId) {
-//
-//            },
+            // TODO: User should be able to edit their comments
+            // editComment: function(photo, photoId) {
+            //
+            // },
 
             deleteComment: function (photo, comment, commentId) {
              if (User.signedIn()) {
@@ -135,7 +135,7 @@ angular.module('nfolio')
          ctx.fillRect(0,0,maxwidthheight,maxwidthheight);
 
          // The containing rectangle for the image is a darker grey
-//         ctx.fillStyle = 'rgb(100,100,100)'
+         // ctx.fillStyle = 'rgb(100,100,100)'
 
          // CALCULATE IF PHOTO IS LANDSCAPE OR PORTRAIT ORIENTATION
          if (image.height > image.width) {
@@ -145,7 +145,7 @@ angular.module('nfolio')
             // 150 for half of 300
             // 280 because padding of 10 both ends 10 x 2 take that off 300, you get 280!! :-)
 
-//            ctx.fillRect(75,10,150,280);
+            // ctx.fillRect(75,10,150,280);
 
             // We subtract the width of the new image from the canvas width, divide by 2 to get the x co-ordinates
             tx = (c.width - tw) / 2;
@@ -162,7 +162,7 @@ angular.module('nfolio')
             // 75 is height - photo height divided by 2
             // 280 is width less padding of 10 both ends
             // 150 is half the height of the frame
-//            ctx.fillRect(10,75,280,150);
+            // ctx.fillRect(10,75,280,150);
 
             // Similar to above but we flip it around onto the Y axis
             ty = (c.height - th) / 2;

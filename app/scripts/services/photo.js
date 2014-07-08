@@ -99,40 +99,97 @@ angular.module('nfolio')
       return Photo;
    });
 
-  function resizeUpload(image,maxwidthheight,type,filename,newMessageRef) {
-    var r,w,h,c,c,c;
+   function resizeUpload(image,maxwidthheight,type,filename,newMessageRef) {
 
-
-
-     if (type === 'thumb') {
+      if (type === 'thumb') {
          c=document.createElement("canvas");
-         var sourceX = 300;
-         var sourceY = 0;
-         var sourceWidth = 300;
-         var sourceHeight = 300;
-         var destWidth = sourceWidth;
-         var destHeight = sourceHeight;
-         var destX = c.width / 2 - destWidth / 2;
-         var destY = c.height / 2 - destHeight / 2;
 
-         c.getContext("2d").drawImage(image, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight);
-     } else {
-         r=maxwidthheight/Math.max(image.width,image.height);
-         w=Math.round(image.width*r);
-         h=Math.round(image.height*r);
-         c=document.createElement("canvas");
-         c.width=w;c.height=h;
+         // Calculate thumbnail photo dimensions
+
+         // I want to bring the image away from the side a little bit, so padding of 10 seems quite good
+         var pad = 10;
+
+         // Next calculate the area into which the photo will be scaled into
+         var mwh = maxwidthheight - (pad * 2);
+
+         // Calculate the scaling ratio based on original height and width of the photo
+         var tr = mwh/Math.max(image.width,image.height);
+
+         // Calculate the new width of the image based on the ratio
+         var tw = Math.round(image.width*tr);
+
+         // Calculate the new height od the image based on ratio
+         var th = Math.round(image.height*tr);
+
+         var tx, ty;
+
+         // Set the overall canvas area to being square
+         c.width = maxwidthheight;
+         c.height = maxwidthheight;
+
+         // Get context of the canvas
+         var ctx = c.getContext("2d");
+
+         // Draw a light grey 300x300 square that forms the frame for the thumbnail
+         ctx.fillStyle = 'rgb(200,200,200)';
+         ctx.fillRect(0,0,maxwidthheight,maxwidthheight);
+
+         // The containing rectangle for the image is a darker grey
+//         ctx.fillStyle = 'rgb(100,100,100)'
+
+         // CALCULATE IF PHOTO IS LANDSCAPE OR PORTRAIT ORIENTATION
+         if (image.height > image.width) {
+            // PORTRAIT photos
+            // 75 is 150 divided by 2
+            // 10 for a little bit of padding
+            // 150 for half of 300
+            // 280 because padding of 10 both ends 10 x 2 take that off 300, you get 280!! :-)
+
+//            ctx.fillRect(75,10,150,280);
+
+            // We subtract the width of the new image from the canvas width, divide by 2 to get the x co-ordinates
+            tx = (c.width - tw) / 2;
+
+            // The y co-ordinates is simply same as padding
+            ty = pad;
+
+            // Scale and draw the image
+            ctx.drawImage(image,tx,ty,tw,th);
+
+         } else {
+            // LANDSCAPE PHOTOS (and this will also capture square cropped images)
+            // 10 is edge padding
+            // 75 is height - photo height divided by 2
+            // 280 is width less padding of 10 both ends
+            // 150 is half the height of the frame
+//            ctx.fillRect(10,75,280,150);
+
+            // Similar to above but we flip it around onto the Y axis
+            ty = (c.height - th) / 2;
+
+            // x co-ords are based on the padding
+            tx = pad;
+
+            ctx.drawImage(image,tx,ty,tw,th);
+         }
+      } else {
+         // MEDIUM
+         var r = maxwidthheight/Math.max(image.width,image.height);
+         var w = Math.round(image.width*r);
+         var h = Math.round(image.height*r);
+         var c = document.createElement("canvas");
+
+         c.width = w;
+         c.height = h;
 
          c.getContext("2d").drawImage(image,0,0,w,h);
-     }
+      }
 
-
-
-    var thumbImage = {
-      fileName: filename,
-      bucket: 'nfolio',
-      dataURL: c.toDataURL(),
-      fileType: 'image/jpeg'
+      var thumbImage = {
+         fileName: filename,
+         bucket: 'nfolio',
+         dataURL: c.toDataURL(),
+         fileType: 'image/jpeg'
     };
                 
     var message = '';

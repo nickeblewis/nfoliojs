@@ -1,76 +1,34 @@
 <div class="container photos-page">
-    <!-- ISOTOPECONTAINER -->
-
-    <!--<div class="row">-->
-        <!--<ul id="isotopeContainer" isotope-container ng-cloak class="ng-cloak">-->
-            <!--<li ng-repeat="photo in photos | orderByPriority | orderBy:'updated':reverse=true" isotope-item>-->
-                <!--<p ng-show="{{ photo.fileMedium != undefined }}">-->
-                    <!--<img src="https://s3-eu-west-1.amazonaws.com/nfolio/{{photo.fileThumb}}" />-->
-                    <!--&lt;!&ndash;<img src="http://placehold.it/70x70" />&ndash;&gt;-->
-                <!--</p>-->
-                <!--<p ng-show="{{ photo.fileMedium == undefined }}" class="alert alert-info">-->
-                    <!--Your image files are currently being generated, they will appear here shortly...-->
-                <!--</p>-->
-                <!--<div class="info">-->
-                    <!--<a ng-href="#/photos/{{ photo.$id }}">-->
-                        <!--{{ photo.title }}-->
-                    <!--</a>-->
-                <!--</div>-->
-                <!--<div class="info">-->
-                    <!--{{ photo.description }}...-->
-                <!--</div>-->
-                <!--<div>-->
-                    <!--<span>submitted by <a href="#/users/{{ photo.owner }}">{{ photo.owner }}</a> {{ timeAgo(photo.updated) }}</span>-->
-                    <!--&mdash;-->
-                    <!--<a href="#/photos/{{ photo.$id }}">{{ photo.commentcount }} comments</a>-->
-                    <!--<a ng-show="signedIn() && photo.owner === user.username" ng-click="deletePhoto(photoId)">delete</a> | <a ng-show="signedIn() && photo.owner === user.username" ng-click="editPhoto(editId)">delete</a>-->
-                <!--</div>-->
-            <!--</li>-->
-
-
-    <!--</div>-->
-
-  <div class="row">
-      <!--<div isotope-container>-->
-    <div class="col-md-12" ng-repeat-start="photo in photos | orderByPriority | orderBy:'updated':reverse=true" ng-if="$first">
-      <p ng-show="{{ photo.fileMedium != undefined }}">
-        <a ng-href="#/photos/{{ photo.$id }}">
-            <img src="https://s3-eu-west-1.amazonaws.com/nfolio/{{photo.fileMedium}}" />
-            <!--<img src="http://placehold.it/300x300" />-->
-        </a>
-      </p>
-      <p ng-show="{{ photo.fileMedium == undefined }}" class="alert alert-info">
-        Your image files are currently being generated, they will appear here shortly...
-      </p>
-      <div class="info">
-        <a ng-href="#/photos/{{ photo.$id }}">
-          <h3>{{ photo.title }}</h3>
-        </a>
-      </div>
-        <!--<div class="info">-->
-            <!--{{ photo.description }}...-->
-        <!--</div>-->
-      <!--<div>-->
-        <!--<span>submitted by <a href="#/users/{{ photo.owner }}">{{ photo.owner }}</a> {{ timeAgo(photo.updated) }}</span>-->
-        <!--&mdash;-->
-        <!--<a href="#/photos/{{ photo.$id }}">{{ photo.commentcount }} comments</a>-->
-        <!--<a ng-show="signedIn() && photo.owner === user.username" ng-click="deletePhoto(photoId)">delete</a> | <a ng-show="signedIn() && photo.owner === user.username" ng-click="editPhoto(editId)">delete</a>-->
-      <!--</div>-->
+    <div class="row">
+        <div class="col-md-12" ng-repeat-start="photo in photos | orderByPriority | orderBy:'updated':reverse=true" ng-if="$first">
+            <div ng-show="{{ photo.fileMedium != undefined }}">
+                <a ng-href="#/photos/{{ photo.$id }}">
+                    <img width="100%" src="https://s3-eu-west-1.amazonaws.com/nfolio/{{photo.fileMedium}}" />
+                    <!--<img src="http://placehold.it/300x300" />-->
+                </a>
+            </div>
+            <div ng-show="{{ photo.fileMedium == undefined }}" class="alert alert-info">
+                Your image files are currently being generated, they will appear here shortly...
+            </div>
+            <div class="info">
+                <a ng-href="#/photos/{{ photo.$id }}">
+                    <h3>{{ photo.title }}</h3>
+                </a>
+                <span>submitted by <a href="#/users/{{ photo.owner }}">{{ photo.owner }}</a> {{ timeAgo(photo.updated) }}</span>
+                &mdash;
+                <a href="#/photos/{{ photo.$id }}">{{ photo.commentcount }} comments</a>
+                <a ng-show="signedIn() && photo.owner === user.username" ng-click="deletePhoto(photoId)">delete</a> | <a ng-show="signedIn() && photo.owner === user.username" ng-click="editPhoto(editId)">delete</a>
+            </div>
+        </div>
+        <div class="col-md-4 col-xs-6 card" ng-repeat-end ng-if="!$first">
+            <div ng-show="{{ photo.fileThumb != undefined }}">
+                <a ng-href="#/photos/{{ photo.$id }}">
+                    <img width="100%" src="https://s3-eu-west-1.amazonaws.com/nfolio/{{photo.fileThumb}}" />
+                </a>
+            </div>
+            <div ng-show="{{ photo.fileMedium == undefined }}" class="alert alert-info">
+                Your image files are currently being generated, they will appear here shortly...
+            </div>
+        </div>
     </div>
-      <div class="col-md-6 col-xs-12" ng-repeat-end ng-if="!$first">
-          <p ng-show="{{ photo.fileThumb != undefined }}">
-              <a ng-href="#/photos/{{ photo.$id }}">
-                  <img src="https://s3-eu-west-1.amazonaws.com/nfolio/{{photo.fileThumb}}" />
-                  <!--<img src="http://placehold.it/300x300" />-->
-              </a>
-          </p>
-          <p ng-show="{{ photo.fileMedium == undefined }}" class="alert alert-info">
-              Your image files are currently being generated, they will appear here shortly...
-          </p>
-
-      </div>
-    <!--<div class="col-md-2">-->
-    </div>
-      <!--</div>-->
-  </div>
 </div>

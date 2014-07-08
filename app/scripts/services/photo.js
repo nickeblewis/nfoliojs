@@ -24,7 +24,7 @@ angular.module('nfolio')
                    reader.onload = function(e) {
                      var img = new Image();
                      img.onload=function() {
-                       resizeUpload(this,700, 'medium', userFolder + '/' + imageFolder + '/medium/' + f.name, ref);
+                       resizeUpload(this,1080, 'medium', userFolder + '/' + imageFolder + '/medium/' + f.name, ref);
                      };
                      var img2 = new Image();
                      img2.onload=function(){

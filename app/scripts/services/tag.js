@@ -27,7 +27,7 @@ angular.module('nfolio')
             return tags.$child(tagId);
          },
 
-         delete: function (tagId) {
+         remove: function (tagId) {
 //            if (User.signedIn()) {
 //               var tag = Tag.find(tagId);
 //               tag.$on('loaded', function () {

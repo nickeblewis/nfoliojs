@@ -29,7 +29,7 @@ angular.module('nfolio')
    };
 
    $scope.deletePhoto = function (photoId) {
-      Photo.delete(photoId);
+      Photo.remove(photoId);
    };
 
    $scope.editPhoto = function (photoId) {

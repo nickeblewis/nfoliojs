@@ -27,7 +27,7 @@ angular.module('nfolio')
       find: function (postId) {
         return posts.$child(postId);
       },
-      delete: function (postId) {
+      remove: function (postId) {
         if (User.signedIn()) {
           var post = Post.find(postId);
 

@@ -1,4 +1,5 @@
 'use strict';
+/*global AWS*/
 angular.module('nfolio')
    .factory('Photo',
       function ($firebase, User, FIREBASE_URL) {
@@ -45,7 +46,7 @@ angular.module('nfolio')
              return photos.$child(photoId);
             },
 
-            delete: function (photoId) {
+            remove: function (photoId) {
              if (User.signedIn()) {
                var photo = Photo.find(photoId);
                photo.$on('loaded', function () {
@@ -59,13 +60,13 @@ angular.module('nfolio')
 
             edit: function(photo, photoId) {
                // TODO: commented this out, it is buggerry pooped
-               if (User.signedIn()) {
-                  var photo = Photo.find(photoId);
-                  photo.$on('loaded', function () {
+//               if (User.signedIn()) {
+//                  var photo = Photo.find(photoId);
+//                  photo.$on('loaded', function () {
 //                     var user = User.findByUsername(photo.owner);
-                     photos.$update(photo);
-                  });
-               }
+//                     photos.$update(photo);
+//                  });
+//               }
             },
 
             addComment: function (photoId, comment) {
@@ -74,7 +75,6 @@ angular.module('nfolio')
                comment.username = user.username;
                comment.photoId = photoId;
                 comment.updated = (new Date()).getTime();
-                // TODO: Change updated date against photo?
                photos.$child(photoId).$child('comments').$add(comment).then(function (ref) {
                  user.$child('comments').$child(ref.name()).$set({id: ref.name(), photoId: photoId});
                });

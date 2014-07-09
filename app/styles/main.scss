@@ -104,29 +104,29 @@ body {
     margin-top: 28px;
 }
 
-
 .card {
-    background: #fff;
-    padding-top: 20px;
-    padding-bottom: 20px;
+  background: #fff;
+  padding-top: 20px;
+  padding-bottom: 20px;
 
-    .feed-list {
-      list-style-type: none;
+  .feed-list {
+    list-style-type: none;
+    @include border-radius(5px);
+    padding: 8px;
+    background-color: $dark-grey;
+
+    .feed-item-post {
+      background-color: $very-lightish-grey;
       @include border-radius(5px);
       padding: 8px;
-      background-color: $dark-grey;
-    
-      .feed-item-post {
-        background-color: $very-lightish-grey;
-        @include border-radius(5px);
-        padding: 8px;
-        margin: 2px;
+      margin: 2px;
     }
-			.feed-item-add {
-        background-color: $very-very-lightish-grey;
-        @include border-radius(5px);
-        padding: 8px;
-        margin: 2px;
+
+    .feed-item-add {
+      background-color: $very-very-lightish-grey;
+      @include border-radius(5px);
+      padding: 8px;
+      margin: 2px;
     }
   }
 }

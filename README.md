@@ -1,3 +1,25 @@
+## Main
+
+- The main page is split into these sections
+   - Recent photo with it's short description, who it was submitted by, when and a link through to comments (which is the same as the photo, but good to have CTA)
+   - Messages section (needs some thought)
+   - x number of previous photo thumbnails
+      - May be possible to zoom in and out 
+      - A link at the bottom makes it possible to see more or.... we have infinite scroll?
+   - Footer section with details of how to join, the costs and so on
+   
+## Hosting
+
+- Transferring Nfolio to namecheap
+- Then create a TXT record for redirection to Firebase
+- nfolio.com hopefully will be ready by the time I go to Madrid
+
+## Testers
+
+- Bragi, Cassius, Sara, Mark
+   - Remove their user accounts, as the system has totally changed
+   - Email them to tell them that they all need to re-register (sorry) and upload at least one photo as a test
+   
 ## Todos
 
 - Should translate these into TDD unit tests

@@ -14,12 +14,28 @@
 - Then create a TXT record for redirection to Firebase
 - nfolio.com hopefully will be ready by the time I go to Madrid
 
+## Image hosting options
+
+- Currently resizing and manipulating images in the client and then storing original plus variants on S3 storage
+   - Problem is HTML5 canvas doesn't allow for image compression
+   - Looking at Cloudinary as an option, free for many thousands of images then $35 for up to 1 million. No brainer?!
+   
 ## Testers
 
 - Bragi, Cassius, Sara, Mark
    - Remove their user accounts, as the system has totally changed
    - Email them to tell them that they all need to re-register (sorry) and upload at least one photo as a test
    
+## Social media campaign
+
+- Twitter, FB and G+ all have different audiences
+
+## Google maps integration
+
+## Selling of images
+
+## Email notification system
+
 ## Todos
 
 - Should translate these into TDD unit tests
@@ -46,7 +62,7 @@
 - Wipe S3 files and data - try uploading a whole bunch of Malta photos and see how their crops look.
   - May need to make some big tweaks to the algorithm for this?
   
-## Launching the site with a photowalk
+## Launching the site with a series of photowalks
 
 - Host a Farnborough photo walk that will be promoted through Nfolio
 - Attendees can register with the site to join the walk

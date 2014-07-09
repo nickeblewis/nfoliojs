@@ -26,6 +26,10 @@
             <div ng-show="{{ photo.fileThumb != undefined }}">
                 <a ng-href="#/photos/{{ photo.$id }}">
                     <img width="100%" src="https://s3-eu-west-1.amazonaws.com/nfolio/{{photo.fileThumb}}" />
+
+                    <!-- cloudimage.io - which didn't work -->
+                    <!--<img width="100%" src="http://s1zdbf.cloudimage.io/s/width/300/https://s3-eu-west-1.amazonaws.com/nfolio/{{photo.fileMedium}}" />-->
+
                 </a>
             </div>
             <div ng-show="{{ photo.fileMedium == undefined }}" class="alert alert-info">

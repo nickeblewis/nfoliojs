@@ -6,8 +6,15 @@ angular.module('nfolio', [
    'ngSanitize',
    'ngRoute',
    'iso.directives',
-   'firebase'
+   'firebase',
+   'cloudinary',
+   'photoAlbumAnimations',
+   'photoAlbumControllers',
+   'photoAlbumServices'
 ])
+
+$.cloudinary.config().cloud_name = 'dqpknoetx';
+$.cloudinary.config().upload_preset = 'gec3tjz3';
 
 .constant('FIREBASE_URL', 'https://nfolio.firebaseio.com/')
 .config(function ($routeProvider) {

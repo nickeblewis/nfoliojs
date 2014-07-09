@@ -1,53 +1,39 @@
 <div class="container photos-page">
-
-  <div class="photo row card">
-    <div class="col-md-12 col-xs-12">
-        <p ng-show="{{photo.fileMedium != undefined}}">
-            <img width="100%" src="https://s3-eu-west-1.amazonaws.com/nfolio/{{photo.fileMedium}}" />
-            <!--<img src="http://placehold.it/700x100" />-->
-        </p>
-        <p ng-show="{{photo.fileMedium == undefined}}" class="alert alert-info">
-            Your image files are currently being generated, they will appear here shortly...
-        </p>
-      <div class="info">
-           <h3>{{ photo.title }}</h3>
-          <p class="desc">{{ photo.description }}</p>
-       </div>
-      <div>
-        <span>submitted by <a href="#/users/{{ photo.owner }}">{{ photo.owner }}</a></span>
-      </div>
+    <div class="photo row card">
+        <div class="col-md-12 col-xs-12">
+            <p ng-show="{{photo.fileMedium != undefined}}">
+                <img width="100%" src="https://s3-eu-west-1.amazonaws.com/nfolio/{{photo.fileMedium}}" />
+                <!--<img src="http://placehold.it/700x100" />-->
+            </p>
+            <p ng-show="{{photo.fileMedium == undefined}}" class="alert alert-info">
+                Your image files are currently being generated, they will appear here shortly...
+            </p>
+            <div class="info">
+                <h3>{{ photo.title }}</h3>
+                <p class="desc">{{ photo.description }}</p>
+            </div>
+            <div>
+                <span>submitted by <a href="#/users/{{ photo.owner }}">{{ photo.owner }}</a></span>
+            </div>
+        </div>
+        <div class="col-md-2">
+        </div>
     </div>
-    <div class="col-md-2">
-      
+    <div ng-repeat="(commentId, comment) in photo.comments" class="row cmt card">
+        <div class="col-md-12">
+            <p>{{ comment.text }}</p>
+            <p class="author">posted by <a href="#/users/{{ comment.username }}">{{ comment.username }}</a> {{timeAgo(comment.updated)}} <a ng-click="removeComment(comment, commentId)" ng-show="signedIn() && comment.username === currentUser.username">(delete)</a></p>
+        </div>
     </div>
-
-  </div>
-    <!--<div class="row cmt card">-->
-        <!--<ul class="feed-list list-group">-->
-            <!--<li class="feed-item-post list-group-item" class="animate" ng-repeat="(commentId, comment) in photo.comments">-->
-                <!--<span class="badge">{{comment.username}}</span><span class="badge">{{timeAgo(comment.updated)}}</span>-->
-                <!--<i class="glyphicon glyphicon-user"></i> {{comment.text}}-->
-            <!--</li>-->
-        <!--</ul>-->
-    <!--</div>-->
- <div ng-repeat="(commentId, comment) in photo.comments" class="row cmt card">
-    <div class="col-md-12">
-      <p>{{ comment.text }}</p>
-      <p class="author">posted by <a href="#/users/{{ comment.username }}">{{ comment.username }}</a> {{timeAgo(comment.updated)}} <a ng-click="removeComment(comment, commentId)" ng-show="signedIn() && comment.username === currentUser.username">(delete)</a></p>
+    <div class="row cmt-form card">
+        <div class="col-md-12">
+            <div ng-hide="signedIn()">
+                <p><a href="#/login">Sign in</a> to photo a comment</p>
+            </div>
+            <form ng-show="signedIn()">
+                <textarea ng-model="comment.text" placeholder="Send us your comments" class="form-control"></textarea><br />
+                <input type="submit" ng-click="addComment()" value="Comment" class="btn btn-primary" />
+            </form>
+        </div>
     </div>
-  </div>
-
-  <div class="row cmt-form card">
-      <div class="col-md-12">
-          <div ng-hide="signedIn()">
-              <p><a href="#/login">Sign in</a> to photo a comment</p>
-          </div>
-
-          <form ng-show="signedIn()">
-              <textarea ng-model="comment.text" placeholder="Send us your comments" class="form-control"></textarea><br />
-              <input type="submit" ng-click="addComment()" value="Comment" class="btn btn-primary" />
-          </form>
-      </div>
-  </div>
-
 </div>

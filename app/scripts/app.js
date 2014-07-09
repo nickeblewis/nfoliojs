@@ -1,5 +1,8 @@
 'use strict';
 
+$.cloudinary.config().cloud_name = 'dqpknoetx';
+$.cloudinary.config().upload_preset = 'gec3tjz3';
+
 angular.module('nfolio', [
    'ngCookies',
    'ngResource',
@@ -7,14 +10,8 @@ angular.module('nfolio', [
    'ngRoute',
    'iso.directives',
    'firebase',
-   'cloudinary',
-   'photoAlbumAnimations',
-   'photoAlbumControllers',
-   'photoAlbumServices'
+   'cloudinary'
 ])
-
-$.cloudinary.config().cloud_name = 'dqpknoetx';
-$.cloudinary.config().upload_preset = 'gec3tjz3';
 
 .constant('FIREBASE_URL', 'https://nfolio.firebaseio.com/')
 .config(function ($routeProvider) {
@@ -23,6 +20,10 @@ $.cloudinary.config().upload_preset = 'gec3tjz3';
      templateUrl: 'views/photos.html',
      controller: 'PhotoCtrl'
    })
+   .when('/upload', {
+       templateUrl: 'views/photosUpload.html',
+       controller: 'PhotoUploadCtrl'
+    })
    .when('/users/:username', {
      templateUrl: 'views/profile.html',
      controller: 'ProfileCtrl'

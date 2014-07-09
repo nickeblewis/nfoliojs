@@ -3,7 +3,7 @@
 angular.module('nfolio')
    .factory('album', ['$rootScope', '$resource',
       function($rootScope, $resource){
-         var url = $.cloudinary.url('myphotoalbum', {format: 'json', type: 'list'});
+         var url = $.cloudinary.url('nfolio', {format: 'json', type: 'list'});
          //cache bust
          url = url + "?" + Math.ceil(new Date().getTime()/1000);
          return $resource(url, {}, {
@@ -19,31 +19,31 @@ angular.module('nfolio')
 
          var Photo = {
             all: photos,
-            create: function (photo, files) {
+            create: function (photo) {
              if (User.signedIn()) {
                var user = User.getCurrent();
                photo.owner = user.username;
                return photos.$add(photo).then(function (ref) {
                  var photoId = ref.name();
-                 if(files) {
-                   var userFolder = user.username,
-                       imageFolder = (new Date()).getTime();
-                   var f = files[0];
-                   var reader = new FileReader();
-                   reader.onload = function(e) {
-                     var img = new Image();
-                     img.onload=function() {
-                       resizeUpload(this,1080, 'medium', userFolder + '/' + imageFolder + '/medium/' + f.name, ref);
-                     };
-                     var img2 = new Image();
-                     img2.onload=function(){
-                       resizeUpload(this,300, 'thumb', userFolder + '/' + imageFolder + '/thumb/' + f.name, ref);
-                     };
-                     img.src=e.target.result;
-                     img2.src=e.target.result;
-                   };
-                   reader.readAsDataURL(f);
-                 }
+//                 if(files) {
+//                   var userFolder = user.username,
+//                       imageFolder = (new Date()).getTime();
+//                   var f = files[0];
+//                   var reader = new FileReader();
+//                   reader.onload = function(e) {
+//                     var img = new Image();
+//                     img.onload=function() {
+//                       resizeUpload(this,1080, 'medium', userFolder + '/' + imageFolder + '/medium/' + f.name, ref);
+//                     };
+//                     var img2 = new Image();
+//                     img2.onload=function(){
+//                       resizeUpload(this,300, 'thumb', userFolder + '/' + imageFolder + '/thumb/' + f.name, ref);
+//                     };
+//                     img.src=e.target.result;
+//                     img2.src=e.target.result;
+//                   };
+//                   reader.readAsDataURL(f);
+//                 }
                  user.$child('photos').$child(photoId).$set(photoId);
 
                  return photoId;

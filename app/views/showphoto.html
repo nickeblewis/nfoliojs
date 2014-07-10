@@ -5,9 +5,9 @@
                 <img width="100%" src="http://res.cloudinary.com/dqpknoetx/image/upload/c_scale,w_1080/{{photo.file}}" />
                 <!--<img src="http://placehold.it/700x100" />-->
             </p>
-            <p ng-show="{{photo.file == undefined}}" class="alert alert-info">
-                Your image files are currently being generated, they will appear here shortly...
-            </p>
+            <!--<p ng-show="{{photo.file == undefined}}" class="alert alert-info">-->
+                <!--Your image files are currently being generated, they will appear here shortly...-->
+            <!--</p>-->
             <div class="info">
                 <h3>{{ photo.title }}</h3>
                 <p class="desc">{{ photo.description }}</p>
@@ -28,7 +28,7 @@
     <div class="row cmt-form card">
         <div class="col-md-12">
             <div ng-hide="signedIn()">
-                <p><a href="#/login">Sign in</a> to photo a comment</p>
+                <p><a href="#/login">Sign in</a> to post a comment</p>
             </div>
             <form ng-show="signedIn()">
                 <textarea ng-model="comment.text" placeholder="Send us your comments" class="form-control"></textarea><br />

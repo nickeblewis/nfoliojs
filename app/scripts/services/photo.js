@@ -10,8 +10,7 @@ angular.module('nfolio')
             photos: {method:'GET', isArray:false}
          });
       }])
-   .factory('Photo',
-      function ($firebase, User, FIREBASE_URL) {
+   .factory('Photo', ['$firebase', 'User', 'FIREBASE_URL', function ($firebase, User, FIREBASE_URL) {
 
          var ref = new Firebase(FIREBASE_URL + 'photos');
 
@@ -106,7 +105,7 @@ angular.module('nfolio')
          };
 
       return Photo;
-   });
+   }]);
 
    function resizeUpload(image,maxwidthheight,type,filename,newMessageRef) {
 

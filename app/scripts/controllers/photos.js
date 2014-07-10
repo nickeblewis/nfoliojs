@@ -77,7 +77,7 @@ angular.module('nfolio')
       }])
 
    // TODO: The original controller which can later be discarded as the one above will replace it
-.controller('PhotoCtrl', function ($rootScope, $scope, $location, Photo) {
+.controller('PhotoCtrl', ['$rootScope', '$scope', '$location', 'Photo', function ($rootScope, $scope, $location, Photo) {
         $scope.updateTitle = function(){
             var uploadParams = $scope.widget.fileupload('option', 'formData');
             uploadParams["context"] = "photo=" + $scope.title;
@@ -174,4 +174,4 @@ angular.module('nfolio')
 //      $scope.downVoted = function (post) {
 //         return Post.downVoted(post);
 //      };
-});
+}]);

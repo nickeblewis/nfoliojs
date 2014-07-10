@@ -2,31 +2,31 @@
 angular.module('nfolio')
    .controller('PhotoUploadCtrl', ['$scope', '$rootScope', '$routeParams', '$location', 'Photo',
       function($scope, $rootScope, $routeParams, $location, Photo) {
+         $scope.photo = {
+            'title': '',
+            description: '',
+            image: '',
+            file:'',
+            updated: (new Date()).getTime()
+         };
 
-          $scope.photo = {
-              'title': '',
-              description: '',
-              image: '',
-             file:'',
-              updated: (new Date()).getTime()
-          };
+         $scope.timeAgo = function(ms) {
+            return moment(ms).fromNow();
+         };
 
-          $scope.timeAgo = function(ms) {
-              return moment(ms).fromNow();
-          };
-
-          $scope.submitPhoto = function () {
-              Photo.create($scope.photo)
-                  .then(function () {
+         $scope.submitPhoto = function () {
+            Photo
+               .create($scope.photo)
+               .then(function () {
                   $scope.photo = {
-                      'title': '',
-                      description: '',
-                      image: '',
+                     'title': '',
+                     description: '',
+                     image: '',
                      file: '',
-                      updated: (new Date()).getTime()
+                     updated: (new Date()).getTime()
                   };
-              });
-          };
+               });
+         };
 
           $scope.deletePhoto = function (photoId) {
               Photo.remove(photoId);
@@ -36,7 +36,7 @@ angular.module('nfolio')
               Photo.edit(photoId);
           };
 
-          $scope.updateTitle = function(){
+         $scope.updateTitle = function(){
             var uploadParams = $scope.widget.fileupload('option', 'formData');
             uploadParams["context"] = "photo=" + $scope.title;
             $scope.widget.fileupload('option', 'formData', uploadParams);
@@ -76,7 +76,7 @@ angular.module('nfolio')
             });
       }])
 
-   // TODO: The original controller which can later be discarded as the one above will replace it
+// TODO: The original controller which can later be discarded as the one above will replace it
 .controller('PhotoCtrl', function ($rootScope, $scope, $location, Photo) {
         $scope.updateTitle = function(){
             var uploadParams = $scope.widget.fileupload('option', 'formData');
@@ -148,30 +148,4 @@ angular.module('nfolio')
    $scope.editPhoto = function (photoId) {
       Photo.edit(photoId);
    };
-
-
-
-//      $scope.upVotePost = function (postId, upVoted) {
-//         if (upVoted) {
-//            Post.clearVote(postId, upVoted);
-//         } else {
-//            Post.upVote(postId);
-//         }
-//      };
-//
-//      $scope.downVotePost = function (postId, downVoted) {
-//         if (downVoted) {
-//            Post.clearVote(postId, !downVoted);
-//         } else {
-//            Post.downVote(postId);
-//         }
-//      };
-//
-//      $scope.upVoted = function (post) {
-//         return Post.upVoted(post);
-//      };
-//
-//      $scope.downVoted = function (post) {
-//         return Post.downVoted(post);
-//      };
 });

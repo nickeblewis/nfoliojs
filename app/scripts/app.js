@@ -14,7 +14,9 @@ angular.module('nfolio', [
 ])
 
 .constant('FIREBASE_URL', 'https://nfolio.firebaseio.com/')
-.config(function ($routeProvider) {
+.config(function ($routeProvider, $locationProvider) {
+        $locationProvider
+            .html5Mode(true);
  $routeProvider
    .when('/', {
      templateUrl: 'views/photos.html',

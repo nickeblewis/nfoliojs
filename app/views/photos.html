@@ -22,10 +22,10 @@
                 <a ng-show="signedIn() && photo.owner === user.username" ng-click="deletePhoto(photoId)">delete</a> | <a ng-show="signedIn() && photo.owner === user.username" ng-click="editPhoto(editId)">delete</a>
             </div>
         </div>
-        <div class="col-md-4 col-xs-6 card" ng-repeat-end ng-if="!$first">
+        <div class="col-md-2 col-xs-3 card" ng-repeat-end ng-if="!$first">
             <div ng-show="{{ photo.file != undefined }}">
                 <a ng-href="#/photos/{{ photo.$id }}">
-                    <img width="100%" src="http://res.cloudinary.com/dqpknoetx/image/upload/b_rgb:ccc,c_lpad,g_center,h_300,w_300/{{photo.file}}" />
+                    <img width="100%" src="http://res.cloudinary.com/dqpknoetx/image/upload/b_rgb:ccc,c_lpad,g_center,h_150,w_150/{{photo.file}}" />
 
                     <!-- cloudimage.io - which didn't work -->
                     <!--<img width="100%" src="http://s1zdbf.cloudimage.io/s/width/300/https://s3-eu-west-1.amazonaws.com/nfolio/{{photo.fileMedium}}" />-->

@@ -1,4 +1,4 @@
 {
   "firebase": "nfolio",
-  "public": "dist"
+  "public": "app"
 }

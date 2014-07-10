@@ -7,6 +7,7 @@ angular.module('nfolio')
               'title': '',
               description: '',
               image: '',
+             file:'',
               updated: (new Date()).getTime()
           };
 
@@ -15,15 +16,16 @@ angular.module('nfolio')
           };
 
           $scope.submitPhoto = function () {
-              Photo.create($scope.photo);
-//                  .then(function () {
-//                  $scope.photo = {
-//                      'title': '',
-//                      description: '',
-//                      image: '',
-//                      updated: (new Date()).getTime()
-//                  };
-//              });
+              Photo.create($scope.photo)
+                  .then(function () {
+                  $scope.photo = {
+                      'title': '',
+                      description: '',
+                      image: '',
+                     file: '',
+                      updated: (new Date()).getTime()
+                  };
+              });
           };
 
           $scope.deletePhoto = function (photoId) {
@@ -67,11 +69,14 @@ angular.module('nfolio')
             .on("cloudinarydone", function (e, data) {
                $rootScope.photos = $rootScope.photos || [];
                data.result.context = {custom: {photo: $scope.title}};
+               $scope.photo.file = data.result.path;
                $scope.result = data.result;
                $rootScope.photos.push(data.result);
                $scope.$apply();
             });
       }])
+
+   // TODO: The original controller which can later be discarded as the one above will replace it
 .controller('PhotoCtrl', function ($rootScope, $scope, $location, Photo) {
         $scope.updateTitle = function(){
             var uploadParams = $scope.widget.fileupload('option', 'formData');

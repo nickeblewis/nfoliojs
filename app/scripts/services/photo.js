@@ -19,6 +19,7 @@ angular.module('nfolio')
 
          var Photo = {
             all: photos,
+            featured: photos.$child('featured'),
             create: function (photo) {
              if (User.signedIn()) {
                var user = User.getCurrent();

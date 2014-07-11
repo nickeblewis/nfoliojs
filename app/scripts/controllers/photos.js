@@ -119,6 +119,8 @@ angular.module('nfolio')
       $scope.photos = Photo.all;
    }
 
+      $scope.featured = Photo.featured;
+
    $scope.photo = {
       'title': '',
       description: '',

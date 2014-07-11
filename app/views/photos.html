@@ -1,10 +1,6 @@
 <div class="container photos-page">
     <div class="row">
-        <div class="alert alert-info">
-            Welcome to Nfolio a new project currently under development by Nick Lewis with contributions from a small bunch of international photographers.
-            If you are a fellow geek, you may like to know that this project is built with AngularJS, backed by Firebase for real-time data and hosting (we do also use Digital Ocean), images stored on Cloudinary for super-fast image retrieval.
-            If you are a fellow photographer and interested in joining the project, please follow @nicklewis on Twitter for news and the #nfolio hashtag.
-        </div>
+
     </div>
     <div class="row">
         <div class="col-md-12" ng-repeat-start="photo in photos | orderByPriority | orderBy:'updated':reverse=true | limitTo:5" ng-if="$first">

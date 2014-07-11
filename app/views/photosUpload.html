@@ -8,12 +8,6 @@
         It will later be taken out once I've got this working like a dream...
     </div>
     <form>
-        <!--<div class="form_line">-->
-        <!--<label path="title">Title:</label>-->
-        <!--<div class="form_controls">-->
-        <!--<input type="text" class="form-control" placeholder="Title" ng-model="title" ng-change="updateTitle()"/>-->
-        <!--</div>-->
-        <!--</div>-->
         <div class="form_line">
             <label>Image:</label>
             <div class="form_controls">
@@ -41,23 +35,16 @@
         </table>
     </div>
 </div>
-
-<a href="#/photos" class="back_link">Back to list</a>
-
-
+<!--<a href="#/photos" class="back_link">Back to list</a>-->
 <form class="horizontal-form" role="search" ng-submit="submitPhoto()" ng-show="signedIn()">
     <div class="form-group">
         <input type="text" class="form-control" placeholder="Title of the photo" ng-model="photo.title">
     </div>
     <div class="form-group">
-        <!--<input type="text" class="form-control" placeholder="Description" ng-model="photo.description"> -->
         <textarea class="form-control" rows="5" placeholder="Description of the photo" ng-model="photo.description"></textarea>
     </div>
-    <!--<div class="form-group">-->
-        <!--<input type="file" filelist-bind accept="image/*" class="form-control" id="files" placeholder="Image" name="files" ng-model="photo.image" multiple>-->
+    <div class="form-group">
         <button type="submit" class="btn btn-default">Submit</button>
-    <!--</div>-->
+    </div>
     <input type="hidden" ng-model="photo.updated">
-    <!--<input type="hidden" ng-model="photo.fileThumb">-->
-    <!--<input type="hidden" ng-model="photo.fileMedium">-->
 </form>

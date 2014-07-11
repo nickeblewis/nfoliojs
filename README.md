@@ -29,10 +29,17 @@
 ## Social media campaign
 
 - Twitter, FB and G+ all have different audiences
+- @nfolio has already been taken, which is a shame
 
 ## Google maps integration
 
+- Geofire
+
 ## Selling of images
+
+- Stripe?
+- Printing services?
+- Digital downloads?
 
 ## Email notification system
 
@@ -44,24 +51,19 @@
   - Coming along well, though some bits have strayed from this path a bit
 - Reinstate the header directive, see if it were the missing DI declaration that was left out of the other file??
 
-## Profile Page
+## Profile Pages (u/nickeblewis, users/nickeblewis)
 
-- Separate the full name from login fields, that should only be shown during registration steps in some way
-- Add avatar via drag and drop to a bordered box (see CSS tricks website)
-  - Stores a medium size and a really small thumbnail of 100x100 on S3
-  - Stored under nfolio/user1/avatar/medium|thumb
-- What other fields should we have on this page?
+- Photos tab
+   - Shares the photos.html template but draws the data from the users specific set of photos. Note the live update of images doesn't happen here (by design)
+- Comments tab
+   - Everything you've said about other peoples' shots
 
 ## Image upload
 
+## Photo groups/sets
+
 - How about the possibilty of uploading a set of images per entry? The idea behind this is that a title, a description (background story) may complement a set of photos better
-- In the meanjs project I got a drag and drop working, so port this across.
 
-## Square cropping
-
-- Wipe S3 files and data - try uploading a whole bunch of Malta photos and see how their crops look.
-  - May need to make some big tweaks to the algorithm for this?
-  
 ## Launching the site with a series of photowalks
 
 - Host a Farnborough photo walk that will be promoted through Nfolio
@@ -72,5 +74,12 @@
 ## Things
 
 - The edit route isn't fully set up yet which I have been trying to get to work today. In fact it destroyed a whole node. So will need to wipe the data back to square one again!
+
+## Test scenarios
+
+- You must be logged in to upload a photo
+- You must be logged in before being able to comment on any photo
+
+## Tagging (and memes)
 
 

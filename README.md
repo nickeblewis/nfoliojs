@@ -43,6 +43,10 @@
 
 ## Email notification system
 
+## Watermarks
+
+- Cloudinary provides a watermark feature
+
 ## Todos
 
 - Should translate these into TDD unit tests

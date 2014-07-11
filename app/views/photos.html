@@ -22,24 +22,24 @@
                 <span>submitted by <a href="#/users/{{ photo.owner }}">{{ photo.owner }}</a> {{ timeAgo(photo.updated) }}</span>
                 &mdash;
                 <a href="#/photos/{{ photo.$id }}">{{ photo.commentcount }} comments</a>
-                <a ng-show="signedIn() && photo.owner === user.username" ng-click="deletePhoto(photoId)">delete</a> | <a ng-show="signedIn() && photo.owner === user.username" ng-click="editPhoto(editId)">delete</a>
+                <a ng-show="signedIn() && photo.owner === user.username" ng-click="deletePhoto(photoId)">delete</a> | <a ng-show="signedIn() && photo.owner === user.username" ng-click="editPhoto(editId)">edit</a>
             </div>
         </div>
-        <div class="col-md-2 col-xs-6 card" ng-repeat-end ng-if="!$first">
+        <div class="col-md-4 col-xs-6 card" ng-repeat-end ng-if="!$first">
             <div ng-show="{{ photo.file != undefined }}">
                 <a ng-href="#/photos/{{ photo.$id }}">
-                    <img width="100%" src="http://res.cloudinary.com/dqpknoetx/image/upload/b_rgb:ccc,c_lpad,g_center,h_150,w_150/{{photo.file}}" />
+                    <img width="100%" src="http://res.cloudinary.com/dqpknoetx/image/upload/b_rgb:ccc,c_lpad,g_center,h_300,w_300/{{photo.file}}" />
                 </a>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="alert alert-info">
-            ...If you are a fellow geek, you may like to know that this project is built with AngularJS, backed by Firebase for real-time data and hosting, images stored on Cloudinary for super-fast image retrieval.
-            If you are a fellow photographer and interested in joining the project, please follow @nicklewis on Twitter for news and the #nfolio hashtag.
-            Finally - what is Nfolio? (or at least by the time we've kinda finished it) - It's a real-time photography platform. Whatever your niche is, you can promote it with Nfolio for discussion and ultimately sales.
-            Additionally with the backing of a large data center, it will be possible to store vast amounts of image files.
-            The potential is large and it's success depends on who joins the journey and how we steer it...
-        </div>
+        <!--<div class="alert alert-info">-->
+            <!--...If you are a fellow geek, you may like to know that this project is built with AngularJS, backed by Firebase for real-time data and hosting, images stored on Cloudinary for super-fast image retrieval.-->
+            <!--If you are a fellow photographer and interested in joining the project, please follow @nicklewis on Twitter for news and the #nfolio hashtag.-->
+            <!--Finally - what is Nfolio? (or at least by the time we've kinda finished it) - It's a real-time photography platform. Whatever your niche is, you can promote it with Nfolio for discussion and ultimately sales.-->
+            <!--Additionally with the backing of a large data center, it will be possible to store vast amounts of image files.-->
+            <!--The potential is large and it's success depends on who joins the journey and how we steer it...-->
+        <!--</div>-->
     </div>
 </div>

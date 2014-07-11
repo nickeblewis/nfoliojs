@@ -144,10 +144,15 @@ body {
 .animate.ng-enter.ng-enter-active, .animate.ng-leave {
   left: 0;
 }
+
 .animate.ng-leave.ng-leave-active, .animate.ng-enter {
   left: 500px;
 }
 
 .desc {
   font-size: 1.2em;
+}
+
+.dummy {
+  background-color: #fff;
 }

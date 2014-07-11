@@ -8,7 +8,7 @@ angular.module('nfolio', [
    'ngResource',
    'ngSanitize',
    'ngRoute',
-   'iso.directives',
+//   'iso.directives',
    'firebase',
    'cloudinary'
 ])
@@ -28,14 +28,18 @@ angular.module('nfolio', [
      templateUrl: 'views/profile.html',
      controller: 'ProfileCtrl'
    })
-   .when('/create', {
-     templateUrl: 'views/create.html',
-     controller: 'PhotoCtrl'
+   .when('/u/:username', {
+     templateUrl: 'views/profile.html',
+     controller: 'ProfileCtrl'
    })
-   .when('/edit/:photoId', {
-     templateUrl: 'views/edit.html',
-     controller: 'PhotoEditCtrl'
-   })
+//   .when('/create', {
+//     templateUrl: 'views/create.html',
+//     controller: 'PhotoCtrl'
+//   })
+//   .when('/edit/:photoId', {
+//     templateUrl: 'views/edit.html',
+//     controller: 'PhotoEditCtrl'
+//   })
    .when('/login', {
      templateUrl: 'views/login.html',
      controller: 'AuthCtrl'
@@ -45,10 +49,10 @@ angular.module('nfolio', [
      controller: 'PhotoViewCtrl'
    })
     // TODO: A later feature.... for example tags/madrid, tags/airshow
-   .when('/tags/:tagId', {
-     templateUrl: 'views/photos.html',
-     controller: 'PhotoCtrl'
-   })
+//   .when('/tags/:tagId', {
+//     templateUrl: 'views/photos.html',
+//     controller: 'PhotoCtrl'
+//   })
    .when('/register', {
      templateUrl: 'views/register.html',
      controller: 'AuthCtrl'

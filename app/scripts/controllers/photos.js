@@ -36,11 +36,11 @@ angular.module('nfolio')
               Photo.edit(photoId);
           };
 
-         $scope.updateTitle = function(){
-            var uploadParams = $scope.widget.fileupload('option', 'formData');
-            uploadParams["context"] = "photo=" + $scope.title;
-            $scope.widget.fileupload('option', 'formData', uploadParams);
-         };
+//         $scope.updateTitle = function(){
+//            var uploadParams = $scope.widget.fileupload('option', 'formData');
+//            uploadParams["context"] = "photo=" + $scope.title;
+//            $scope.widget.fileupload('option', 'formData', uploadParams);
+//         };
 
          $scope.widget = $(".cloudinary_fileupload")
             .unsigned_cloudinary_upload($.cloudinary.config().upload_preset, {tags: 'nfolio', context:'photo='}, {
@@ -77,7 +77,7 @@ angular.module('nfolio')
       }])
 
 // TODO: The original controller which can later be discarded as the one above will replace it
-.controller('PhotoCtrl', function ($rootScope, $scope, $location, Photo) {
+.controller('PhotoCtrl', ['$rootScope','$scope','$location','Photo', function ($rootScope, $scope, $location, Photo) {
         $scope.updateTitle = function(){
             var uploadParams = $scope.widget.fileupload('option', 'formData');
             uploadParams["context"] = "photo=" + $scope.title;
@@ -148,4 +148,4 @@ angular.module('nfolio')
    $scope.editPhoto = function (photoId) {
       Photo.edit(photoId);
    };
-});
+}]);

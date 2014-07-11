@@ -22,10 +22,15 @@
             <p class="author">posted by <a href="#/users/{{ comment.username }}">{{ comment.username }}</a> {{timeAgo(comment.updated)}} <a ng-click="removeComment(comment, commentId)" ng-show="signedIn() && comment.username === currentUser.username">(delete)</a></p>
         </div>
     </div>
+    <div class="alert alert-info">
+        Comments can be made if you are registered and logged in. Please be sensible, no rubbish comments please ;-) Now one of the cool features of this site is it's
+        real-time nature, comments made here, will appear immediately on other user's screens, which makes it possible to have conversations about images. I am working
+        on making the user-experience as good as possible, as there are some challenges involved in making this work smoothly...
+    </div>
     <div class="row cmt-form card">
         <div class="col-md-12">
             <div ng-hide="signedIn()">
-                <p><a href="#/login">Sign in</a> to photo a comment</p>
+                <p><a href="#/login">Sign in</a> to post a comment</p>
             </div>
             <form ng-show="signedIn()">
                 <textarea ng-model="comment.text" placeholder="Send us your comments" class="form-control"></textarea><br />

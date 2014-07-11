@@ -1,7 +1,11 @@
 <div class="auth-forms">
 
   <h2>Register</h2>
-
+    <div class="alert alert-info">
+        We will be delighted to welcome you as a member to Nfolio. Registration is quick and easy, just provide your user name, email and a password.
+        You can later fill out more information in your profile as you wish.
+        Initially membership is FREE but to take advantage of new advanced features, a premium will be introduced. More news on this as it comes.
+    </div>
   <form ng-submit="register()" name="form">
     <div ng-show="error || form.username.$error">
       <p ng-show="error" class="text-danger">{{ error }}</p>

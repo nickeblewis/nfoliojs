@@ -1,9 +1,11 @@
 <div class="container photos-page">
+<!--
     <div class="row">
         <div class="alert alert-info">
             <strong>Welcome to Nfolio</strong> a new project currently under development by Nick Lewis with contributions from a small bunch of international photographers...
         </div>
     </div>
+-->
     <div class="row">
         <div class="col-md-12" ng-repeat-start="photo in photos | orderByPriority | orderBy:'updated':reverse=true" ng-if="$first">
             <div ng-show="{{ photo.file != undefined }}">

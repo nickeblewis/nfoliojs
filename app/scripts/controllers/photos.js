@@ -70,6 +70,7 @@ angular.module('nfolio')
                $rootScope.photos = $rootScope.photos || [];
                data.result.context = {custom: {photo: $scope.title}};
                $scope.photo.file = data.result.path;
+                $scope.photo.metadata = data.result.image_metadata;
                $scope.result = data.result;
                $rootScope.photos.push(data.result);
                $scope.$apply();

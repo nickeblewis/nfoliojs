@@ -8,14 +8,19 @@
 -->
     <div class="row">
         <div class="col-md-12" ng-repeat-start="photo in photos | orderByPriority | orderBy:'updated':reverse=true" ng-if="$first">
-            <div ng-show="{{ photo.file != undefined }}">
-                <a ng-href="#/photos/{{ photo.$id }}">
-                    <img width="100%" src="http://res.cloudinary.com/dqpknoetx/image/upload/c_scale,w_1080/{{photo.file}}" />
-                    <!--<img width="100%" src="http://res.cloudinary.com/dqpknoetx/image/upload/c_scale,w_700/{{photo.file}}" />-->
-                </a>
-            </div>
 
-            <div class="info">
+
+
+            <div class="col-md-6">
+                <div ng-show="{{ photo.file != undefined }}">
+                    <a ng-href="#/photos/{{ photo.$id }}">
+                        <img src="http://res.cloudinary.com/dqpknoetx/image/upload/c_scale,w_540/{{photo.file}}" />
+                        <!--<img width="100%" src="http://res.cloudinary.com/dqpknoetx/image/upload/c_scale,w_700/{{photo.file}}" />-->
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-6">
+               <div class="info">
                 <a ng-href="#/photos/{{ photo.$id }}">
                     <h3>{{ photo.title }}</h3>
                 </a>
@@ -25,6 +30,7 @@
                 &mdash;
                 <a href="#/photos/{{ photo.$id }}">{{ photo.commentcount }} comments</a>
                 <a ng-show="signedIn() && photo.owner === user.username" ng-click="deletePhoto(photoId)">delete</a> | <a ng-show="signedIn() && photo.owner === user.username" ng-click="editPhoto(editId)">edit</a>
+            </div>
             </div>
         </div>
         <div class="col-md-4 col-xs-6 card" ng-repeat-end ng-if="!$first">

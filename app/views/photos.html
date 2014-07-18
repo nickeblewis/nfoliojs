@@ -25,12 +25,13 @@
                     <h3>{{ photo.title }}</h3>
                 </a>
                 <p class="desc">This image was captured with a <strong>{{ photo.metadata.Make }} {{ photo.metadata.Model }}</strong> with an aperture of {{ photo.metadata.ApertureValue }}, shutter speed of {{ photo.metadata.ShutterSpeedValue }} and at an ISO of {{ photo.metadata.ISO }}. The focal length you used was {{ photo.metadata.FocalLength }}</p>
+                <p>{{ photo.metadata.GPSLatitudeRef }} - {{ photo.metadata.GPSLongitudeRef }}</p>
                 <p class="desc">{{ photo.description }}</p>
 
                 <span>submitted by <a href="#/users/{{ photo.owner }}">{{ photo.owner }}</a> {{ timeAgo(photo.updated) }}</span>
                 &mdash;
                 <a href="#/photos/{{ photo.$id }}">{{ photo.commentcount }} comments</a>
-                <a ng-show="signedIn() && photo.owner === user.username" ng-click="deletePhoto(photoId)">delete</a> | <a ng-show="signedIn() && photo.owner === user.username" ng-click="editPhoto(editId)">edit</a>
+                <a ng-show="photo.owner === user.username" ng-click="deletePhoto(photoId)">delete</a> | <a ng-show="photo.owner === user.username" ng-click="editPhoto(editId)">edit</a>
             </div>
             </div>
         </div>

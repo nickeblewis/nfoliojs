@@ -24,11 +24,12 @@
                 <a ng-href="#/photos/{{ photo.$id }}">
                     <h3>{{ photo.title }}</h3>
                 </a>
-                <p class="desc">This image was captured with a <strong>{{ photo.metadata.Make }} {{ photo.metadata.Model }}</strong> with an aperture of {{ photo.metadata.ApertureValue }}, shutter speed of {{ photo.metadata.ShutterSpeedValue }} and at an ISO of {{ photo.metadata.ISO }}. The focal length you used was {{ photo.metadata.FocalLength }}</p>
-                <p>{{ photo.metadata.GPSLatitudeRef }} - {{ photo.metadata.GPSLongitudeRef }}</p>
-                <p class="desc">{{ photo.description }}</p>
+                   <p class="desc">{{ photo.description }}</p>
+                <p class="metadata">This image was captured with a <strong>{{ photo.metadata.Model }}</strong> an aperture of {{ photo.metadata.ApertureValue }}, shutter speed of {{ photo.metadata.ShutterSpeedValue }} and at an ISO of {{ photo.metadata.ISO }}. The focal length was {{ photo.metadata.FocalLength }}</p>
+<!--                <p>{{ photo.metadata.GPSLatitudeRef }} - {{ photo.metadata.GPSLongitudeRef }}</p>-->
 
-                <span>submitted by <a href="#/users/{{ photo.owner }}">{{ photo.owner }}</a> {{ timeAgo(photo.updated) }}</span>
+
+                <span class="metadata">submitted by <a href="#/users/{{ photo.owner }}">{{ photo.owner }}</a> {{ timeAgo(photo.updated) }}</span>
                 &mdash;
                 <a href="#/photos/{{ photo.$id }}">{{ photo.commentcount }} comments</a>
                 <a ng-show="photo.owner === user.username" ng-click="deletePhoto(photoId)">delete</a> | <a ng-show="photo.owner === user.username" ng-click="editPhoto(editId)">edit</a>
@@ -39,7 +40,14 @@
             <div ng-show="{{ photo.file != undefined }}">
                 <a ng-href="#/photos/{{ photo.$id }}">
                     <img width="100%" src="http://res.cloudinary.com/dqpknoetx/image/upload/b_rgb:ccc,c_lpad,g_center,h_300,w_300/{{photo.file}}" />
+                    {{ photo.title | limitTo:40 }}
                 </a>
+                <div ng-show="photo.comments == null" class="alert alert-info">
+<p>Be the first to comment on this photograph</p></div>
+                <div ng-show="photo.comments != null" class="alert alert-info" ng-repeat="(commentId, comment) in photo.comments | limitTo:1">
+
+           <p>{{ comment.text }}</p>
+
             </div>
         </div>
     </div>

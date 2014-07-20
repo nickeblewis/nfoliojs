@@ -8,9 +8,10 @@
             <div class="info">
                 <h3>{{ photo.title }}</h3>
                 <p class="desc">{{ photo.description }}</p>
+                <p class="metadata">This image was captured with a <strong>{{ photo.metadata.Model }}</strong> an aperture of {{ photo.metadata.ApertureValue }}, shutter speed of {{ photo.metadata.ShutterSpeedValue }} and at an ISO of {{ photo.metadata.ISO }}. The focal length you used was {{ photo.metadata.FocalLength }}</p>
             </div>
             <div>
-                <span>submitted by <a href="#/users/{{ photo.owner }}">{{ photo.owner }}</a></span>
+                <span class="metadata">submitted by <a href="#/users/{{ photo.owner }}">{{ photo.owner }}</a></span>
             </div>
         </div>
         <div class="col-md-2">

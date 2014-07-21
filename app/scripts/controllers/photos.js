@@ -14,6 +14,7 @@ angular.module('nfolio')
             return moment(ms).fromNow();
          };
 
+
          $scope.submitPhoto = function () {
             Photo
                .create($scope.photo)
@@ -78,7 +79,7 @@ angular.module('nfolio')
       }])
 
    // Don't delete this controller!
-   .controller('PhotoCtrl', ['$rootScope','$scope','$location','Photo', function ($rootScope, $scope, $location, Photo) {
+   .controller('PhotoCtrl', ['$routeParams', '$scope','$location','Photo', function ($routeParams, $scope, $location, Photo) {
       //        $scope.updateTitle = function(){
       //            var uploadParams = $scope.widget.fileupload('option', 'formData');
       //            uploadParams["context"] = "photo=" + $scope.title;
@@ -133,6 +134,11 @@ angular.module('nfolio')
       $scope.timeAgo = function(ms) {
          return moment(ms).fromNow();
       };
+
+       $scope.addComment = function (photoId) {
+           Photo.addComment(photoId, $scope.comment);
+           $scope.comment = '';
+        };
 
       $scope.submitPhoto = function () {
          Photo.create($scope.photo, $scope.files).then(function () {

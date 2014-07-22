@@ -16,6 +16,9 @@ angular.module('nfolio')
 
 
          $scope.submitPhoto = function () {
+//             if ($scope.photo.file === '')
+//                 return;
+//             
             Photo
                .create($scope.photo)
                .then(function () {

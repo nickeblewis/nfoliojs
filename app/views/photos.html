@@ -1,37 +1,36 @@
 <div class="container photos-page">
-
-
-    <div class="row card" ng-repeat="photo in photos | orderByPriority | orderBy:'updated':reverse=true">
-<!--       {{photo.$id}}-->
-        <div class="col-md-12">
-            <div class="col-md-9">
-                 <div ng-show="{{ photo.file != undefined }}">
-                    <a ng-href="#/photos/{{ photo.$id }}">
-                        <img width="100%" src="http://res.cloudinary.com/dqpknoetx/image/upload/b_rgb:eee,c_lpad,g_center,h_550,w_820/{{photo.file}}" />
-                        <!--<img width="100%" src="http://res.cloudinary.com/dqpknoetx/image/upload/c_lpad,w_700/{{photo.file}}" />-->
-<!--                        http://res.cloudinary.com/dqpknoetx/image/upload/c_lpad,g_center,h_500,w_820/v1406034222/pb8wfdtyeeuz9njfp1bw.jpg-->
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <p class="desc">by <a href="#/users/{{ photo.owner }}">{{ photo.owner }}</a></p>
-                <p class="metadata">{{ timeAgo(photo.updated) }}</p>
-                 <p class="metadata">This image was captured with a <strong>{{ photo.metadata.Model }}</strong> an aperture of {{ photo.metadata.ApertureValue }}, shutter speed of {{ photo.metadata.ShutterSpeedValue }} and at an ISO of {{ photo.metadata.ISO }}. The focal length was {{ photo.metadata.FocalLength }}</p>
-            </div>
+  <div class="row bigcard" ng-repeat="photo in photos | orderByPriority | orderBy:'updated':reverse=true | limitTo:8">
+    <!--       {{photo.$id}}-->
+    <div class="col-md-12">
+      <div class="col-md-9">
+        <div ng-show="{{ photo.file != undefined }}">
+          <a ng-href="#/photos/{{ photo.$id }}">
+            <img width="100%" src="http://res.cloudinary.com/dqpknoetx/image/upload/b_rgb:eee,c_lpad,g_center,h_550,w_820/{{photo.file}}" />
+            <!--<img width="100%" src="http://res.cloudinary.com/dqpknoetx/image/upload/c_lpad,w_700/{{photo.file}}" />-->
+            <!--                        http://res.cloudinary.com/dqpknoetx/image/upload/c_lpad,g_center,h_500,w_820/v1406034222/pb8wfdtyeeuz9njfp1bw.jpg-->
+          </a>
         </div>
-        <div class="col-md-12">
-            <div class="col-md-9">
-                <a ng-href="#/photos/{{ photo.$id }}">
-                    <h3>{{ photo.title }}</h3>
-                </a>
-                <p class="desc">{{ photo.description }}</p>
-                <div ng-repeat="(commentId, comment) in photo.comments" class="row cmt card">
-        <div class="col-md-12">
-            <p>{{ comment.text }}</p>
-            <p class="author">posted by <a href="#/users/{{ comment.username }}">{{ comment.username }}</a> {{timeAgo(comment.updated)}} <a ng-click="removeComment(comment, commentId)" ng-show="signedIn() && comment.username === currentUser.username">(delete)</a></p>
-        </div>
+      </div>
+      <div class="col-md-3">
+        <p class="desc">by <a href="#/users/{{ photo.owner }}">{{ photo.owner }}</a>
+        </p>
+        <p class="metadata">{{ timeAgo(photo.updated) }}</p>
+        <p class="metadata">This image was captured with a <strong>{{ photo.metadata.Model }}</strong> an aperture of {{ photo.metadata.ApertureValue }}, shutter speed of {{ photo.metadata.ShutterSpeedValue }} and at an ISO of {{ photo.metadata.ISO }}. The focal length was {{ photo.metadata.FocalLength }}</p>
+      </div>
     </div>
-<!--
+    <div class="col-md-12">
+      <div class="col-md-9 innercard">
+        <a ng-href="#/photos/{{ photo.$id }}">
+          <h3>{{ photo.title }}</h3>
+        </a>
+        <p class="desc">{{ photo.description }}</p>
+        <ul class="feed-list list-group">
+          <li class="feed-item-post list-group-item animate" ng-repeat="(commentId, comment) in photo.comments">
+            <span class="badge">{{comment.username}}</span><span class="badge">{{timeAgo(comment.updated)}}</span>
+            <i class="glyphicon glyphicon-user"></i> {{comment.text}}
+          </li>
+        </ul>
+        <!--
            <div class="row cmt-form card">
         <div class="col-md-12">
             <div ng-hide="signedIn()">
@@ -44,13 +43,14 @@
         </div>
     </div>
 -->
-            </div>
-            <div class="col-md-3"></div>
-        </div>
+      </div>
+      <div class="col-md-3"></div>
     </div>
-<!--     <div class="row card">
+  </div>
+  <!--     <div class="row card">
         <div class="col-md-12">
             <p>Load More</p>
         </div>
     </div>
  --></div>
+

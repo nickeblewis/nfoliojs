@@ -8,6 +8,7 @@ angular.module('nfolio', [
    'ngResource',
    'ngSanitize',
    'ngRoute',
+//    'ngAnimate',
 //   'iso.directives',
    'firebase',
    'cloudinary'

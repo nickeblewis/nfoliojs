@@ -4,7 +4,7 @@ $grey: #dfdfdf;
 $dark-grey: #777;
 $lightish-grey: #aaa;
 $very-lightish-grey: #ccc;
-$very-very-lightish-grey: #eee;
+$very-very-lightish-grey: #edeeef;
 
 @import 'sass-bootstrap/lib/bootstrap';
 
@@ -64,7 +64,7 @@ $very-very-lightish-grey: #eee;
 body {
     padding-top: 60px;
     padding-bottom: 20px;
-    background-color: #fff;
+//    background-color: $very-lightish-grey;
 }
 
 .header,
@@ -121,6 +121,8 @@ body {
       @include border-radius(5px);
       padding: 8px;
       margin: 2px;
+        border-left: 3px solid red;
+margin-bottom: 2px;
     }
 
     .feed-item-add {
@@ -136,19 +138,19 @@ body {
 	background-color: grey;	
 }
 
-.animate.ng-enter, .animate.ng-leave {
-  transition: 500ms ease-in all;
-  position: relative;
-  display: block;
-} 
-
-.animate.ng-enter.ng-enter-active, .animate.ng-leave {
-  left: 0;
-}
-
-.animate.ng-leave.ng-leave-active, .animate.ng-enter {
-  left: 500px;
-}
+//.animate.ng-enter, .animate.ng-leave {
+//  transition: 500ms ease-in all;
+//  position: relative;
+//  display: block;
+//}
+//
+//.animate.ng-enter.ng-enter-active, .animate.ng-leave {
+//  left: 0;
+//}
+//
+//.animate.ng-leave.ng-leave-active, .animate.ng-enter {
+//  left: 500px;
+//}
 
 .desc {
   font-size: 1.2em;
@@ -156,7 +158,7 @@ body {
 
 .metadata {
   font-size: 1.2em;
-    color: #ccc;
+    color: $dark-grey;
 }
 
 .dummy {
@@ -166,4 +168,76 @@ body {
 .prof-img {
     width: 50px;
     height: 50px;
+}
+
+.bigcard {
+    padding: 10px;
+    background-color: $very-very-lightish-grey;
+    border-bottom: 4px solid red;
+}
+
+.list-group-item {
+    border-left: 3px solid red;
+margin-bottom: 2px;
+}
+
+/*
+  We're using CSS transitions for when
+  the enter and move events are triggered
+  for the element that has the .animate
+  class
+*/
+.animate.ng-enter, .animate.ng-move {
+  -webkit-transition:0.5s linear all;
+  -moz-transition:0.5s linear all;
+  -o-transition:0.5s linear all;
+  transition:0.5s linear all;
+  opacity:0;
+}
+
+/*
+ The ng-enter-active and ng-move-active
+ are where the transition destination properties
+ are set so that the animation knows what to
+ animate.
+*/
+.animate.ng-enter.ng-enter-active,
+.animate.ng-move.ng-move-active {
+  opacity:1;
+}
+
+/*
+  We're using CSS keyframe animations for when
+  the leave event is triggered for the element
+  that has the .animate class
+*/
+.animate.ng-leave {
+  -webkit-animation:0.5s my_animation;
+  -moz-animation:0.5s my_animation;
+  -o-animation:0.5s my_animation;
+  animation:0.5s my_animation;
+}
+
+@keyframes my_animation {
+  from { opacity:1; }
+  to { opacity:0; }
+}
+
+/*
+  Unfortunately each browser vendor requires
+  its own definition of keyframe animation code...
+*/
+@-webkit-keyframes my_animation {
+  from { opacity:1; }
+  to { opacity:0; }
+}
+
+@-moz-keyframes my_animation {
+  from { opacity:1; }
+  to { opacity:0; }
+}
+
+@-o-keyframes my_animation {
+  from { opacity:1; }
+  to { opacity:0; }
 }

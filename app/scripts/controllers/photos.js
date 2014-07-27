@@ -70,7 +70,7 @@ angular.module('nfolio')
         })
         .on("cloudinaryprogressall", function(e, data) {
           $scope.progress = Math.round((data.loaded * 100.0) / data.total);
-          $scope.status = "Uploading... " + $scope.progress + "%";
+          $scope.status = "" + $scope.progress + "%";
           $scope.$apply();
         })
         .on("cloudinarydone", function(e, data) {
@@ -81,8 +81,16 @@ angular.module('nfolio')
             }
           };
           $scope.photo.file = data.result.path;
+
+
+
           $scope.photo.metadata = data.result.image_metadata;
-          $scope.result = data.result;
+          //          $scope.result = data.result;
+          $scope.status = '';
+
+          $scope.photo.title = $scope.photo.metadata.Title;
+          $scope.photo.description = $scope.photo.metadata.Description;
+
           $rootScope.photos.push(data.result);
           $scope.$apply();
         });

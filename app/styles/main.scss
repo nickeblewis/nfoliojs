@@ -1,130 +1,103 @@
-$icon-font-path: "/bower_components/sass-bootstrap/fonts/";
-
-$grey: #dfdfdf;
-$dark-grey: #777;
-$lightish-grey: #aaa;
-$very-lightish-grey: #ccc;
-$very-very-lightish-grey: #edeeef;
-
+$icon-font-path:"/bower_components/sass-bootstrap/fonts/";
+ $grey:#dfdfdf;
+ $dark-grey:#777;
+ $lightish-grey:#aaa;
+ $very-lightish-grey:#ccc;
+ $very-very-lightish-grey:#edeeef;
 @import 'sass-bootstrap/lib/bootstrap';
-
-@mixin clearfix() {
-    &:before,
-    &:after {
-        content: "";
-        display: table;
-    }
-    &:after {
-        clear: both;
-    }
-}
-
 @mixin border-radius($radius) {
   -webkit-border-radius: $radius;
   border-radius: $radius;
   background-clip: padding-box;
 }
-
 @mixin border-top-radius($radius) {
   -webkit-border-top-right-radius: $radius;
   border-top-right-radius: $radius;
-   -webkit-border-top-left-radius: $radius;
-   border-top-left-radius: $radius;
-   background-clip: padding-box;
+  -webkit-border-top-left-radius: $radius;
+  border-top-left-radius: $radius;
+  background-clip: padding-box;
 }
 @mixin border-right-radius($radius) {
   -webkit-border-bottom-right-radius: $radius;
   border-bottom-right-radius: $radius;
-     -webkit-border-top-right-radius: $radius;
-     border-top-right-radius: $radius;
-     background-clip: padding-box;
+  -webkit-border-top-right-radius: $radius;
+  border-top-right-radius: $radius;
+  background-clip: padding-box;
 }
 @mixin border-bottom-radius($radius) {
   -webkit-border-bottom-right-radius: $radius;
   border-bottom-right-radius: $radius;
-   -webkit-border-bottom-left-radius: $radius;
-   border-bottom-left-radius: $radius;
-   background-clip: padding-box;
+  -webkit-border-bottom-left-radius: $radius;
+  border-bottom-left-radius: $radius;
+  background-clip: padding-box;
 }
 @mixin border-left-radius($radius) {
   -webkit-border-bottom-left-radius: $radius;
   border-bottom-left-radius: $radius;
-     -webkit-border-top-left-radius: $radius;
-     border-top-left-radius: $radius;
-     background-clip: padding-box;
+  -webkit-border-top-left-radius: $radius;
+  border-top-left-radius: $radius;
+  background-clip: padding-box;
 }
-
 .browsehappy {
-    margin: 0.2em 0;
-    background: #ccc;
-    color: #000;
-    padding: 0.2em 0;
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
 }
-
 body {
-    padding-top: 60px;
-    padding-bottom: 20px;
-//    background-color: $very-lightish-grey;
-}
+  padding-top: 60px;
+  padding-bottom: 20px;
+  //    background-color: $very-lightish-grey;
 
+}
 .header,
 .marketing,
 .footer {
-    padding-left: 15px;
-    padding-right: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
-
 .header {
-    border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
 }
-
 .header h3 {
-    margin-top: 0;
-    margin-bottom: 0;
-    line-height: 40px;
-    padding-bottom: 19px;
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 40px;
+  padding-bottom: 19px;
 }
-
 .footer {
-    padding-top: 19px;
-    color: #777;
-    border-top: 1px solid #e5e5e5;
+  padding-top: 19px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
 }
-
 .jumbotron {
-    text-align: center;
-    border-bottom: 1px solid #e5e5e5;
+  text-align: center;
+  border-bottom: 1px solid #e5e5e5;
 }
-
 .jumbotron .btn {
-    font-size: 21px;
-    padding: 14px 24px;
+  font-size: 21px;
+  padding: 14px 24px;
 }
-
 .marketing p + h4 {
-    margin-top: 28px;
+  margin-top: 28px;
 }
-
 .card {
   background: #fff;
   padding-top: 20px;
   padding-bottom: 20px;
-
   .feed-list {
     list-style-type: none;
     @include border-radius(5px);
     padding: 8px;
     background-color: $dark-grey;
-
     .feed-item-post {
       background-color: $very-lightish-grey;
       @include border-radius(5px);
       padding: 8px;
       margin: 2px;
-        border-left: 3px solid red;
-margin-bottom: 2px;
+      border-left: 3px solid red;
+      margin-bottom: 2px;
     }
-
     .feed-item-add {
       background-color: $very-very-lightish-grey;
       @include border-radius(5px);
@@ -133,50 +106,46 @@ margin-bottom: 2px;
     }
   }
 }
-
 .search {
-	background-color: grey;	
+  background-color: grey;
 }
-
-.animate.ng-enter, .animate.ng-leave {
+.animate.ng-enter,
+.animate.ng-leave {
   transition: 500ms ease-in all;
   position: relative;
   display: block;
 }
-
-.animate.ng-enter.ng-enter-active, .animate.ng-leave {
+.animate.ng-enter.ng-enter-active,
+.animate.ng-leave {
   left: 0;
 }
-
-.animate.ng-leave.ng-leave-active, .animate.ng-enter {
+.animate.ng-leave.ng-leave-active,
+.animate.ng-enter {
   left: 500px;
 }
-
 .desc {
   font-size: 1.2em;
 }
-
 .metadata {
   font-size: 1.2em;
-    color: $dark-grey;
+  color: $dark-grey;
 }
-
 .dummy {
   background-color: #fff;
 }
-
 .prof-img {
-    width: 50px;
-    height: 50px;
+  width: 50px;
+  height: 50px;
 }
-
 .bigcard {
-    padding: 10px;
-    background-color: $very-very-lightish-grey;
-    border-bottom: 4px solid red;
+  padding: 10px;
+  background-color: $very-very-lightish-grey;
+  border-bottom: 4px solid red;
 }
-
+.status {
+  font-size: 2em;
+}
 .list-group-item {
-    border-left: 3px solid red;
-margin-bottom: 2px;
+  border-left: 3px solid red;
+  margin-bottom: 2px;
 }

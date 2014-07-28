@@ -9,6 +9,7 @@
         <h3>{{ photo.title }}</h3>
         <p class="desc">{{ photo.description }}</p>
         <p class="metadata">This image was captured with a <strong>{{ photo.metadata.Model }}</strong> an aperture of {{ photo.metadata.ApertureValue }}, shutter speed of {{ photo.metadata.ShutterSpeedValue }} and at an ISO of {{ photo.metadata.ISO }}. The focal length you used was {{ photo.metadata.FocalLength }}</p>
+        <p ng-show="photo.metadata.SourcePhotosCount > 0">This looks like it may be a panorama comprising of {{photo.metadata.SourcePhotosCount}} images</p>
       </div>
       <div>
         <span class="metadata">submitted by <a href="#/users/{{ photo.owner }}">{{ photo.owner }}</a></span>

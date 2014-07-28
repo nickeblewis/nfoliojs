@@ -1,113 +1,138 @@
 'use strict';
 /*global AWS*/
 angular.module('nfolio')
-   .factory('album', ['$rootScope', '$resource',
-      function($rootScope, $resource){
-         var url = $.cloudinary.url('nfolio', {format: 'json', type: 'list'});
-         //cache bust
-         url = url + "?" + Math.ceil(new Date().getTime()/1000);
-         return $resource(url, {}, {
-            photos: {method:'GET', isArray:false}
-         });
-      }])
-   .factory('Photo', ['$firebase','User','FIREBASE_URL',
-      function ($firebase, User, FIREBASE_URL) {
+  .factory('album', ['$rootScope', '$resource',
+    function($rootScope, $resource) {
+      var url = $.cloudinary.url('nfolio', {
+        format: 'json',
+        type: 'list'
+      });
+      //cache bust
+      url = url + "?" + Math.ceil(new Date().getTime() / 1000);
+      return $resource(url, {}, {
+        photos: {
+          method: 'GET',
+          isArray: false
+        }
+      });
+    }
+  ])
+  .factory('Photo', ['$firebase', 'User', 'FIREBASE_URL',
+    function($firebase, User, FIREBASE_URL) {
 
-         var ref = new Firebase(FIREBASE_URL + 'photos');
+      var ref = new Firebase(FIREBASE_URL + 'photos');
 
-         var photos = $firebase(ref);
+      var photos = $firebase(ref);
 
-         var Photo = {
-            all: photos,
-//            featured: photos.$child('featured'),
-            create: function (photo) {
-             if (User.signedIn()) {
-               var user = User.getCurrent();
-               photo.owner = user.username;
-               return photos.$add(photo).then(function (ref) {
-                 var photoId = ref.name();
-//                 if(files) {
-//                   var userFolder = user.username,
-//                       imageFolder = (new Date()).getTime();
-//                   var f = files[0];
-//                   var reader = new FileReader();
-//                   reader.onload = function(e) {
-//                     var img = new Image();
-//                     img.onload=function() {
-//                       resizeUpload(this,1080, 'medium', userFolder + '/' + imageFolder + '/medium/' + f.name, ref);
-//                     };
-//                     var img2 = new Image();
-//                     img2.onload=function(){
-//                       resizeUpload(this,300, 'thumb', userFolder + '/' + imageFolder + '/thumb/' + f.name, ref);
-//                     };
-//                     img.src=e.target.result;
-//                     img2.src=e.target.result;
-//                   };
-//                   reader.readAsDataURL(f);
-//                 }
-                 user.$child('photos').$child(photoId).$set(photoId);
+      var Photo = {
+        all: photos,
+        //            featured: photos.$child('featured'),
+        limit: function(n) {
+          var data = {};
+          //          var postsQuery = ref.startAt(null, '-JSyC-fIzHSBkaQWtNw-').limit(n);
+          var postsQuery = ref.limit(n);
 
-                 return photoId;
-               });
-             }
-            },
+          postsQuery.on('child_added', function(snapshot) {
+            var p = snapshot.val();
+            var photoId = snapshot.name();
+            data[photoId] = Photo.find(photoId);
+            //            console.log(p)
 
-            find: function (photoId) {
-             return photos.$child(photoId);
-            },
+          });
+          return data;
+        },
+        create: function(photo) {
+          if (User.signedIn()) {
+            var user = User.getCurrent();
+            photo.owner = user.username;
+            return photos.$add(photo).then(function(ref) {
+              var photoId = ref.name();
+              //                 if(files) {
+              //                   var userFolder = user.username,
+              //                       imageFolder = (new Date()).getTime();
+              //                   var f = files[0];
+              //                   var reader = new FileReader();
+              //                   reader.onload = function(e) {
+              //                     var img = new Image();
+              //                     img.onload=function() {
+              //                       resizeUpload(this,1080, 'medium', userFolder + '/' + imageFolder + '/medium/' + f.name, ref);
+              //                     };
+              //                     var img2 = new Image();
+              //                     img2.onload=function(){
+              //                       resizeUpload(this,300, 'thumb', userFolder + '/' + imageFolder + '/thumb/' + f.name, ref);
+              //                     };
+              //                     img.src=e.target.result;
+              //                     img2.src=e.target.result;
+              //                   };
+              //                   reader.readAsDataURL(f);
+              //                 }
+              user.$child('photos').$child(photoId).$set(photoId);
 
-            remove: function (photoId) {
-             if (User.signedIn()) {
-               var photo = Photo.find(photoId);
-               photo.$on('loaded', function () {
-                 var user = User.findByUsername(photo.owner);
-                 photos.$remove(photoId).then(function () {
-                   user.$child('photos').$remove(photoId);
-                 });
-               });
-             }
-            },
+              return photoId;
+            });
+          }
+        },
 
-            edit: function(photo, photoId) {
-               // TODO: commented this out, it is buggerry pooped
-//               if (User.signedIn()) {
-//                  var photo = Photo.find(photoId);
-//                  photo.$on('loaded', function () {
-//                     var user = User.findByUsername(photo.owner);
-//                     photos.$update(photo);
-//                  });
-//               }
-            },
+        find: function(photoId) {
+          return photos.$child(photoId);
+        },
 
-            addComment: function (photoId, comment) {
-             if (User.signedIn()) {
-               var user = User.getCurrent();
-               comment.username = user.username;
-               comment.photoId = photoId;
-                comment.updated = (new Date()).getTime();
-               photos.$child(photoId).$child('comments').$add(comment).then(function (ref) {
-                 user.$child('comments').$child(ref.name()).$set({id: ref.name(), photoId: photoId});
-               });
-             }
-            },
+        remove: function(photoId) {
+          if (User.signedIn()) {
+            var photo = Photo.find(photoId);
+            photo.$on('loaded', function() {
+              var user = User.findByUsername(photo.owner);
+              photos.$remove(photoId).then(function() {
+                user.$child('photos').$remove(photoId);
+              });
+            });
+          }
+        },
 
-            // TODO: User should be able to edit their comments
-            // editComment: function(photo, photoId) {
-            //
-            // },
+        edit: function(photo, photoId) {
+          // TODO: commented this out, it is buggerry pooped
+          //               if (User.signedIn()) {
+          //                  var photo = Photo.find(photoId);
+          //                  photo.$on('loaded', function () {
+          //                     var user = User.findByUsername(photo.owner);
+          //                     photos.$update(photo);
+          //                  });
+          //               }
+        },
 
-            deleteComment: function (photo, comment, commentId) {
-             if (User.signedIn()) {
-               var user = User.findByUsername(comment.username);
-               photo.$child('comments').$remove(commentId).then(function () {
-                 user.$child('comments').$remove(commentId);
-               });
-             }
-            }
-         };
+        addComment: function(photoId, comment) {
+          if (User.signedIn()) {
+            var user = User.getCurrent();
+            comment.username = user.username;
+            comment.photoId = photoId;
+            comment.updated = (new Date()).getTime();
+            photos.$child(photoId).$child('comments').$add(comment).then(function(ref) {
+              user.$child('comments').$child(ref.name()).$set({
+                id: ref.name(),
+                photoId: photoId
+              });
+            });
+          }
+        },
+
+        // TODO: User should be able to edit their comments
+        // editComment: function(photo, photoId) {
+        //
+        // },
+
+        deleteComment: function(photo, comment, commentId) {
+          if (User.signedIn()) {
+            var user = User.findByUsername(comment.username);
+            photo.$child('comments').$remove(commentId).then(function() {
+              user.$child('comments').$remove(commentId);
+            });
+          }
+        }
+      };
 
       return Photo;
-   }]);
+    }
+  ]);
 
 //   function resizeUpload(image,maxwidthheight,type,filename,newMessageRef) {
 //

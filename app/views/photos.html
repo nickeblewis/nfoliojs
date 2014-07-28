@@ -1,5 +1,5 @@
 <div class="photos-page">
-  <div class="row bigcard" ng-repeat="photo in photos | orderByPriority | orderBy:'updated':reverse=true | limitTo:8">
+  <div class="row bigcard" ng-repeat="photo in photos | orderByPriority | orderBy:'updated':reverse=true">
     <!--       {{photo.$id}}-->
     <div class="col-md-12">
       <div class="col-md-9">
@@ -16,6 +16,7 @@
         </p>
         <p class="badge">{{ timeAgo(photo.updated) }}</p>
         <p class="metadata">This image was captured with a <strong>{{ photo.metadata.Model }}</strong> an aperture of {{ photo.metadata.ApertureValue }}, shutter speed of {{ photo.metadata.ShutterSpeedValue }} and at an ISO of {{ photo.metadata.ISO }}. The focal length was {{ photo.metadata.FocalLength }}</p>
+        <p ng-show="photo.metadata.SourcePhotosCount > 0">This looks like it may be a panorama comprising of {{photo.metadata.SourcePhotosCount}} images</p>
       </div>
     </div>
     <div class="col-md-12">
@@ -47,10 +48,10 @@
       <div class="col-md-3"></div>
     </div>
   </div>
-  <!--     <div class="row card">
-        <div class="col-md-12">
-            <p>Load More</p>
-        </div>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-6 card" ng-show="showLoadMore">
+      <button type="button" class="btn btn-primary" ng-click="loadMore()">Load more</button>
     </div>
- --></div>
+  </div>
+</div>
 

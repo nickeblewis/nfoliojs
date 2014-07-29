@@ -139,7 +139,7 @@ angular.module('nfolio')
     //            });
 
     if ($location.path() === '/') {
-      //      $scope.photos = Photo.all;
+//            $scope.photos = Photo.all;
       $scope.photos = Photo.limit(5);
     }
 
@@ -147,7 +147,7 @@ angular.module('nfolio')
     //      $scope.featured = Photo.featured;
 
     $scope.loadMore = function() {
-
+        $scope.photos.push({});
     };
 
     $scope.photo = {

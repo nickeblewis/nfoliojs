@@ -140,7 +140,7 @@ angular.module('nfolio')
 
     if ($location.path() === '/') {
 //            $scope.photos = Photo.all;
-      $scope.photos = Photo.limit(5);
+      $scope.photos = Photo.limit(20);
     }
 
     $scope.showLoadMore = true;

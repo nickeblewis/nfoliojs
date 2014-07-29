@@ -29,8 +29,8 @@ angular.module('nfolio')
         //            featured: photos.$child('featured'),
         limit: function(n) {
           var data = {};
-                    var postsQuery = ref.startAt(null, '-JSyC-fIzHSBkaQWtNw-').limit(n);
-//          var postsQuery = ref.limit(n);
+//                    var postsQuery = ref.startAt(null, '-JSyC-fIzHSBkaQWtNw-').limit(n);
+          var postsQuery = ref.limit(n);
 
           postsQuery.on('child_added', function(snapshot) {
             var p = snapshot.val();

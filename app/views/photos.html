@@ -26,7 +26,7 @@
         </a>
         <p class="desc">{{ photo.description }}</p>
         <ul class="feed-list list-group">
-          <li class="feed-item-post list-group-item animate" ng-repeat="(commentId, comment) in photo.comments">
+          <li class="feed-item-post list-group-item" ng-class="animate" ng-repeat="(commentId, comment) in photo.comments">
             <span class="badge">{{comment.username}}</span><span class="badge">{{timeAgo(comment.updated)}}</span>
             <i class="glyphicon glyphicon-user"></i> {{comment.text}}
           </li>

@@ -19,18 +19,18 @@ angular.module('nfolio')
         //             if ($scope.photo.file === '')
         //                 return;
         //
-        Photo
-          .create($scope.photo)
-          .then(function() {
-            $scope.photo = {
-              'title': '',
-              description: '',
-              image: '',
-              file: '',
-              updated: (new Date()).getTime()
-            };
-          });
-      };
+    Photo
+      .create($scope.photo)
+      .then(function() {
+        $scope.photo = {
+          'title': '',
+          description: '',
+          image: '',
+          file: '',
+          updated: (new Date()).getTime()
+        };
+      });
+  };
 
       $scope.deletePhoto = function(photoId) {
         Photo.remove(photoId);

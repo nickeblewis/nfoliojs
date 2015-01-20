@@ -35,6 +35,14 @@
       <li>
         <a href="#" ng-click="logout()">Logout</a>
       </li>
+      <div ng-show="user">
+        <p>Hello, {{ user.facebook.displayName }}</p>
+        <button ng-click="auth.$unauth()">Logout</button>
+      </div>
+      <div ng-hide="user">
+        <p>Welcome, please log in.</p>
+        <button ng-click="auth.$authWithOAuthPopup('facebook')">Login</button>
+      </div>
     </ul>
     <ul class="nav navbar-nav navbar-right" ng-hide="signedIn()">
       <li>

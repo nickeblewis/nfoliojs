@@ -1,5 +1,6 @@
 <div class="photos-page">
-  <div class="row bigcard" ng-repeat="photo in photos | orderByPriority | orderBy:'updated':reverse=true">
+  <!-- <div class="row bigcard" ng-repeat="photo in photos | orderByPriority | orderBy:'updated':reverse=true"> -->
+  <div class="row bigcard" ng-repeat="photo in photos | orderBy:'updated':reverse=true">
     <!--       {{photo.$id}}-->
     <div class="col-md-12">
       <div class="col-md-9">
@@ -54,4 +55,3 @@
     </div>
   </div>
 </div>
-

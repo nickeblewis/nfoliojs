@@ -22,19 +22,19 @@ angular.module('nfolio')
 
       var ref = new Firebase(FIREBASE_URL + 'photos');
 
-      var photos = $firebase(ref);
+      var photos = $firebase(ref.limitToLast(5));
 
       var Photo = {
-        all: photos,
+        all: photos.$asArray(),
         //            featured: photos.$child('featured'),
         limit: function(n) {
           var data = {};
           //          var postsQuery = ref.startAt(null, '-JSyC-fIzHSBkaQWtNw-').limit(n);
-          var postsQuery = ref.limit(n);
+          var postsQuery = ref.limitToFirst(n);
 
           postsQuery.on('child_added', function(snapshot) {
             var p = snapshot.val();
-            var photoId = snapshot.name();
+            var photoId = snapshot.key();
             data[photoId] = Photo.find(photoId);
             //            console.log(p)
 
@@ -42,39 +42,45 @@ angular.module('nfolio')
           return data;
         },
         create: function(photo) {
-          if (User.signedIn()) {
-            var user = User.getCurrent();
-            photo.owner = user.username;
-            return photos.$add(photo).then(function(ref) {
-              var photoId = ref.name();
-              //                 if(files) {
-              //                   var userFolder = user.username,
-              //                       imageFolder = (new Date()).getTime();
-              //                   var f = files[0];
-              //                   var reader = new FileReader();
-              //                   reader.onload = function(e) {
-              //                     var img = new Image();
-              //                     img.onload=function() {
-              //                       resizeUpload(this,1080, 'medium', userFolder + '/' + imageFolder + '/medium/' + f.name, ref);
-              //                     };
-              //                     var img2 = new Image();
-              //                     img2.onload=function(){
-              //                       resizeUpload(this,300, 'thumb', userFolder + '/' + imageFolder + '/thumb/' + f.name, ref);
-              //                     };
-              //                     img.src=e.target.result;
-              //                     img2.src=e.target.result;
-              //                   };
-              //                   reader.readAsDataURL(f);
-              //                 }
-              user.$child('photos').$child(photoId).$set(photoId);
 
-              return photoId;
-            });
-          }
+          //if (User.signedIn()) {
+          //var user = User.getCurrent();
+          // photo.owner = user.username;
+          return photos.$push(photo).then(function(ref) {
+            var photoId = ref.name();
+            //                 if(files) {
+            //                   var userFolder = user.username,
+            //                       imageFolder = (new Date()).getTime();
+            //                   var f = files[0];
+            //                   var reader = new FileReader();
+            //                   reader.onload = function(e) {
+            //                     var img = new Image();
+            //                     img.onload=function() {
+            //                       resizeUpload(this,1080, 'medium', userFolder + '/' + imageFolder + '/medium/' + f.name, ref);
+            //                     };
+            //                     var img2 = new Image();
+            //                     img2.onload=function(){
+            //                       resizeUpload(this,300, 'thumb', userFolder + '/' + imageFolder + '/thumb/' + f.name, ref);
+            //                     };
+            //                     img.src=e.target.result;
+            //                     img2.src=e.target.result;
+            //                   };
+            //                   reader.readAsDataURL(f);
+            //                 }
+            //user.$child('photos').$child(photoId).$set(photoId);
+
+            return photoId;
+          });
+          //}
         },
 
         find: function(photoId) {
-          return photos.$child(photoId);
+          // return photos.$child(photoId);
+          // return photos.$asObject(photoId);
+
+
+          var photo = $firebase(ref.child(photoId));
+          return photo.$asObject();
         },
 
         remove: function(photoId) {
@@ -106,7 +112,7 @@ angular.module('nfolio')
             comment.username = user.username;
             comment.photoId = photoId;
             comment.updated = (new Date()).getTime();
-            photos.$child(photoId).$child('comments').$add(comment).then(function(ref) {
+            photos.child(photoId).$child('comments').$add(comment).then(function(ref) {
               user.$child('comments').$child(ref.name()).$set({
                 id: ref.name(),
                 photoId: photoId

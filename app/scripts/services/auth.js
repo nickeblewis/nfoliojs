@@ -1,10 +1,10 @@
 'use strict';
 angular.module('nfolio')
 .factory('Auth',
-  function ($firebaseSimpleLogin, FIREBASE_URL, $rootScope) {
+  function ($firebaseAuth, FIREBASE_URL, $rootScope) {
     var ref = new Firebase(FIREBASE_URL);
 
-    var auth = $firebaseSimpleLogin(ref);
+    var auth = $firebaseAuth(ref);
 
     var Auth = {
       register: function (user) {
@@ -25,5 +25,5 @@ angular.module('nfolio')
       return Auth.signedIn();
     };
 
-    return Auth;
+    return auth;
   });

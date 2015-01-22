@@ -1,57 +1,47 @@
-<div class="photos-page">
-  <!-- <div class="row bigcard" ng-repeat="photo in photos | orderByPriority | orderBy:'updated':reverse=true"> -->
-  <div class="row bigcard" ng-repeat="photo in photos | orderBy:'updated':reverse=true">
-    <!--       {{photo.$id}}-->
-    <div class="col-md-12">
-      <div class="col-md-9">
-        <div ng-show="{{ photo.file != undefined }}">
-          <a ng-href="#/photos/{{ photo.$id }}">
-            <img width="100%" src="http://res.cloudinary.com/dqpknoetx/image/upload/b_rgb:eee,c_lpad,g_center,h_550,w_820/{{photo.file}}" />
-            <!--<img width="100%" src="http://res.cloudinary.com/dqpknoetx/image/upload/c_lpad,w_700/{{photo.file}}" />-->
-            <!--                        http://res.cloudinary.com/dqpknoetx/image/upload/c_lpad,g_center,h_500,w_820/v1406034222/pb8wfdtyeeuz9njfp1bw.jpg-->
+<div class="row">
+
+  <div class="col-sm-2" id="photostream">
+
+      <div ng-repeat="photo in photos | orderBy:'updated':reverse=true">
+        <a ng-click="showChosenPhoto(photo.$id)">
+          <!-- <img class="xs-hidden" width="100%" src="http://res.cloudinary.com/dqpknoetx/image/upload/b_rgb:000,c_lpad,g_center,h_150,w_120/{{photo.file}}" /> -->
+          <img class="xs-hidden" src="http://res.cloudinary.com/dqpknoetx/image/upload/bo_5px_solid_rgb:000,c_scale,w_210/{{photo.file}}" />
+          <a ng-click="showChosenPhoto(photo.$id)">
+            <h6>{{ photo.title }}</h6>
           </a>
-        </div>
-      </div>
-      <div class="col-md-3 hidden-xs">
-        <p class="desc"><i class="glyphicon glyphicon-user"></i>  <a href="#/users/{{ photo.owner }}">{{ photo.owner }}</a>
-        </p>
-        <p class="badge">{{ timeAgo(photo.updated) }}</p>
-        <p class="metadata">This image was captured with a <strong>{{ photo.metadata.Model }}</strong> an aperture of {{ photo.metadata.ApertureValue }}, shutter speed of {{ photo.metadata.ShutterSpeedValue }} and at an ISO of {{ photo.metadata.ISO }}. The focal length was {{ photo.metadata.FocalLength }}</p>
-        <p ng-show="photo.metadata.SourcePhotosCount > 0">This looks like it may be a panorama comprising of {{photo.metadata.SourcePhotosCount}} images</p>
-      </div>
-    </div>
-    <div class="col-md-12">
-      <div class="col-md-9 innercard">
-        <a ng-href="#/photos/{{ photo.$id }}">
-          <h3>{{ photo.title }}</h3>
         </a>
-        <p class="desc">{{ photo.description }}</p>
-        <ul class="feed-list list-group">
-          <li class="feed-item-post list-group-item animate" ng-repeat="(commentId, comment) in photo.comments">
-            <span class="badge">{{comment.username}}</span><span class="badge">{{timeAgo(comment.updated)}}</span>
-            <i class="glyphicon glyphicon-user"></i> {{comment.text}}
-          </li>
-        </ul>
-        <!--
-           <div class="row cmt-form card">
-        <div class="col-md-12">
-            <div ng-hide="signedIn()">
-                <p><a href="#/login">Sign in</a> to post a comment</p>
-            </div>
-            <form ng-show="signedIn()">
-                <textarea ng-model="comment.text" placeholder="Send us your comments" class="form-control"></textarea><br />
-                <input type="submit" ng-click="addComment(photo.$id)" value="Comment" class="btn btn-primary" />
-            </form>
-        </div>
-    </div>
--->
       </div>
-      <div class="col-md-3"></div>
-    </div>
+
+
   </div>
-  <div class="row">
-    <div class="col-md-6 col-md-offset-6 card" ng-show="showLoadMore">
-      <button type="button" class="btn btn-primary" ng-click="loadMore()">Load more</button>
+
+  <div class="col-md-10" id="loupe">
+    <div class="row bigcard">
+          <div ng-show="{{ sphoto.file != undefined }}">
+            <a ng-href="#/photos/{{ sphoto.$id }}">
+              <img class="xs-hidden" width="100%" src="http://res.cloudinary.com/dqpknoetx/image/upload/b_rgb:eee,c_lpad,g_center,h_550,w_820/{{sphoto.file}}" />
+            </a>
+      </div>
+      <div class="col-md-12">
+        <div class="innercard">
+          <img width="100%" height="100%" src="http://res.cloudinary.com/dqpknoetx/image/upload/c_scale,w_1080/{{sphoto.file}}" />
+          <a ng-href="#/photos/{{ sphoto.$id }}">
+            <h3>{{ sphoto.title }}</h3>
+          </a>
+          <p class="desc">{{ sphoto.description }}</p>
+          <p>
+
+            <!--<img src="http://placehold.it/700x100" />-->
+          </p>
+          <ul class="feed-list list-group">
+            <li class="feed-item-post list-group-item animate" ng-repeat="(commentId, comment) in sphoto.comments">
+              <span class="badge">{{comment.username}}</span><span class="badge">{{timeAgo(comment.updated)}}</span>
+              <i class="glyphicon glyphicon-user"></i> {{comment.text}}
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-3"></div>
+      </div>
     </div>
-  </div>
+   </div>
 </div>

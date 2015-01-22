@@ -149,3 +149,46 @@ body {
   border-left: 3px solid red;
   margin-bottom: 2px;
 }
+
+
+body, html {
+  margin: 0;
+  overflow: hidden;
+  height:100%;
+}
+
+@media (min-width: 768px){
+  #photostream {
+    position: absolute;
+    top: 0px;
+    bottom: 0;
+    left: 0;
+    /* width: 75%; */
+    overflow-y: scroll;
+/*     margin-top: 50px;
+margin-bottom: 50px;
+ */  }
+
+  #loupe {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    overflow-y: scroll;
+    /* width: 25%; */
+/*     margin-top: 50px;
+margin-bottom: 50px;
+ */  }
+}
+
+#photostream {
+  background-color: #000;
+  text-align: center;
+  height:100%;
+}
+
+#loupe {
+  height:100%;
+  /* background-colo: ;r: #4FC1E9; */
+  text-align: center;
+}

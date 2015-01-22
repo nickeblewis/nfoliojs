@@ -17,12 +17,12 @@ angular.module('nfolio')
       });
     }
   ])
-  .factory('Photo', ['$firebase', 'User', 'FIREBASE_URL',
-    function($firebase, User, FIREBASE_URL) {
+  .factory('Photo', ['$firebase', 'User', 'FIREBASE_URL', 'Auth',
+    function($firebase, User, FIREBASE_URL, Auth) {
 
       var ref = new Firebase(FIREBASE_URL + 'photos');
 
-      var photos = $firebase(ref.limitToLast(5));
+      var photos = $firebase(ref.limitToLast(500));
 
       var Photo = {
         all: photos.$asArray(),
@@ -44,8 +44,8 @@ angular.module('nfolio')
         create: function(photo) {
 
           //if (User.signedIn()) {
-          //var user = User.getCurrent();
-          // photo.owner = user.username;
+          // var user = User.getCurrent();
+          //photo.owner = $scope.user.facebook.displayName;
           return photos.$push(photo).then(function(ref) {
             var photoId = ref.name();
             //                 if(files) {

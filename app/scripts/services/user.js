@@ -3,7 +3,7 @@
 /*global Auth*/
 angular.module('nfolio')
 .factory('User', function ($firebase, $rootScope, FIREBASE_URL, Auth) {
-  var ref = new Firebase(FIREBASE_URL + 'users');
+  var ref = new Firebase(FIREBASE_URL);
 
   var users = $firebase(ref);
 
@@ -25,7 +25,7 @@ angular.module('nfolio')
       }
     },
     getCurrent: function () {
-      return $rootScope.currentUser;
+      return users.$getAuth().facebook;
     },
     signedIn: function () {
       return $rootScope.currentUser !== undefined;

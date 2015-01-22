@@ -117,7 +117,7 @@ angular.module('nfolio')
 
     };
 
-    $scope.sphoto = {};
+    $scope.sphoto = $scope.photos.$getRecord("-JgE-B47p390Ip_DnBTy");;
 
     $scope.photo = {
       'title': '',

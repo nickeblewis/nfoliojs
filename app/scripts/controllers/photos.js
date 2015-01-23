@@ -107,7 +107,7 @@ angular.module('nfolio')
 
     if ($location.path() === '/') {
            $scope.photos = Photo.all;
-           $scope.sphoto = Photo.find("-JgE-B47p390Ip_DnBTy");
+          //  $scope.sphoto = Photo.find("-JgE-B47p390Ip_DnBTy");
       // $scope.photos = Photo.limit(100);
     }
 

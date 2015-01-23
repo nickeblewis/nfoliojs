@@ -1,10 +1,15 @@
+<!-- The all encompassing row class -->
 <div class="row">
 
+  <!-- The photo stream is a left-hand column for larger displays, collapses for tablet and mobile -->
   <div class="col-md-2 col-xs-12 col-sm-12" id="photostream">
 
-      <div ng-repeat="photo in photos | orderBy:'updated':reverse=true">
+      <!-- TODO: Whilst images load, show a spinner animation -->
+      <div ng-hide="true" class="loading-spinner"></div>
+
+      <!-- We've got our stack of thumbnails, hide the spinner and show them! -->
+      <div ng-show=photos"" ng-repeat="photo in photos | orderBy:'updated':reverse=true">
         <a ng-click="showChosenPhoto(photo.$id)">
-          <!-- <img class="xs-hidden" width="100%" src="http://res.cloudinary.com/dqpknoetx/image/upload/b_rgb:000,c_lpad,g_center,h_150,w_120/{{photo.file}}" /> -->
           <img class="xs-hidden" src="http://res.cloudinary.com/dqpknoetx/image/upload/bo_5px_solid_rgb:000,c_scale,w_210/{{photo.file}}" />
           <a ng-click="showChosenPhoto(photo.$id)">
             <h6>{{ photo.title }}</h6>
@@ -12,44 +17,44 @@
         </a>
       </div>
 
-
   </div>
 
   <div class="col-md-10 col-xs-12 col-sm-12" id="loupe">
-    <div class="row bigcard">
-          <!-- <div ng-show="{{ sphoto.file != undefined }}">
-            <a ng-href="#/photos/{{ sphoto.\$id }}">
-              <img class="xs-hidden" width="100%" src="http://res.cloudinary.com/dqpknoetx/image/upload/b_rgb:eee,c_lpad,g_center,h_550,w_820/{{sphoto.file}}" />
-            </a>
-                </div> -->
+
+    <!-- TODO: Get the spinner working here, smack bang in the middle and obvious -->
+    <div ng-if="sphoto == undefined" class="loading-spinner"></div>
+
+    <div ng-if="sphoto != undefined" class="row bigcard">
       <div class="col-md-12">
         <div class="innercard thumbnail">
           <img src="http://res.cloudinary.com/dqpknoetx/image/upload/c_scale,w_1200/{{sphoto.file}}" />
           <div class="caption post-content">
-          <a ng-href="#/photos/{{ sphoto.$id }}">
-            <h3>{{ sphoto.title }}</h3>
-          </a>
+            <a ng-href="#/photos/{{ sphoto.$id }}">
+              <h3>{{ sphoto.title }}</h3>
+            </a>
 
-          <p class="desc">{{ sphoto.description }}</p>
-          <p class="metadata">This image was captured with a <strong>{{ sphoto.metadata.Model }}</strong> an aperture of {{ sphoto.metadata.ApertureValue }}, shutter speed of {{ sphoto.metadata.ShutterSpeedValue }} and at an ISO of {{ sphoto.metadata.ISO }}. The focal length you used was {{ sphoto.metadata.FocalLength }}</p>
-          <p ng-show="sphoto.metadata.SourcePhotosCount > 0">This looks like it may be a panorama comprising of {{sphoto.metadata.SourcePhotosCount}} images</p>
-        </div>
-        <div>
-          <span class="metadata">submitted by <a href="#/users/{{ photo.owner }}">{{ photo.owner }}</a></span>
-        </div>
-      </div>
-          <p>
+            <p class="desc">
+              {{ sphoto.description }}
+            </p>
 
-            <!--<img src="http://placehold.it/700x100" />-->
-          </p>
-          <ul class="feed-list list-group">
-            <li class="feed-item-post list-group-item animate" ng-repeat="(commentId, comment) in sphoto.comments">
-              <span class="badge">{{comment.username}}</span><span class="badge">{{timeAgo(comment.updated)}}</span>
-              <i class="glyphicon glyphicon-user"></i> {{comment.text}}
-            </li>
-          </ul>
+            <p class="metadata">
+              This image was captured with a <strong>{{ sphoto.metadata.Model }}</strong> an aperture of {{ sphoto.metadata.ApertureValue }}, shutter speed of {{      sphoto.metadata.ShutterSpeedValue }} and at an ISO of {{ sphoto.metadata.ISO }}. The focal length you used was {{ sphoto.metadata.FocalLength }}
+            </p>
+            <p ng-show="sphoto.metadata.SourcePhotosCount > 0">
+              This looks like it may be a panorama comprising of {{sphoto.metadata.SourcePhotosCount}} images
+            </p>
+          </div>
+          <div>
+            <span class="metadata">submitted by <a href="#/users/{{ photo.owner }}">{{ sphoto.owner }}</a></span>
+          </div>
         </div>
-        <!-- <div class="col-md-3"></div> -->
+        <ul class="feed-list list-group">
+          <li class="feed-item-post list-group-item animate" ng-repeat="(commentId, comment) in sphoto.comments">
+            <span class="badge">{{comment.username}}</span><span class="badge">{{timeAgo(comment.updated)}}</span>
+            <i class="glyphicon glyphicon-user"></i> {{comment.text}}
+          </li>
+        </ul>
+        </div>
       </div>
     </div>
    </div>

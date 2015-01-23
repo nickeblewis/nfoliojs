@@ -213,4 +213,21 @@ margin-bottom: 50px;
     max-height:90%;
     margin:0 auto;
   }
+
+  .welcome-text {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    bottom: 0;
+    left: 50%;
+    margin: -15px 0 -15px;
+    font-size: 24px;
+    color: #aaa;
+  }
+  
+  /* .caption-detail {
+    background: #fff;
+    @include border-radius(5px);
+    padding: 5px;
+  } */
 }

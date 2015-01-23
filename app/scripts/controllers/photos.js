@@ -3,7 +3,7 @@ angular.module('nfolio')
   .controller('PhotoUploadCtrl', ['$scope', '$rootScope', '$routeParams', '$location', 'Photo', 'Auth',
     function($scope, $rootScope, $routeParams, $location, Photo, Auth) {
       $scope.auth = Auth;
-      $scope.user = $scope.auth.$getAuth();
+      $scope.user = Auth.getAuth();
 
       $scope.photo = {
         'title': '',
@@ -11,30 +11,26 @@ angular.module('nfolio')
         image: '',
         file: '',
         updated: (new Date()).getTime(),
-        owner: $scope.user.facebook.displayName
+        owner: $scope.user.google.displayName
       };
 
       $scope.timeAgo = function(ms) {
         return moment(ms).fromNow();
       };
 
-
       $scope.submitPhoto = function() {
-        //             if ($scope.photo.file === '')
-        //                 return;
-        //
-    Photo
-      .create($scope.photo)
-      .then(function() {
-        $scope.photo = {
-          'title': '',
-          description: '',
-          image: '',
-          file: '',
-          updated: (new Date()).getTime()
-        };
-      });
-  };
+        Photo
+          .create($scope.photo)
+          .then(function() {
+            $scope.photo = {
+              'title': '',
+              description: '',
+              image: '',
+              file: '',
+              updated: (new Date()).getTime()
+            };
+          });
+      };
 
       $scope.deletePhoto = function(photoId) {
         Photo.remove(photoId);
@@ -44,24 +40,11 @@ angular.module('nfolio')
         Photo.edit(photoId);
       };
 
-      //         $scope.updateTitle = function(){
-      //            var uploadParams = $scope.widget.fileupload('option', 'formData');
-      //            uploadParams["context"] = "photo=" + $scope.title;
-      //            $scope.widget.fileupload('option', 'formData', uploadParams);
-      //         };
-
       $scope.widget = $(".cloudinary_fileupload")
         .unsigned_cloudinary_upload($.cloudinary.config().upload_preset, {
           tags: 'nfolio',
           context: 'photo='
         }, {
-          // Uncomment the following lines to enable client side image resizing and valiation.
-          // Make sure cloudinary/processing is included the js file
-          //disableImageResize: false,
-          //imageMaxWidth: 800,
-          //imageMaxHeight: 600,
-          //acceptFileTypes: /(\.|\/)(gif|jpe?g|png|bmp|ico)$/i,
-          //maxFileSize: 20000000, // 20MB
           dropZone: "#direct_upload",
           start: function(e) {
             $scope.status = "Starting upload...";
@@ -105,10 +88,14 @@ angular.module('nfolio')
 .controller('PhotoCtrl', ['$routeParams', '$scope', '$location', 'Photo',
   function($routeParams, $scope, $location, Photo) {
 
+    $scope.loading = true;
+
     if ($location.path() === '/') {
            $scope.photos = Photo.all;
-          //  $scope.sphoto = Photo.find("-JgE-B47p390Ip_DnBTy");
+          // $scope.sphoto = Photo.find("-JgE-B47p390Ip_DnBTy");
+
       // $scope.photos = Photo.limit(100);
+      $scope.loading = false;
     }
 
     $scope.showLoadMore = true;

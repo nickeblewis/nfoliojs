@@ -5,10 +5,10 @@
   <div class="col-md-2 col-xs-12 col-sm-12" id="photostream">
 
       <!-- TODO: Whilst images load, show a spinner animation -->
-      <div ng-hide="true" class="loading-spinner"></div>
+      <div ng-show="loading" class="loading-spinner"></div>
 
       <!-- We've got our stack of thumbnails, hide the spinner and show them! -->
-      <div ng-show=photos"" ng-repeat="photo in photos | orderBy:'updated':reverse=true">
+      <div ng-if="photos != undefined" ng-repeat="photo in photos | orderBy:'updated':reverse=true">
         <a ng-click="showChosenPhoto(photo.$id)">
           <img class="xs-hidden" src="http://res.cloudinary.com/dqpknoetx/image/upload/bo_5px_solid_rgb:000,c_scale,w_210/{{photo.file}}" />
           <a ng-click="showChosenPhoto(photo.$id)">
@@ -24,6 +24,16 @@
     <!-- TODO: Get the spinner working here, smack bang in the middle and obvious -->
     <div ng-if="sphoto == undefined" class="loading-spinner"></div>
 
+    <!-- <div ng-if="sphoto == undefined" class="innercard col-md-12">
+      <div class="col-md-4" ng-if="photos != undefined" ng-repeat="photo in photos | orderBy:'updated':reverse=true">
+        <a ng-click="showChosenPhoto(photo.\$id)">
+          <img class="xs-hidden" src="http://res.cloudinary.com/dqpknoetx/image/upload/bo_5px_solid_rgb:000,c_scale,w_100/{{photo.file}}" />
+          <a ng-click="showChosenPhoto(photo.\$id)">
+            <h6>{{ photo.title }}</h6>
+          </a>
+        </a>
+      </div>
+      </div> -->
     <div ng-if="sphoto != undefined" class="row bigcard">
       <div class="col-md-12">
         <div class="innercard thumbnail">
@@ -54,6 +64,19 @@
             <i class="glyphicon glyphicon-user"></i> {{comment.text}}
           </li>
         </ul>
+        <div class="row cmt-form card">
+          <div class="col-md-12">
+            <!-- <div ng-hide="user">
+              <p><a href="#/login">Sign in</a> to post a comment</p>
+            </div> -->
+            <form ng-show="user">
+              <textarea ng-model="comment.text" placeholder="Send us your comments" class="form-control"></textarea>
+              <br />
+              <input type="submit" ng-click="addComment()" value="Comment" class="btn btn-primary" />
+            </form>
+          </div>
+        </div>
+
         </div>
       </div>
     </div>

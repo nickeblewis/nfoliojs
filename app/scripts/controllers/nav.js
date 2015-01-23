@@ -2,9 +2,18 @@
 angular.module('nfolio')
 .controller('NavCtrl', function ($scope, $location, Photo, Auth) {
     $scope.auth = Auth;
-    $scope.user = $scope.auth.$getAuth();
+    $scope.user = Auth.getAuth();
+
+    $scope.loggedIn = function () {
+      return true;
+    };
     
    $scope.logout = function () {
-      auth.logout();
+      Auth.logout();
+   };
+
+   $scope.loginWithOAuth = function () {
+     Auth.loginWithOAuth();
+     $location.path('/');
    };
 });

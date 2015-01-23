@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation" ng-controller="NavCtrl" >
   <!-- Brand and toggle get grouped for better mobile display -->
   <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -11,7 +11,7 @@
   </div>
 
   <!-- Collect the nav links, forms, and other content for toggling -->
-  <div ng-controller="NavCtrl" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 <!--     <form class="navbar-form navbar-left" role="search" ng-submit="submitPost()" ng-show="signedIn()">
       <div class="form-group">
         <input type="text" class="form-control" placeholder="Title" ng-model="post.title">
@@ -32,18 +32,19 @@
           <!--{{ user.username }}-->
         <!--</a>-->
       <!--</li>-->
-      <li ng-show="user"><a href="#/">Hello, {{ user.facebook.displayName }}</a></li>
+      <li ng-show="user"><a href="#/">{{ user.google.displayName }}</a></li>
       <li>
-        <a href="#/" ng-click="auth.$unauth()">Logout</a>
+        <a href="#/" ng-click="logout()">Logout</a>
 
       </li>
     </ul>
     <ul class="nav navbar-nav navbar-right" ng-hide="user">
-      <!-- <li>
-        <a href="#/register">Register</a>
-      </li> -->
       <li>
-        <a href="#/" ng-click="auth.$authWithOAuthPopup('facebook')">Log In</a>
+        <a href="#/register">Register</a>
+      </li>
+      <li>
+        <a href="#/" ng-click="loginWithOAuth()">Log In</a>
+        <!-- <a ng-href="#/login">Log In</a> -->
       </li>
     </ul>
   </div><!-- /.navbar-collapse -->

@@ -45,8 +45,8 @@ $icon-font-path:"/bower_components/sass-bootstrap/fonts/";
   padding: 0.2em 0;
 }
 body {
-  padding-top: 60px;
-  padding-bottom: 20px;
+  /* padding-top: 60px; */
+  /* padding-bottom: 20px; */
   //    background-color: $very-lightish-grey;
 
 }
@@ -139,7 +139,7 @@ body {
 }
 .bigcard {
   padding: 10px;
-  background-color: $very-very-lightish-grey;
+  background-color: $dark-grey;
   border-bottom: 4px solid red;
 }
 .status {
@@ -160,8 +160,8 @@ body, html {
 @media (min-width: 768px){
   #photostream {
     position: absolute;
-    top: 0px;
-    bottom: 0;
+    top: 50px;
+    padding-bottom: 50px;
     left: 0;
     /* width: 75%; */
     overflow-y: scroll;
@@ -171,8 +171,8 @@ margin-bottom: 50px;
 
   #loupe {
     position: absolute;
-    top: 0;
-    bottom: 0;
+    top: 50px;
+    padding-bottom: 50px;
     right: 0;
     overflow-y: scroll;
     /* width: 25%; */
@@ -185,10 +185,32 @@ margin-bottom: 50px;
   background-color: #000;
   text-align: center;
   height:100%;
+  /* margin-top: 50px; */
+
+
+  img {
+    display:block;
+    width:auto;
+    height:auto;
+    max-width:100%;
+    max-height:90%;
+    margin:0 auto;
+  }
+
 }
 
 #loupe {
   height:100%;
-  /* background-colo: ;r: #4FC1E9; */
+  background-color: #ccc;
   text-align: center;
+  /* margin-top: 50px; */
+
+  img {
+    display:block;
+    width:auto;
+    height:auto;
+    max-width:100%;
+    max-height:90%;
+    margin:0 auto;
+  }
 }

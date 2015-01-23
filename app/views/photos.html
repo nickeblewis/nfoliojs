@@ -1,6 +1,6 @@
 <div class="row">
 
-  <div class="col-sm-2" id="photostream">
+  <div class="col-md-2 col-xs-12 col-sm-12" id="photostream">
 
       <div ng-repeat="photo in photos | orderBy:'updated':reverse=true">
         <a ng-click="showChosenPhoto(photo.$id)">
@@ -15,19 +15,21 @@
 
   </div>
 
-  <div class="col-md-10" id="loupe">
+  <div class="col-md-10 col-xs-12 col-sm-12" id="loupe">
     <div class="row bigcard">
-          <div ng-show="{{ sphoto.file != undefined }}">
-            <a ng-href="#/photos/{{ sphoto.$id }}">
+          <!-- <div ng-show="{{ sphoto.file != undefined }}">
+            <a ng-href="#/photos/{{ sphoto.\$id }}">
               <img class="xs-hidden" width="100%" src="http://res.cloudinary.com/dqpknoetx/image/upload/b_rgb:eee,c_lpad,g_center,h_550,w_820/{{sphoto.file}}" />
             </a>
-      </div>
+                </div> -->
       <div class="col-md-12">
-        <div class="innercard">
-          <img width="100%" height="100%" src="http://res.cloudinary.com/dqpknoetx/image/upload/c_scale,w_1200/{{sphoto.file}}" />
+        <div class="innercard thumbnail">
+          <img src="http://res.cloudinary.com/dqpknoetx/image/upload/c_scale,w_1200/{{sphoto.file}}" />
+          <div class="caption post-content">
           <a ng-href="#/photos/{{ sphoto.$id }}">
             <h3>{{ sphoto.title }}</h3>
           </a>
+
           <p class="desc">{{ sphoto.description }}</p>
           <p class="metadata">This image was captured with a <strong>{{ sphoto.metadata.Model }}</strong> an aperture of {{ sphoto.metadata.ApertureValue }}, shutter speed of {{ sphoto.metadata.ShutterSpeedValue }} and at an ISO of {{ sphoto.metadata.ISO }}. The focal length you used was {{ sphoto.metadata.FocalLength }}</p>
           <p ng-show="sphoto.metadata.SourcePhotosCount > 0">This looks like it may be a panorama comprising of {{sphoto.metadata.SourcePhotosCount}} images</p>
@@ -35,7 +37,7 @@
         <div>
           <span class="metadata">submitted by <a href="#/users/{{ photo.owner }}">{{ photo.owner }}</a></span>
         </div>
-
+      </div>
           <p>
 
             <!--<img src="http://placehold.it/700x100" />-->
@@ -47,7 +49,7 @@
             </li>
           </ul>
         </div>
-        <div class="col-md-3"></div>
+        <!-- <div class="col-md-3"></div> -->
       </div>
     </div>
    </div>

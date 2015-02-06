@@ -36,9 +36,9 @@
       </div> -->
     <div ng-if="sphoto != undefined" class="row bigcard">
       <div class="col-md-12">
-        <div class="innercard thumbnail">
-          <img src="http://res.cloudinary.com/dqpknoetx/image/upload/c_scale,w_1200/{{sphoto.file}}" />
-          <div class="caption post-content">
+        <div id="imagecontainer" class="innercard">
+          <img id="imagecontent" src="http://res.cloudinary.com/dqpknoetx/image/upload/c_scale,w_1200/{{sphoto.file}}" />
+          <!-- <img class="img-responsive" src="http://res.cloudinary.com/dqpknoetx/image/upload/c_pad,g_center,h_600,w_1200/{{sphoto.file}}" /> -->
             <a ng-href="#/photos/{{ sphoto.$id }}">
               <h3>{{ sphoto.title }}</h3>
             </a>
@@ -53,7 +53,6 @@
             <p ng-show="sphoto.metadata.SourcePhotosCount > 0">
               This looks like it may be a panorama comprising of {{sphoto.metadata.SourcePhotosCount}} images
             </p>
-          </div>
           <div>
             <span class="metadata">submitted by <a href="#/users/{{ photo.owner }}">{{ sphoto.owner }}</a></span>
           </div>

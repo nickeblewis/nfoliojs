@@ -23,6 +23,7 @@ angular.module('nfolio')
       var ref = new Firebase(FIREBASE_URL + 'photos');
 
       var photos = $firebase(ref.limitToLast(500));
+      var photosLatest = $firebase(ref.limitToLast(1));
 
       var Photo = {
         all: photos.$asArray(),
@@ -34,13 +35,15 @@ angular.module('nfolio')
 
           postsQuery.on('child_added', function(snapshot) {
             var p = snapshot.val();
-            var photoId = snapshot.key();
-            data[photoId] = Photo.find(photoId);
+            // var photoId = snapshot.key();
+            // data[photoId] = Photo.find(photoId);
             //            console.log(p)
+            return p.$asArray();
 
           });
           return data;
         },
+        top: photosLatest.$asArray(),
         create: function(photo) {
 
           //if (User.signedIn()) {

@@ -5,6 +5,7 @@ angular.module('nfolio')
       $scope.auth = Auth;
       $scope.user = Auth.getAuth();
 
+      // TODO: Double check the owner field is being updated all of the time, as on occasions it may not be
       $scope.photo = {
         'title': '',
         description: '',
@@ -69,8 +70,6 @@ angular.module('nfolio')
           };
           $scope.photo.file = data.result.path;
 
-
-
           $scope.photo.metadata = data.result.image_metadata;
           //          $scope.result = data.result;
           $scope.status = '';
@@ -84,28 +83,19 @@ angular.module('nfolio')
     }
   ])
 
-// Don't delete this controller!
 .controller('PhotoCtrl', ['$routeParams', '$scope', '$location', 'Photo',
   function($routeParams, $scope, $location, Photo) {
 
     $scope.loading = true;
 
     if ($location.path() === '/') {
-           $scope.photos = Photo.all;
-          // $scope.sphoto = Photo.find("-JgE-B47p390Ip_DnBTy");
+      $scope.photos = Photo.all;
+      $scope.sphoto = Photo.find("-JgE-B47p390Ip_DnBTy");
+      //$scope.sphoto = Photo.top;
 
       // $scope.photos = Photo.limit(100);
       $scope.loading = false;
     }
-
-    $scope.showLoadMore = true;
-    //      $scope.featured = Photo.featured;
-
-    $scope.loadMore = function() {
-
-    };
-
-
 
     $scope.photo = {
       'title': '',
@@ -115,7 +105,7 @@ angular.module('nfolio')
     };
 
     $scope.showChosenPhoto = function(photoId) {
-        $scope.sphoto = $scope.photos.$getRecord(photoId);
+      $scope.sphoto = $scope.photos.$getRecord(photoId);
     };
 
     $scope.timeAgo = function(ms) {

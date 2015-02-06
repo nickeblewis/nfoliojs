@@ -62,7 +62,7 @@
   </div>
   <div class="panel-body">
     <!--<a href="#/photos" class="back_link">Back to list</a>-->
-    <form class="horizontal-form" role="search" ng-submit="submitPhoto()" ng-show="signedIn()">
+    <form class="horizontal-form" role="search" ng-submit="submitPhoto()" ng-show="user">
       <div class="form-group">
         <input type="text" class="form-control" placeholder="Title of the photo" ng-model="photo.title">
       </div>
@@ -76,4 +76,3 @@
     </form>
   </div>
 </div>
-
